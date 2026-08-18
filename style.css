@@ -1,0 +1,3604 @@
+:root {
+    /* Enhanced Newari Color Palette */
+    --brick-900: #5a1f1b;
+    --brick-800: #742822;
+    --brick-600: #8b2e2e;
+    --terra-500: #b5532b;
+    --wood-900: #2b1a12;
+    --wood-700: #3b2416;
+    --wood-500: #5a3a28;
+    --brass-500: #c8a44d;
+    --jade-600: #2e6b57;
+    --cream-50: #f6f2ea;
+    --cream-100: #efe7d8;
+    --smoke-700: rgba(20, 18, 16, .88);
+    --ink-900: #0f0f0f;
+
+    /* New Cultural Colors */
+    --copper-patina: #7c6f47;
+    --temple-gold: #d4af37;
+    --ceremonial-red: #cc2936;
+    --mustard-oil: #e6b800;
+    --prayer-flag-blue: #0077be;
+    --temple-stone: #8d7053;
+    --ritual-saffron: #ff8c42;
+
+    --text: #1d1b19;
+    --muted: #5a544d;
+
+    --radius: 16px;
+    --shadow-soft: 0 10px 30px rgba(0, 0, 0, .12);
+    --shadow-deep: 0 20px 60px rgba(0, 0, 0, .22);
+    --shadow-cultural: 0 15px 40px rgba(139, 46, 46, .15);
+    --glass: rgba(255, 255, 255, .08);
+    --glass-border: rgba(255, 255, 255, .18);
+
+    --container: 1200px;
+
+    --transition-fast: 180ms cubic-bezier(.2, .8, .2, 1);
+    --transition-slow: 480ms cubic-bezier(.2, .8, .2, 1);
+    --transition-cultural: 400ms cubic-bezier(.25, .46, .45, .94);
+}
+
+/* Dark mode tuning */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --text: #f2eee8;
+        --muted: #c9c1b8;
+        --cream-50: #181512;
+        --cream-100: #231e1a;
+        --glass: rgba(0, 0, 0, .22);
+        --glass-border: rgba(255, 255, 255, .12);
+    }
+}
+
+/* Motion safety */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation: none !important;
+        transition: none !important;
+    }
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.modal-overlay {
+  position: fixed;
+  z-index: 9999;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.3s;
+}
+
+.modal-content {
+  background: #fff;
+  color: #222;
+  max-width: 480px;
+  width: 90%;
+  padding: 2rem 1.5rem;
+  border-radius: 18px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+  text-align: left;
+  font-size: 1.08rem;
+  position: relative;
+}
+
+.modal-content h2 {
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+  color: #b02a37;
+  font-weight: bold;
+  text-align: center;
+}
+
+.modal-content button.btn {
+  display: block;
+  margin: 1.5rem auto 0 auto;
+  padding: 0.6rem 2.2rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  background: var(--temple-gold, #c8a44d);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-weight: 700;
+  transition: background 0.2s;
+}
+
+.modal-content button.btn:hover {
+  background: #b02a37;
+}
+
+/* Enhanced Body with Cultural Background Pattern */
+body {
+    /* overflow-x: hidden; */
+    /* Prevent horizontal scroll on body */
+    color: var(--text);
+    background:
+        /* Traditional Newari window pattern overlay */
+        radial-gradient(circle at 25% 25%, rgba(212, 175, 55, 0.03) 2px, transparent 2px),
+        radial-gradient(circle at 75% 75%, rgba(204, 41, 54, 0.03) 2px, transparent 2px),
+        /* Subtle brick texture */
+        repeating-linear-gradient(45deg,
+            rgba(139, 46, 46, 0.02) 0px,
+            rgba(139, 46, 46, 0.02) 2px,
+            transparent 2px,
+            transparent 20px),
+        /* Main gradient */
+        radial-gradient(1200px 600px at 10% -10%, rgba(200, 164, 77, .12), transparent 60%),
+        radial-gradient(1000px 500px at 120% 10%, rgba(139, 46, 46, .10), transparent 60%),
+        linear-gradient(180deg, var(--cream-50), var(--cream-100));
+    background-size: 40px 40px, 40px 40px, 60px 60px, 1200px 600px, 1000px 500px, 100% 100%;
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", "Mukta", "Hind", Arial, sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+     position: relative;    
+}
+
+/* Enhanced Newari Architectural Pattern */
+.newari-brick-pattern {
+    background: linear-gradient(135deg, var(--brick-600) 0%, var(--terra-500) 50%, var(--brick-800) 100%);
+    background-image:
+        /* Traditional Newari window carved pattern */
+        repeating-conic-gradient(from 0deg at 50% 50%,
+            transparent 0deg 45deg,
+            rgba(0, 0, 0, 0.1) 45deg 90deg,
+            transparent 90deg 135deg,
+            rgba(0, 0, 0, 0.1) 135deg 180deg),
+        /* Brick mortar lines */
+        linear-gradient(90deg, var(--brick-900) 1px, transparent 1px),
+        linear-gradient(0deg, var(--brick-900) 1px, transparent 1px),
+        /* Traditional carved wood accent */
+        linear-gradient(45deg, transparent 48%, var(--wood-900) 49%, var(--wood-900) 51%, transparent 52%);
+    background-size: 80px 80px, 60px 30px, 60px 30px, 120px 120px;
+    position: relative;
+}
+
+.newari-brick-pattern::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+        /* Cultural mandala-inspired pattern */
+        radial-gradient(circle at 30px 30px, var(--brass-500) 1px, transparent 2px),
+        radial-gradient(circle at 90px 60px, var(--temple-gold) 0.5px, transparent 1px);
+    background-size: 120px 90px;
+    opacity: 0.6;
+    mix-blend-mode: overlay;
+}
+
+.newari-brick-pattern::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(rgba(0, 0, 0, 0) 0%,
+            rgba(0, 0, 0, 0.05) 50%,
+            rgba(0, 0, 0, 0) 100%);
+    pointer-events: none;
+}
+
+/* Traditional Pagoda-inspired Wall */
+.wall {
+    width: 100%;
+    height: 200px;
+    background:
+        /* Carved wood pattern */
+        repeating-linear-gradient(0deg,
+            var(--wood-700) 0px 5px,
+            var(--wood-500) 5px 10px,
+            var(--wood-700) 10px 15px),
+        /* Traditional brass inlay pattern */
+        repeating-linear-gradient(90deg,
+            transparent 0px 25px,
+            var(--brass-500) 25px 27px,
+            transparent 27px 50px),
+        var(--wood-900);
+    border: 6px solid var(--wood-900);
+    border-image: linear-gradient(45deg, var(--brass-500), var(--copper-patina), var(--brass-500)) 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow:
+        inset 0 4px 8px rgba(0, 0, 0, 0.3),
+        0 8px 25px rgba(139, 46, 46, 0.2);
+    position: relative;
+}
+
+.wall::before {
+    content: "";
+    position: absolute;
+    inset: 10px;
+    background:
+        /* Traditional window lattice pattern */
+        repeating-linear-gradient(45deg, transparent 0px 8px, rgba(200, 164, 77, 0.3) 8px 10px),
+        repeating-linear-gradient(-45deg, transparent 0px 8px, rgba(200, 164, 77, 0.2) 8px 10px);
+    border-radius: 8px;
+    pointer-events: none;
+}
+
+.frame {
+    width: 100%;
+    height: 100%;
+    background: url("images/windows.png") repeat-x center / auto 100%;
+    position: relative;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+/* Cultural Header Enhancement */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background:
+        /* Traditional temple roof pattern */
+        repeating-linear-gradient(90deg,
+            rgba(200, 164, 77, 0.1) 0px 20px,
+            rgba(139, 46, 46, 0.1) 20px 40px),
+        linear-gradient(180deg, var(--terra-500), var(--brass-500)) !important;
+    backdrop-filter: saturate(140%) blur(12px);
+    border-bottom: 3px solid var(--temple-gold);
+    border-image: linear-gradient(90deg, transparent, var(--temple-gold), transparent) 1;
+    padding: 1rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 80px;
+    box-shadow:
+        0 4px 20px rgba(139, 46, 46, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+header::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 5%;
+    right: 5%;
+    height: 2px;
+    background: linear-gradient(90deg,
+            transparent,
+            var(--temple-gold) 20%,
+            var(--copper-patina) 50%,
+            var(--temple-gold) 80%,
+            transparent);
+}
+
+header .cgu {
+    background: none !important;
+    mix-blend-mode: multiply;
+    background-color: transparent;
+    display: block;
+    height: 55px;
+    border-radius: 50%;
+    width: auto;
+    object-fit: contain;
+    margin: 0;
+    padding: 0;
+    filter:
+        drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3)) drop-shadow(0 0 0 1px rgba(200, 164, 77, 0.5));
+    transition: all var(--transition-cultural);
+}
+
+header .cgu:hover {
+    transform: scale(1.05) rotate(2deg);
+    filter:
+        drop-shadow(0 6px 12px rgba(0, 0, 0, 0.4)) drop-shadow(0 0 0 2px var(--temple-gold));
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 1.6rem;
+    font-weight: 900;
+    color: var(--cream-50);
+    text-decoration: none;
+    letter-spacing: 0.8px;
+    text-shadow:
+        0 2px 4px rgba(0, 0, 0, 0.5),
+        0 0 20px rgba(200, 164, 77, 0.3);
+    position: relative;
+}
+
+.logo::after {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--temple-gold), transparent);
+    transform: scaleX(0);
+    transition: transform var(--transition-cultural);
+}
+
+.logo:hover::after {
+    transform: scaleX(1);
+}
+
+.logo i {
+    color: var(--temple-gold);
+    font-size: 2rem;
+    margin-left: 3px;
+    filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.6));
+    animation: culturalGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes culturalGlow {
+    0% {
+        filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.6));
+    }
+
+    100% {
+        filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.8));
+    }
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
+}
+
+.navbar a {
+    color: var(--cream-50);
+    text-decoration: none;
+    font-weight: 700;
+    padding: 0.75rem 1.5rem;
+    border-radius: 25px;
+    transition: all var(--transition-cultural);
+    text-transform: capitalize;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(200, 164, 77, 0.2);
+}
+
+.navbar a::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(circle at center, var(--temple-gold) 0%, transparent 70%),
+        linear-gradient(45deg, var(--brass-500), var(--copper-patina));
+    opacity: 0;
+    transition: opacity var(--transition-cultural);
+    z-index: -1;
+}
+
+.navbar a:hover::before {
+    opacity: 0.9;
+}
+
+.navbar a:hover {
+    transform: translateY(-3px);
+    color: var(--wood-900);
+    box-shadow:
+        0 8px 25px rgba(200, 164, 77, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    border-color: var(--temple-gold);
+}
+
+#menu-bar {
+    display: none;
+    font-size: 1.6rem;
+    cursor: pointer;
+    color: var(--cream-50);
+    padding: 0.75rem;
+    border-radius: 12px;
+    transition: all var(--transition-cultural);
+    border: 1px solid rgba(200, 164, 77, 0.3);
+}
+
+#menu-bar:hover {
+    background: linear-gradient(45deg, rgba(200, 164, 77, 0.2), rgba(139, 46, 46, 0.2));
+    transform: scale(1.1) rotate(5deg);
+    border-color: var(--temple-gold);
+}
+
+/* Main content spacing */
+main {
+    margin-top: 80px;
+}
+
+/* Enhanced Home Section */
+.home {
+    min-height: 90vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 3rem;
+    padding: 3rem 5%;
+    position: relative;
+    overflow: hidden;
+}
+
+.home::before {
+    content: "";
+    position: absolute;
+    top: -20%;
+    right: -15%;
+    width: 70%;
+    height: 140%;
+    background:
+        /* Traditional Newari architectural pattern */
+        repeating-conic-gradient(from 45deg at 40px 40px,
+            rgba(139, 46, 46, 0.04) 0deg 90deg,
+            transparent 90deg 180deg,
+            rgba(200, 164, 77, 0.03) 180deg 270deg,
+            transparent 270deg 360deg),
+        repeating-linear-gradient(45deg,
+            rgba(212, 175, 55, 0.03) 0px 20px,
+            transparent 20px 40px);
+    background-size: 80px 80px, 60px 60px;
+    transform: rotate(12deg);
+    z-index: 0;
+    animation: culturalFloat 20s ease-in-out infinite;
+}
+
+.home::after {
+    content: "";
+    position: absolute;
+    bottom: 10%;
+    left: -10%;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(204, 41, 54, 0.08) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: culturalPulse 8s ease-in-out infinite;
+}
+
+@keyframes culturalFloat {
+
+    0%,
+    100% {
+        transform: rotate(12deg) translateY(0);
+    }
+
+    50% {
+        transform: rotate(15deg) translateY(-20px);
+    }
+}
+
+@keyframes culturalPulse {
+
+    0%,
+    100% {
+        transform: scale(1) rotate(0deg);
+        opacity: 0.8;
+    }
+
+    50% {
+        transform: scale(1.1) rotate(180deg);
+        opacity: 0.4;
+    }
+}
+
+/* .home .content {
+    z-index: 1;
+    position: relative;
+} */
+.home .content img {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 1002;
+    max-width: 300px;
+    border-radius: 25px;
+    box-shadow: 0 8px 30px rgba(139,46,46,0.18);
+}
+
+.home .content h3 {
+    font-size: clamp(2.8rem, 4.5vw, 4.5rem);
+    background: linear-gradient(135deg,
+            var(--ceremonial-red) 0%,
+            var(--temple-gold) 30%,
+            var(--ritual-saffron) 70%,
+            var(--brass-500) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 1.5rem;
+    font-family: "Noto Serif", Georgia, serif;
+    line-height: 1.1;
+    text-shadow: 0 8px 30px rgba(204, 41, 54, 0.3);
+    font-weight: 900;
+    position: relative;
+}
+
+.home .content h3::after {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 100px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--temple-gold), var(--copper-patina), var(--temple-gold));
+    border-radius: 2px;
+    animation: culturalAccent 3s ease-in-out infinite;
+}
+
+@keyframes culturalAccent {
+
+    0%,
+    100% {
+        width: 100px;
+        opacity: 1;
+    }
+
+    50% {
+        width: 150px;
+        opacity: 0.7;
+    }
+}
+
+.home .content p {
+    font-size: 1.3rem;
+    color: var(--muted);
+    margin-bottom: 2.5rem;
+    line-height: 1.8;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.home .image {
+    z-index: 1;
+    position: relative;
+}
+
+.home .image img {
+    width: 100%;
+    height: auto;
+    border-radius: 25px;
+    box-shadow:
+        var(--shadow-cultural),
+        0 0 0 3px rgba(200, 164, 77, 0.2),
+        0 0 0 6px rgba(139, 46, 46, 0.1);
+    transform: rotate(-2deg);
+    transition: all var(--transition-slow);
+    filter: contrast(1.1) saturate(1.1);
+}
+
+.home .image::before {
+    content: "";
+    position: absolute;
+    inset: -15px;
+    background:
+        repeating-conic-gradient(from 0deg at 50% 50%,
+            transparent 0deg 30deg,
+            rgba(200, 164, 77, 0.1) 30deg 60deg);
+    border-radius: 25px;
+    z-index: -1;
+    animation: culturalFrame 15s linear infinite;
+}
+
+@keyframes culturalFrame {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.home .image:hover img {
+    transform: rotate(1deg) scale(1.05);
+    box-shadow:
+        0 25px 80px rgba(139, 46, 46, 0.25),
+        0 0 0 4px var(--temple-gold),
+        0 0 0 8px rgba(200, 164, 77, 0.2);
+}
+
+/* Enhanced Button Styles with Cultural Elements */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.2rem 2.5rem;
+    background:
+        linear-gradient(135deg, var(--temple-gold) 0%, var(--brass-500) 50%, var(--copper-patina) 100%),
+        repeating-linear-gradient(45deg, transparent 0px 2px, rgba(255, 255, 255, 0.1) 2px 4px);
+    color: var(--wood-900);
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 800;
+    font-size: 1.1rem;
+    box-shadow:
+        0 12px 35px rgba(139, 46, 46, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+    transition: all var(--transition-cultural);
+    border: 2px solid var(--temple-gold);
+    cursor: pointer;
+    text-transform: capitalize;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.4) 0%, transparent 70%);
+    transition: all var(--transition-fast);
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+}
+
+.btn:hover::before {
+    width: 200px;
+    height: 200px;
+}
+
+.btn:hover {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow:
+        0 20px 60px rgba(139, 46, 46, 0.4),
+        0 0 30px rgba(212, 175, 55, 0.5),
+        inset 0 1px 0 rgba(255, 255, 255, 0.4);
+    filter: brightness(1.1) saturate(1.2);
+    border-color: var(--ceremonial-red);
+}
+
+/* ===== ABOUT SECTION ===== */
+.about {
+  padding: 5rem 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #f7ede2, #fcefe8); /* warm parchment tones */
+  background-image: url('images/nepali-pattern-light.png'); /* optional decorative background */
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-blend-mode: soft-light;
+}
+
+.about-inner {
+  /* Removed flex properties here */
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Text & Image Container - now a single block */
+.about .content {
+  /* Removed flex properties here, adjusted max-width for overall section alignment */
+  max-width: 800px; /* Increased max-width for better flow with the image */
+  margin: 0 auto; /* Center the entire content block */
+  text-align: center;
+}
+
+.about h3 {
+  font-size: 2.7rem;
+  color: #a63c3c;
+  margin-bottom: 1.5rem;
+  font-family: 'Playfair Display', serif;
+  font-weight: 600;
+  position: relative;
+  display: inline-block;
+}
+
+.about h3::after {
+  content: "";
+  position: absolute;
+  width: 70px;
+  height: 3px;
+  background-color: #a63c3c;
+  left: 50%; /* Center the line */
+  transform: translateX(-50%); /* Center the line */
+  bottom: -10px;
+  border-radius: 2px;
+}
+
+.about p {
+  color: var(--muted);
+  font-size: 1.1rem;
+  line-height: 1.9;
+  font-family: 'Poppins', sans-serif;
+  margin-bottom: 1.2rem;
+  font-size: 1.3rem;
+  text-align: left; /* Keep paragraphs left-aligned for readability */
+}
+
+/* Right side: image - Now handles centering within the text flow */
+.about-image {
+  /* Removed flex properties. Use margin and max-width for centering */
+  max-width: 700px; /* Control the max size of the image */
+  margin: 2.5rem auto; /* Add margin and center the image container */
+  display: block; /* Ensures margin: auto works for centering */
+}
+
+.about-image img {
+  width: 100%;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  transition: transform 0.6s ease;
+}
+
+.about-image img:hover {
+  transform: scale(1.03);
+}
+
+/* Fade-in animation - (kept as is) */
+.fade-in {
+  opacity: 0;
+  transform: translateY(40px);
+  animation: fadeInUp 1.2s forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive layout - now simpler as content is stacked by default */
+@media (max-width: 900px) {
+  /* Removed flex-direction: column-reverse; */
+  .about-inner {
+    text-align: center;
+  }
+
+  .about .content {
+    text-align: center;
+  }
+
+  .about h3 {
+    font-size: 2rem;
+  }
+
+  .about p {
+    font-size: 1rem;
+    text-align: center; /* Center paragraph text on small screens */
+  }
+
+  .about-image {
+    margin: 1.5rem auto; /* Adjusted spacing for mobile */
+  }
+
+  .about-image img {
+    max-width: 100%;
+  }
+}
+
+
+
+
+/* Enhanced Section Headings */
+/* Enhanced Section Headings */
+.heading {
+    text-align: center;
+    font-size: clamp(2.2rem, 3.5vw, 3.5rem);
+    background: linear-gradient(135deg,
+            var(--cream-50) 0%,
+            var(--temple-gold) 30%,
+            var(--cream-50) 90%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 4rem;
+    font-family: "Noto Serif", Georgia, serif;
+    font-weight: 900;
+    position: relative;
+    text-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    z-index: 0;
+    /* keeps base heading behind span */
+}
+
+.heading::before,
+.heading::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--temple-gold), transparent);
+    z-index: 0;
+    /* stays behind the span */
+}
+
+.heading::before {
+    left: -100px;
+    background: linear-gradient(90deg, transparent, var(--temple-gold), var(--copper-patina));
+}
+
+.heading::after {
+    right: -100px;
+    background: linear-gradient(90deg, var(--copper-patina), var(--temple-gold), transparent);
+}
+
+.heading span {
+    position: relative;
+    z-index: 2;
+    /* above everything else */
+    color: wheat;
+}
+
+.heading span::after {
+    content: "";
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 2px;
+    background: var(--ritual-saffron);
+    border-radius: 1px;
+    animation: culturalUnderline 2s ease-in-out infinite;
+    z-index: 3;
+    /* ensures underline is above shadows */
+}
+
+@keyframes culturalUnderline {
+
+    0%,
+    100% {
+        width: 50px;
+    }
+
+    50% {
+        width: 80px;
+    }
+}
+
+/* Enhanced Speciality Section */
+.speciality {
+    padding: 6rem 5%;
+    background:
+        /* Traditional textile pattern */
+        repeating-linear-gradient(45deg,
+            rgba(139, 46, 46, 0.02) 0px 10px,
+            transparent 10px 20px,
+            rgba(200, 164, 77, 0.02) 20px 30px,
+            transparent 30px 40px),
+        /* Cultural mandala overlay */
+        radial-gradient(circle at 20% 80%, rgba(204, 41, 54, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(212, 175, 55, 0.05) 0%, transparent 50%),
+        linear-gradient(135deg, var(--cream-50), var(--cream-100));
+    position: relative;
+    overflow: hidden;
+}
+
+.speciality::before {
+    content: "";
+    position: absolute;
+    top: 10%;
+    left: -20%;
+    width: 40%;
+    height: 80%;
+    background:
+        repeating-conic-gradient(from 0deg at 50px 50px,
+            rgba(139, 46, 46, 0.03) 0deg 60deg,
+            transparent 60deg 120deg,
+            rgba(200, 164, 77, 0.02) 120deg 180deg,
+            transparent 180deg 240deg);
+    background-size: 100px 100px;
+    transform: rotate(-15deg);
+    animation: culturalBackdrop 25s linear infinite;
+}
+
+@keyframes culturalBackdrop {
+    from {
+        transform: rotate(-15deg);
+    }
+
+    to {
+        transform: rotate(345deg);
+    }
+}
+
+.box-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2.5rem;
+    max-width: var(--container);
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+.speciality .box {
+    position: relative;
+    background:
+        linear-gradient(135deg,
+            rgba(246, 242, 234, 0.95) 0%,
+            rgba(239, 231, 216, 0.92) 100%);
+    border: 2px solid transparent;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow:
+        0 15px 40px rgba(139, 46, 46, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.5);
+    transition: all var(--transition-cultural);
+    backdrop-filter: blur(10px);
+}
+
+.speciality .box::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        /* Traditional carved pattern */
+        repeating-radial-gradient(circle at 25% 25%,
+            rgba(200, 164, 77, 0.08) 0px 2px,
+            transparent 2px 20px),
+        repeating-radial-gradient(circle at 75% 75%,
+            rgba(139, 46, 46, 0.06) 0px 1px,
+            transparent 1px 25px),
+        /* Subtle texture */
+        linear-gradient(45deg,
+            rgba(200, 164, 77, 0.03) 25%,
+            transparent 25%,
+            transparent 75%,
+            rgba(139, 46, 46, 0.03) 75%);
+    background-size: 40px 40px, 50px 50px, 20px 20px;
+    opacity: 0.7;
+    z-index: 0;
+    border-radius: 18px;
+}
+
+.speciality .box::after {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    background: linear-gradient(135deg,
+            var(--temple-gold),
+            var(--copper-patina),
+            var(--brass-500),
+            var(--ceremonial-red));
+    z-index: -1;
+    border-radius: 20px;
+    opacity: 0;
+    transition: opacity var(--transition-cultural);
+}
+
+.speciality .box:hover::after {
+    opacity: 1;
+}
+
+.speciality .box:hover {
+    transform: translateY(-12px) rotateY(5deg);
+    box-shadow:
+        0 25px 80px rgba(139, 46, 46, 0.25),
+        0 0 50px rgba(200, 164, 77, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.7);
+}
+
+.speciality .box .image {
+    width: 100%;
+    height: 220px;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+    border-radius: 18px 18px 0 0;
+}
+
+.speciality .box .image::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(45deg,
+            transparent 30%,
+            rgba(200, 164, 77, 0.1) 50%,
+            transparent 70%);
+    z-index: 1;
+    transition: opacity var(--transition-cultural);
+    opacity: 0;
+}
+
+.speciality .box:hover .image::before {
+    opacity: 1;
+}
+
+.speciality .box .image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: all var(--transition-slow);
+    filter: contrast(1.1) saturate(1.05);
+}
+
+.speciality .box:hover .image img {
+    transform: scale(1.15) rotate(2deg);
+    filter: contrast(1.2) saturate(1.2) brightness(1.1);
+}
+
+.speciality .box .content {
+    padding: 2rem;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    background: linear-gradient(180deg, transparent, rgba(246, 242, 234, 0.8));
+}
+
+.speciality .box .content img {
+    width: 70px;
+    height: 70px;
+    margin-bottom: 1.5rem;
+    border-radius: 50%;
+    box-shadow:
+        0 8px 25px rgba(139, 46, 46, 0.2),
+        0 0 0 3px rgba(200, 164, 77, 0.3),
+        inset 0 2px 4px rgba(255, 255, 255, 0.3);
+    border: 2px solid var(--temple-gold);
+    transition: all var(--transition-cultural);
+}
+
+.speciality .box:hover .content img {
+    transform: scale(1.1) rotate(5deg);
+    box-shadow:
+        0 12px 35px rgba(139, 46, 46, 0.3),
+        0 0 0 4px var(--ceremonial-red),
+        0 0 20px rgba(204, 41, 54, 0.4);
+}
+
+.speciality .box .content h3 {
+    color: var(--terra-500);
+    font-size: 1.4rem;
+    margin-bottom: 1.2rem;
+    font-weight: 800;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.speciality .box .content h3::after {
+    content: "";
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 30px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--brass-500), var(--temple-gold));
+    border-radius: 1px;
+    transition: width var(--transition-cultural);
+}
+
+.speciality .box:hover .content h3::after {
+    width: 60px;
+}
+
+.speciality .box .content p {
+    color: var(--wood-700);
+    line-height: 1.8;
+    font-size: 1.05rem;
+}
+
+/* Enhanced Popular Section */
+.popular {
+    padding: 6rem 5%;
+    background:
+        /* Traditional prayer flag pattern */
+        repeating-linear-gradient(90deg,
+            rgba(204, 41, 54, 0.03) 0px 15px,
+            rgba(212, 175, 55, 0.03) 15px 30px,
+            rgba(46, 107, 87, 0.03) 30px 45px,
+            rgba(255, 140, 66, 0.03) 45px 60px),
+        /* Subtle mandala background */
+        radial-gradient(circle at 25% 25%, rgba(139, 46, 46, 0.04) 0%, transparent 50%),
+        radial-gradient(circle at 75% 75%, rgba(200, 164, 77, 0.04) 0%, transparent 50%),
+        linear-gradient(135deg, rgba(246, 242, 234, 0.95), rgba(239, 231, 216, 0.9));
+    position: relative;
+}
+
+.popular::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 300px;
+    height: 300px;
+    background:
+        repeating-conic-gradient(from 45deg at 50% 50%,
+            rgba(200, 164, 77, 0.06) 0deg 45deg,
+            transparent 45deg 90deg,
+            rgba(204, 41, 54, 0.04) 90deg 135deg,
+            transparent 135deg 180deg);
+    border-radius: 50%;
+    animation: culturalSpiral 30s linear infinite;
+    z-index: 0;
+}
+
+@keyframes culturalSpiral {
+    from {
+        transform: rotate(0deg) scale(1);
+    }
+
+    50% {
+        transform: rotate(180deg) scale(1.1);
+    }
+
+    to {
+        transform: rotate(360deg) scale(1);
+    }
+}
+
+.popular .box {
+    position: relative;
+    background:
+        linear-gradient(135deg,
+            rgba(255, 255, 255, 0.95) 0%,
+            rgba(246, 242, 234, 0.9) 100%);
+    border: 2px solid transparent;
+    border-radius: 25px;
+    overflow: hidden;
+    box-shadow:
+        0 20px 50px rgba(139, 46, 46, 0.12),
+        inset 0 1px 0 rgba(255, 255, 255, 0.6);
+    transition: all var(--transition-cultural);
+    text-align: center;
+    padding: 2rem;
+    z-index: 1;
+}
+
+.popular .box::before {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    background:
+        conic-gradient(from 0deg,
+            var(--temple-gold) 0deg 90deg,
+            var(--copper-patina) 90deg 180deg,
+            var(--ceremonial-red) 180deg 270deg,
+            var(--brass-500) 270deg 360deg);
+    border-radius: 25px;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity var(--transition-cultural);
+    animation: culturalBorderRotate 8s linear infinite;
+}
+
+@keyframes culturalBorderRotate {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.popular .box:hover::before {
+    opacity: 1;
+}
+
+.popular .box:hover {
+    transform: translateY(-8px) rotateX(8deg) rotateY(-2deg);
+    box-shadow:
+        0 30px 80px rgba(139, 46, 46, 0.2),
+        0 0 50px rgba(200, 164, 77, 0.3);
+}
+
+.popular .box .price {
+    position: absolute;
+    top: 1.5rem;
+    left: 1.5rem;
+    background:
+        linear-gradient(135deg, var(--ceremonial-red) 0%, var(--ritual-saffron) 100%);
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border-radius: 30px;
+    font-weight: 800;
+    font-size: 1rem;
+    z-index: 2;
+    box-shadow:
+        0 8px 25px rgba(204, 41, 54, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    transition: all var(--transition-cultural);
+}
+
+.popular .box:hover .price {
+    transform: scale(1.05) rotate(-2deg);
+    box-shadow:
+        0 12px 35px rgba(204, 41, 54, 0.5),
+        0 0 20px rgba(255, 140, 66, 0.6);
+}
+
+.popular .box img {
+    width: 100%;
+    height: 320px;
+    object-fit: cover;
+    border-radius: 18px;
+    margin-bottom: 1.5rem;
+    transition: all var(--transition-slow);
+    box-shadow:
+        0 12px 30px rgba(0, 0, 0, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    border: 3px solid transparent;
+    background-clip: padding-box;
+}
+
+.popular .box img::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(45deg,
+            rgba(200, 164, 77, 0.1),
+            transparent 30%,
+            rgba(204, 41, 54, 0.1));
+    opacity: 0;
+    transition: opacity var(--transition-cultural);
+}
+
+.popular .box:hover img {
+    transform: scale(1.08) rotate(1deg);
+    border-color: var(--temple-gold);
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.25),
+        0 0 30px rgba(200, 164, 77, 0.4);
+}
+
+.popular .box h3 {
+    font-size: 1.4rem;
+    background: linear-gradient(135deg, var(--brick-800) 0%, var(--ceremonial-red) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 1.2rem;
+    font-weight: 800;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.popular .box h3::after {
+    content: "";
+    position: absolute;
+    bottom: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 2px;
+    background: var(--temple-gold);
+    border-radius: 1px;
+    transition: all var(--transition-cultural);
+}
+
+.popular .box:hover h3::after {
+    width: 80px;
+    background: linear-gradient(90deg, var(--ceremonial-red), var(--temple-gold), var(--ceremonial-red));
+}
+
+.stars {
+    display: flex;
+    justify-content: center;
+    gap: 0.4rem;
+    margin-bottom: 2rem;
+}
+
+.stars i {
+    color: var(--mustard-oil);
+    font-size: 1.3rem;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+    transition: all var(--transition-fast);
+}
+
+.popular .box:hover .stars i {
+    transform: scale(1.1) rotate(15deg);
+    color: var(--temple-gold);
+    filter: drop-shadow(0 4px 8px rgba(212, 175, 55, 0.5));
+}
+
+/* Enhanced Steps Section */
+.step-container {
+    padding: 6rem 5%;
+    background:
+        /* Traditional textile pattern */
+        repeating-linear-gradient(0deg,
+            rgba(139, 46, 46, 0.02) 0px 5px,
+            transparent 5px 10px,
+            rgba(200, 164, 77, 0.02) 10px 15px,
+            transparent 15px 20px),
+        repeating-linear-gradient(90deg,
+            rgba(204, 41, 54, 0.015) 0px 8px,
+            transparent 8px 16px,
+            rgba(212, 175, 55, 0.015) 16px 24px,
+            transparent 24px 32px),
+        linear-gradient(135deg, var(--cream-50), var(--cream-100));
+    position: relative;
+    overflow: hidden;
+}
+
+.step-container::before {
+    content: "";
+    position: absolute;
+    bottom: -50%;
+    right: -20%;
+    width: 600px;
+    height: 600px;
+    background:
+        radial-gradient(circle at center,
+            rgba(200, 164, 77, 0.06) 0%,
+            rgba(139, 46, 46, 0.04) 30%,
+            transparent 70%);
+    border-radius: 50%;
+    animation: culturalOrb 20s ease-in-out infinite;
+}
+
+@keyframes culturalOrb {
+
+    0%,
+    100% {
+        transform: translateY(0) scale(1);
+        opacity: 0.6;
+    }
+
+    50% {
+        transform: translateY(-30px) scale(1.1);
+        opacity: 0.8;
+    }
+}
+
+.steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 3rem;
+    max-width: var(--container);
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+.steps .box {
+    text-align: center;
+    padding: 2.5rem 1.5rem;
+    background:
+        linear-gradient(135deg,
+            rgba(255, 255, 255, 0.9) 0%,
+            rgba(246, 242, 234, 0.85) 100%);
+    border: 2px solid transparent;
+    border-radius: 25px;
+    box-shadow:
+        0 15px 40px rgba(139, 46, 46, 0.12),
+        inset 0 1px 0 rgba(255, 255, 255, 0.6);
+    transition: all var(--transition-cultural);
+    position: relative;
+    overflow: hidden;
+}
+
+.steps .box::before {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    background: linear-gradient(135deg,
+            var(--temple-gold) 0%,
+            var(--copper-patina) 25%,
+            var(--ceremonial-red) 50%,
+            var(--brass-500) 75%,
+            var(--temple-gold) 100%);
+    border-radius: 25px;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity var(--transition-cultural);
+}
+
+.steps .box::after {
+    content: "";
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    background:
+        radial-gradient(circle, rgba(200, 164, 77, 0.1) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: culturalAccentFloat 4s ease-in-out infinite;
+}
+
+@keyframes culturalAccentFloat {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    50% {
+        transform: translateY(-10px) rotate(180deg);
+    }
+}
+
+.steps .box:hover::before {
+    opacity: 1;
+}
+
+.steps .box:hover {
+    transform: translateY(-15px) rotateY(5deg);
+    box-shadow:
+        0 25px 80px rgba(139, 46, 46, 0.2),
+        0 0 40px rgba(200, 164, 77, 0.3);
+}
+
+.steps .box img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    margin-bottom: 1.5rem;
+    box-shadow:
+        0 12px 35px rgba(139, 46, 46, 0.2),
+        0 0 0 4px rgba(200, 164, 77, 0.3),
+        inset 0 3px 6px rgba(255, 255, 255, 0.3);
+    border: 3px solid var(--temple-gold);
+    transition: all var(--transition-cultural);
+    filter: contrast(1.1) saturate(1.1);
+}
+
+.steps .box:hover img {
+    transform: scale(1.1) rotate(5deg);
+    box-shadow:
+        0 20px 60px rgba(139, 46, 46, 0.3),
+        0 0 0 6px var(--ceremonial-red),
+        0 0 30px rgba(204, 41, 54, 0.4);
+}
+
+.steps .box h3 {
+    background: linear-gradient(135deg, var(--brick-800) 0%, var(--ceremonial-red) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 1.3rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.steps .box p {
+    color: var(--wood-700);
+    font-size: 1.05rem;
+    line-height: 1.7;
+}
+
+
+
+/* CRITICAL FIX: Remove any properties that could block scrolling */
+.gallery {
+    padding: 4rem 3% 4rem;
+    position: relative;
+    background: repeating-conic-gradient(from 30deg at 50px 50px, rgba(139, 46, 46, 0.03) 0deg 60deg, transparent 60deg 120deg, rgba(200, 164, 77, 0.02) 120deg 180deg, transparent 180deg 240deg),
+        radial-gradient(circle at 30% 70%, rgba(204, 41, 54, 0.04) 0%, transparent 60%),
+        linear-gradient(180deg, rgba(246, 242, 234, 0.9), rgba(239, 231, 216, 0.85));
+    /* REMOVED: All overflow, height, and positioning properties that block scrolling */
+    width: 100%;
+    overflow: visible;
+    -webkit-overflow-scrolling: touch;
+}
+
+.gallery .heading {
+    text-align: center;
+    font-size: 3rem;
+    color: #8b2e2e;
+    margin-bottom: 2rem;
+    font-weight: 800;
+    position: relative;
+}
+
+/* Category Filter Buttons */
+.category-filters {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+    position: relative;
+}
+
+.category-btn {
+    padding: 0.8rem 2rem;
+    background: linear-gradient(135deg, #b5532b, #8b2e2e);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(139, 46, 46, 0.2);
+    position: relative;
+    overflow: hidden;
+    pointer-events: auto;
+    text-decoration: none;
+}
+
+.category-btn[data-category="menupdf"] {
+    text-decoration: none;
+}
+
+.category-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+.category-btn:hover::before {
+    left: 100%;
+}
+
+.category-btn.active {
+    background: linear-gradient(135deg, #d4af37, #c8a451);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(212, 175, 55, 0.3);
+}
+
+.category-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(139, 46, 46, 0.3);
+}
+
+/* CRITICAL FIX: Ensure wrapper doesn't block scrolling */
+.gallery-wrapper {
+    position: relative;
+    width: 100%;
+    /* REMOVED: All overflow and max-width constraints */
+}
+
+/* CRITICAL FIX: Grid container - no overflow properties */
+.gallery .box-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 2rem;
+    width: 100%;
+    padding: 1rem 0;
+    transition: all 0.5s ease;
+    /* REMOVED: All overflow, height, and positioning that could block scroll */
+}
+
+/* CRITICAL FIX: Box styling - minimal positioning */
+.gallery .box {
+    width: 100%;
+    height: 270px;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(139, 46, 46, 0.12), 0 0 0 1px rgba(200, 164, 77, 0.15);
+    transition: all 0.3s ease;
+    background-clip: padding-box;
+    position: relative;
+
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 0.6s ease forwards;
+    margin-bottom: 0.5rem;
+}
+.gallery .box:nth-child(odd) {
+    animation-delay: 0.1s;
+}
+
+.gallery .box:nth-child(even) {
+    animation-delay: 0.2s;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.gallery .box.hidden {
+    display: none;
+}
+
+.gallery .box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: all 0.3s ease;
+    filter: contrast(1.1) saturate(1.05);
+
+}
+
+/* CRITICAL FIX: Lighter hover effect that doesn't interfere with scrolling */
+.gallery .box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(139, 46, 46, 0.15);
+    /* REMOVED: scale and z-index that could interfere */
+}
+
+.gallery .box:hover img {
+    transform: scale(1.05);
+    filter: contrast(1.2) saturate(1.2) brightness(1.1);
+}
+.gallery .box .content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(43, 26, 18, 0.95));
+    color: white;
+    padding: 1.5rem;
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+
+}
+
+.gallery .box:hover .content {
+    transform: translateY(0);
+}
+
+.gallery .box .content h3 {
+    color: wheat;
+    margin-bottom: 0.6rem;
+    font-weight: 800;
+    font-size: 1.2rem;
+}
+
+.gallery .box .content p {
+    color: rgba(246, 242, 234, 0.95);
+    margin-bottom: 0.8rem;
+    line-height: 1.4;
+    font-size: 0.85rem;
+}
+
+.gallery .box .content .btn {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.9rem;
+    border-radius: 20px;
+    background: linear-gradient(135deg, #d4af37, #c8a451);
+    color: #fff;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    pointer-events: auto;
+}
+
+.gallery .box .content .btn:hover {
+    background: linear-gradient(135deg, #c8a451, #b5932d);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+}
+
+/* Button container */
+.button-container {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin: 3rem auto 0;
+    flex-wrap: wrap;
+    position: relative;
+}
+
+#see-more-btn,
+#see-less-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    background: linear-gradient(135deg, #b5532b, #8b2e2e);
+    color: #fff;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    box-shadow: 0 4px 15px rgba(139, 46, 46, 0.2);
+    position: relative;
+    pointer-events: auto;
+}
+
+#see-more-btn:hover,
+#see-less-btn:hover {
+    background: linear-gradient(135deg, #742822, #5d1f1f);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(139, 46, 46, 0.3);
+}
+
+#see-more-btn .arrow,
+#see-less-btn .arrow {
+    margin-left: 0.5rem;
+    transition: transform 0.3s ease;
+}
+
+#see-more-btn:hover .arrow {
+    transform: translateX(3px);
+}
+
+#see-less-btn:hover .arrow {
+    transform: translateX(-3px);
+}
+
+#see-less-btn {
+    display: none;
+}
+
+/* Category Badge */
+.category-badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: rgba(212, 175, 55, 0.9);
+    color: white;
+    padding: 0.2rem 0.6rem;
+    border-radius: 12px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    backdrop-filter: blur(5px);
+    z-index: 2;
+   
+}
+
+.category-badge.drinks {
+    background: rgba(139, 46, 46, 0.9);
+}
+
+/* CRITICAL: Ensure no element blocks scrolling */
+.gallery * {
+    /* Allow scrolling through all elements */
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .gallery {
+        padding: 4rem 3% 3rem;
+    }
+
+    .gallery .heading {
+        font-size: 2.5rem;
+    }
+
+    .category-filters {
+        gap: 0.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .category-btn {
+        padding: 0.6rem 1.5rem;
+        font-size: 0.9rem;
+    }
+
+    .gallery .box-container {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 1.5rem;
+    }
+
+    .gallery .box {
+        height: 250px;
+    }
+
+    .button-container {
+        margin: 2rem auto 0;
+    }
+
+    #see-more-btn,
+    #see-less-btn {
+        padding: 0.8rem 1.5rem;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .gallery .box-container {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.2rem;
+    }
+
+    .gallery .box {
+        height: 240px;
+    }
+
+    .category-filters {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+/* CRITICAL: Add padding to body to prevent any edge cases */
+body {
+    padding: 0;
+    margin: 0;
+}
+
+/* Add some content after gallery to test scrolling */
+.test-content {
+    height: 100vh;
+    background: linear-gradient(45deg, #f0f0f0, #e0e0e0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: #333;
+}
+
+/* Enhanced Review Section */
+.review {
+    padding: 6rem 5%;
+    background:
+        /* Traditional prayer flag sequence */
+        repeating-linear-gradient(90deg,
+            rgba(204, 41, 54, 0.08) 0px 20px,
+            rgba(212, 175, 55, 0.06) 20px 40px,
+            rgba(46, 107, 87, 0.05) 40px 60px,
+            rgba(255, 140, 66, 0.07) 60px 80px,
+            rgba(0, 119, 190, 0.04) 80px 100px),
+        /* Deep cultural background */
+        radial-gradient(circle at 20% 30%, rgba(139, 46, 46, 0.12) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(43, 26, 18, 0.08) 0%, transparent 50%),
+        linear-gradient(180deg, rgba(43, 26, 18, 0.95), rgba(59, 36, 22, 0.92));
+    position: relative;
+    overflow: hidden;
+}
+
+.review::before {
+    content: "";
+    position: absolute;
+    top: 20%;
+    left: 10%;
+    width: 200px;
+    height: 200px;
+    background:
+        radial-gradient(circle,
+            rgba(200, 164, 77, 0.1) 0%,
+            transparent 70%);
+    border-radius: 50%;
+    animation: culturalReviewFloat 15s ease-in-out infinite;
+}
+
+.review::after {
+    content: "";
+    position: absolute;
+    bottom: 20%;
+    right: 10%;
+    width: 300px;
+    height: 300px;
+    background:
+        conic-gradient(from 45deg,
+            rgba(204, 41, 54, 0.08) 0deg 90deg,
+            transparent 90deg 180deg,
+            rgba(255, 140, 66, 0.06) 180deg 270deg,
+            transparent 270deg 360deg);
+    border-radius: 50%;
+    animation: culturalReviewOrb 20s linear infinite reverse;
+}
+
+@keyframes culturalReviewFloat {
+
+    0%,
+    100% {
+        transform: translateY(0) scale(1);
+    }
+
+    50% {
+        transform: translateY(-20px) scale(1.1);
+    }
+}
+
+@keyframes culturalReviewOrb {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.review .box {
+    text-align: center;
+    padding: 2.5rem;
+    background:
+        linear-gradient(135deg,
+            rgba(246, 242, 234, 0.08) 0%,
+            rgba(255, 255, 255, 0.04) 50%,
+            rgba(200, 164, 77, 0.06) 100%);
+    border: 2px solid rgba(200, 164, 77, 0.2);
+    border-radius: 25px;
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    transition: all var(--transition-cultural);
+    color: var(--cream-50);
+    backdrop-filter: blur(10px);
+    position: relative;
+    overflow: hidden;
+}
+
+.review .box::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        repeating-radial-gradient(circle at 30% 70%,
+            rgba(200, 164, 77, 0.03) 0px 2px,
+            transparent 2px 20px),
+        repeating-radial-gradient(circle at 70% 30%,
+            rgba(204, 41, 54, 0.02) 0px 1px,
+            transparent 1px 25px);
+    border-radius: 23px;
+    z-index: 0;
+}
+
+.review .box::after {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    background:
+        conic-gradient(from 0deg,
+            var(--temple-gold) 0deg 60deg,
+            transparent 60deg 120deg,
+            var(--ceremonial-red) 120deg 180deg,
+            transparent 180deg 240deg,
+            var(--copper-patina) 240deg 300deg,
+            transparent 300deg 360deg);
+    border-radius: 25px;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity var(--transition-cultural);
+    animation: culturalReviewBorder 8s linear infinite;
+}
+
+@keyframes culturalReviewBorder {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.review .box:hover::after {
+    opacity: 0.7;
+}
+
+.review .box:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow:
+        0 30px 90px rgba(0, 0, 0, 0.5),
+        0 0 50px rgba(200, 164, 77, 0.3);
+    border-color: var(--temple-gold);
+}
+
+.review .box img {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    margin-bottom: 1.5rem;
+    box-shadow:
+        0 12px 35px rgba(0, 0, 0, 0.4),
+        0 0 0 4px rgba(200, 164, 77, 0.4),
+        inset 0 2px 4px rgba(255, 255, 255, 0.2);
+    border: 3px solid var(--temple-gold);
+    transition: all var(--transition-cultural);
+    filter: contrast(1.1) saturate(1.1);
+    position: relative;
+    z-index: 1;
+}
+
+.review .box:hover img {
+    transform: scale(1.1) rotate(3deg);
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.5),
+        0 0 0 6px var(--ceremonial-red),
+        0 0 30px rgba(204, 41, 54, 0.6);
+}
+
+.review .box h3 {
+    color: var(--temple-gold);
+    font-size: 1.4rem;
+    margin-bottom: 0.8rem;
+    font-weight: 900;
+    text-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.6),
+        0 0 20px rgba(200, 164, 77, 0.4);
+    position: relative;
+    z-index: 1;
+}
+
+.review .box p {
+    color: rgba(246, 242, 234, 0.95);
+    line-height: 1.8;
+    font-style: italic;
+    margin: 0;
+    font-size: 1.05rem;
+    position: relative;
+    z-index: 1;
+}
+
+.review .box .meta {
+    display: block;
+    margin-top: 1rem;
+    color: rgba(200, 164, 77, 0.8);
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+.stars {
+    display: flex;
+    justify-content: center;
+    gap: 0.4rem;
+    margin: 1rem 0 1.5rem;
+    position: relative;
+    z-index: 1;
+}
+
+.stars i {
+    color: var(--mustard-oil);
+    font-size: 1.2rem;
+    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.6));
+    transition: all var(--transition-fast);
+}
+
+.review .box:hover .stars i {
+    color: var(--temple-gold);
+    transform: scale(1.2) rotate(10deg);
+    filter: drop-shadow(0 4px 12px rgba(212, 175, 55, 0.8));
+}
+
+/* -------------------------------------- */
+/* Reviews Section Styling */
+/* -------------------------------------- */
+
+.reviews {
+    padding: 5rem 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* You can choose a different background here if you like, 
+       or use the same one as 'about' for consistency */
+    background: #fff; /* Clean white background */
+}
+
+.reviews-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.reviews .content {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+/* Heading Styling (Consistent with About) */
+.reviews h3 {
+    font-size: 2.7rem;
+    color: #a63c3c;
+    margin-bottom: 1.5rem;
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
+    position: relative;
+    display: inline-block;
+}
+
+.reviews h3::after {
+    content: "";
+    position: absolute;
+    width: 70px;
+    height: 3px;
+    background-color: #a63c3c;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -10px;
+    border-radius: 2px;
+}
+
+/* Paragraph/Quote Styling */
+.reviews p {
+    color: var(--muted);
+    font-size: 1.3rem;
+    line-height: 1.9;
+    font-family: 'Poppins', sans-serif;
+    margin-bottom: 2rem;
+    text-align: center;
+    font-style: italic; /* Making review quotes stand out */
+}
+
+
+/* ---- Responsive grid layout ---- */
+.video-gallery h3 {
+    text-align: center;          /* Center horizontally */
+  font-size: 3rem;             /* Adjust font size for desktop */
+  color: #a9a663;              /* Warm accent (choose your theme color) */
+  margin-bottom: 1.5rem;       /* Space below the heading */
+  letter-spacing: 1px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+/* Responsive adjustment for smaller screens */
+@media (max-width: 768px) {
+  .video-gallery h3 {
+    font-size: 1.6rem;
+  }
+}
+
+.video-gallery-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 30px;
+  margin-top: 2rem;
+  background: transparent;
+}
+
+.video-column { /* no sizing needed; grid handles it */ }
+
+/* ---- Responsive player wrapper ---- */
+/* Modern: aspect-ratio + graceful fallback for older browsers */
+.video-responsive {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: 0 5px 20px rgba(0,0,0,.15);
+  background: transparent; /* show page bg if any extra area */
+}
+
+/* Landscape 16:9 and Portrait 9:16 */
+.video-responsive.landscape { aspect-ratio: 16 / 9; }
+.video-responsive.portrait  { aspect-ratio: 9 / 16; }
+
+/* Fallback for older browsers (no aspect-ratio support) */
+@supports not (aspect-ratio: 1 / 1) {
+  .video-responsive.landscape { height: 0; padding-bottom: 56.25%; }
+  .video-responsive.portrait  { height: 0; padding-bottom: 177.78%; }
+}
+
+/* Fill the wrapper */
+.video-responsive iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* ---- Optional: if you prefer all cards to be 16:9 and crop verticals
+       instead of using a tall portrait card, apply .fill-portrait: ---- */
+/*
+.video-responsive.fill-portrait.landscape { aspect-ratio: 16 / 9; }
+.video-responsive.fill-portrait iframe {
+  width: 180%;         left: -40%;     /* widen + center = fills horizontally */
+
+
+
+/* ---- Small screens: slightly tighter gaps ---- */
+@media (max-width: 768px) {
+  .video-gallery-row { gap: 20px; }
+}
+
+
+/* Enhanced Order Section */
+.order {
+    padding: 6rem 5%;
+    background:
+        /* Traditional mandala pattern */
+        repeating-radial-gradient(circle at 25% 25%,
+            rgba(139, 46, 46, 0.02) 0px 3px,
+            transparent 3px 30px),
+        repeating-radial-gradient(circle at 75% 75%,
+            rgba(200, 164, 77, 0.03) 0px 2px,
+            transparent 2px 25px),
+        /* Cultural textile overlay */
+        repeating-linear-gradient(45deg,
+            rgba(204, 41, 54, 0.015) 0px 10px,
+            transparent 10px 20px,
+            rgba(255, 140, 66, 0.02) 20px 30px,
+            transparent 30px 40px),
+        linear-gradient(135deg, var(--cream-50), var(--cream-100));
+    position: relative;
+}
+
+.order::before {
+    content: "";
+    position: absolute;
+    top: 20%;
+    right: 5%;
+    width: 400px;
+    height: 400px;
+    background:
+        conic-gradient(from 30deg,
+            rgba(200, 164, 77, 0.04) 0deg 72deg,
+            transparent 72deg 144deg,
+            rgba(139, 46, 46, 0.03) 144deg 216deg,
+            transparent 216deg 288deg,
+            rgba(204, 41, 54, 0.035) 288deg 360deg);
+    border-radius: 50%;
+    animation: culturalOrderSpiral 35s linear infinite;
+    z-index: 0;
+}
+
+@keyframes culturalOrderSpiral {
+    from {
+        transform: rotate(0deg) scale(1);
+    }
+
+    25% {
+        transform: rotate(90deg) scale(1.05);
+    }
+
+    50% {
+        transform: rotate(180deg) scale(1);
+    }
+
+    75% {
+        transform: rotate(270deg) scale(0.95);
+    }
+
+    to {
+        transform: rotate(360deg) scale(1);
+    }
+}
+
+.order .row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    max-width: var(--container);
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+.order .image {
+    position: relative;
+}
+
+.order .image::before {
+    content: "";
+    position: absolute;
+    inset: -20px;
+    background:
+        conic-gradient(from 0deg,
+            var(--temple-gold) 0deg 45deg,
+            transparent 45deg 90deg,
+            var(--copper-patina) 90deg 135deg,
+            transparent 135deg 180deg,
+            var(--ceremonial-red) 180deg 225deg,
+            transparent 225deg 270deg,
+            var(--brass-500) 270deg 315deg,
+            transparent 315deg 360deg);
+    border-radius: 25px;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity var(--transition-cultural);
+    animation: culturalImageFrame 12s linear infinite;
+}
+
+@keyframes culturalImageFrame {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.order .image:hover::before {
+    opacity: 0.6;
+}
+
+.order .image img {
+    width: 100%;
+    border-radius: 20px;
+    box-shadow:
+        0 20px 60px rgba(139, 46, 46, 0.2),
+        0 0 0 3px rgba(200, 164, 77, 0.3);
+    transition: all var(--transition-cultural);
+    filter: contrast(1.1) saturate(1.05);
+}
+
+.order .image:hover img {
+    transform: scale(1.05) rotate(1deg);
+    box-shadow:
+        0 30px 90px rgba(139, 46, 46, 0.3),
+        0 0 50px rgba(200, 164, 77, 0.4);
+}
+
+.order form {
+    background:
+        linear-gradient(135deg,
+            rgba(255, 255, 255, 0.95) 0%,
+            rgba(246, 242, 234, 0.9) 100%);
+    padding: 3rem;
+    border-radius: 25px;
+    box-shadow:
+        0 20px 60px rgba(139, 46, 46, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.6);
+    border: 2px solid transparent;
+    position: relative;
+    overflow: hidden;
+}
+
+.order form::before {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    background:
+        linear-gradient(135deg,
+            var(--temple-gold) 0%,
+            var(--copper-patina) 25%,
+            var(--ceremonial-red) 50%,
+            var(--brass-500) 75%,
+            var(--temple-gold) 100%);
+    border-radius: 25px;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity var(--transition-cultural);
+}
+
+.order form:hover::before {
+    opacity: 1;
+}
+
+.order form::after {
+    content: "";
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    background:
+        radial-gradient(circle,
+            rgba(200, 164, 77, 0.1) 0%,
+            transparent 70%);
+    border-radius: 50%;
+    animation: culturalFormAccent 6s ease-in-out infinite;
+}
+
+@keyframes culturalFormAccent {
+
+    0%,
+    100% {
+        transform: scale(1) rotate(0deg);
+        opacity: 0.5;
+    }
+
+    50% {
+        transform: scale(1.2) rotate(180deg);
+        opacity: 0.8;
+    }
+}
+
+.inputBox {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.inputBox input,
+textarea {
+    padding: 1.2rem;
+    border: 2px solid rgba(200, 164, 77, 0.2);
+    border-radius: 15px;
+    font-size: 1.05rem;
+    background: rgba(255, 255, 255, 0.9);
+    transition: all var(--transition-cultural);
+    font-family: inherit;
+    position: relative;
+}
+
+.inputBox input::placeholder,
+textarea::placeholder {
+    color: var(--muted);
+    opacity: 0.7;
+}
+
+.inputBox input:focus,
+textarea:focus {
+    outline: none;
+    border-color: var(--temple-gold);
+    box-shadow:
+        0 0 0 4px rgba(200, 164, 77, 0.2),
+        0 8px 25px rgba(139, 46, 46, 0.1);
+    background: rgba(255, 255, 255, 1);
+    transform: translateY(-2px);
+}
+
+textarea {
+    resize: vertical;
+    min-height: 140px;
+    margin-bottom: 2rem;
+    grid-column: 1 / -1;
+}
+
+/* Enhanced Footer with Cultural Elements */
+.footer {
+    padding: 4rem 5% 5rem;
+    background:
+        /* Traditional prayer flag pattern */
+        repeating-linear-gradient(90deg,
+            rgba(204, 41, 54, 0.1) 0px 15px,
+            rgba(212, 175, 55, 0.08) 15px 30px,
+            rgba(46, 107, 87, 0.06) 30px 45px,
+            rgba(255, 140, 66, 0.09) 45px 60px,
+            rgba(0, 119, 190, 0.05) 60px 75px),
+        /* Deep cultural foundation */
+        radial-gradient(circle at 30% 70%, rgba(139, 46, 46, 0.15) 0%, transparent 60%),
+        radial-gradient(circle at 70% 30%, rgba(43, 26, 18, 0.12) 0%, transparent 60%),
+        linear-gradient(180deg, var(--wood-900), var(--wood-700));
+    color: var(--cream-50);
+    position: relative;
+    overflow: hidden;
+}
+
+.footer::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background:
+        linear-gradient(90deg,
+            transparent 0%,
+            var(--temple-gold) 20%,
+            var(--copper-patina) 40%,
+            var(--ceremonial-red) 60%,
+            var(--brass-500) 80%,
+            transparent 100%);
+    animation: culturalFooterBorder 8s ease-in-out infinite;
+}
+
+@keyframes culturalFooterBorder {
+
+    0%,
+    100% {
+        opacity: 0.6;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+.footer-inner {
+    max-width: var(--container);
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+}
+
+.footer .share {
+    margin-bottom: 0;
+}
+
+.footer-map-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 400px;
+    gap: 2rem;
+    align-items: stretch;
+    width: 100%;
+    max-width: calc(var(--container) - 40px);
+}
+
+.map-card {
+    border-radius: 25px;
+    overflow: hidden;
+    box-shadow:
+        0 25px 80px rgba(0, 0, 0, 0.6),
+        0 0 0 3px rgba(200, 164, 77, 0.3);
+    border: 2px solid transparent;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.2), rgba(43, 26, 18, 0.1));
+    min-height: 300px;
+    position: relative;
+}
+
+.map-card::before {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    background:
+        conic-gradient(from 45deg,
+            var(--temple-gold) 0deg 90deg,
+            var(--copper-patina) 90deg 180deg,
+            var(--ceremonial-red) 180deg 270deg,
+            var(--brass-500) 270deg 360deg);
+    border-radius: 25px;
+    z-index: -1;
+    opacity: 0.7;
+    animation: culturalMapBorder 10s linear infinite;
+}
+
+@keyframes culturalMapBorder {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.map-iframe {
+    width: 100%;
+    height: 100%;
+    min-height: 300px;
+    border: 0;
+    display: block;
+    border-radius: 23px;
+}
+
+.map-info-card {
+    background:
+        linear-gradient(135deg,
+            rgba(246, 242, 234, 0.06) 0%,
+            rgba(255, 255, 255, 0.03) 100%);
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow:
+        0 15px 40px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(200, 164, 77, 0.2);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    justify-content: center;
+    backdrop-filter: blur(10px);
+    position: relative;
+    overflow: hidden;
+}
+
+.map-info-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        repeating-radial-gradient(circle at 70% 30%,
+            rgba(200, 164, 77, 0.03) 0px 2px,
+            transparent 2px 25px),
+        repeating-radial-gradient(circle at 30% 70%,
+            rgba(204, 41, 54, 0.02) 0px 1px,
+            transparent 1px 20px);
+    border-radius: 18px;
+    z-index: 0;
+}
+
+.map-info-head {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: var(--cream-50);
+    position: relative;
+    z-index: 1;
+}
+
+.map-info-head i {
+    font-size: 1.6rem;
+    color: var(--temple-gold);
+    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.6));
+    animation: culturalLocationPulse 3s ease-in-out infinite;
+}
+
+@keyframes culturalLocationPulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+        filter: drop-shadow(0 4px 12px rgba(212, 175, 55, 0.8));
+    }
+}
+
+.map-info-card h3 {
+    margin: 0;
+    font-size: 1.3rem;
+    color: var(--temple-gold);
+    font-weight: 900;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+    position: relative;
+    z-index: 1;
+}
+
+.map-address {
+    font-style: normal;
+    color: rgba(246, 242, 234, 0.95);
+    line-height: 1.6;
+    margin: 0;
+    font-size: 1rem;
+    position: relative;
+    z-index: 1;
+}
+
+.map-note {
+    margin: 0;
+    color: rgba(200, 164, 77, 0.9);
+    font-size: 0.95rem;
+    font-style: italic;
+    position: relative;
+    z-index: 1;
+}
+
+.map-actions {
+    display: flex;
+    gap: 0.8rem;
+    margin-top: 0.5rem;
+    position: relative;
+    z-index: 1;
+}
+
+.map-actions .btn {
+    padding: 0.8rem 1.3rem;
+    font-size: 0.95rem;
+    border-radius: 15px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    transition: all var(--transition-cultural);
+}
+
+.btn.outline {
+    background: transparent;
+    color: var(--temple-gold);
+    border: 2px solid rgba(200, 164, 77, 0.3);
+    backdrop-filter: blur(5px);
+}
+
+.btn.outline:hover {
+    background: rgba(200, 164, 77, 0.2);
+    border-color: var(--temple-gold);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(200, 164, 77, 0.3);
+}
+
+/* Enhanced Social Media Buttons */
+.social-row {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    margin: 2rem auto 0;
+    position: relative;
+}
+
+.social-row::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: -50px;
+    right: -50px;
+    height: 1px;
+    background: linear-gradient(90deg,
+            transparent,
+            rgba(200, 164, 77, 0.3) 30%,
+            rgba(200, 164, 77, 0.5) 50%,
+            rgba(200, 164, 77, 0.3) 70%,
+            transparent);
+    z-index: 0;
+}
+
+.sr-only {
+    position: absolute !important;
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+    clip: rect(1px, 1px, 1px, 1px);
+    white-space: nowrap;
+    border: 0;
+    padding: 0;
+    margin: -1px;
+}
+
+.social-btn {
+    --btn-size: 56px;
+    width: var(--btn-size);
+    height: var(--btn-size);
+    display: grid;
+    place-items: center;
+    border-radius: 16px;
+    text-decoration: none;
+    color: var(--wood-900);
+    font-weight: 800;
+    background:
+        linear-gradient(135deg, var(--temple-gold) 0%, var(--brass-500) 50%, var(--copper-patina) 100%);
+    box-shadow:
+        0 12px 35px rgba(43, 26, 18, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+    border: 2px solid rgba(200, 164, 77, 0.4);
+    transition: all var(--transition-cultural);
+    position: relative;
+    overflow: visible;
+    z-index: 1;
+}
+
+.social-btn::before {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    background:
+        conic-gradient(from 45deg,
+            var(--temple-gold) 0deg 90deg,
+            var(--copper-patina) 90deg 180deg,
+            var(--ceremonial-red) 180deg 270deg,
+            var(--brass-500) 270deg 360deg);
+    border-radius: 16px;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity var(--transition-cultural);
+    animation: culturalSocialBorder 6s linear infinite;
+}
+
+@keyframes culturalSocialBorder {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.social-btn:hover::before {
+    opacity: 1;
+}
+
+.social-btn .icon {
+    font-size: 1.2rem;
+    line-height: 1;
+    display: inline-block;
+    transition: all var(--transition-cultural);
+}
+
+.social-btn:hover,
+.social-btn:focus {
+    transform: translateY(-6px) scale(1.05);
+    box-shadow:
+        0 25px 80px rgba(43, 26, 18, 0.5),
+        0 0 40px rgba(200, 164, 77, 0.4);
+    filter: brightness(1.1);
+    outline: none;
+}
+
+.social-btn:hover .icon {
+    transform: scale(1.1) rotate(5deg);
+}
+
+.social-btn:focus-visible {
+    box-shadow:
+        0 25px 80px rgba(43, 26, 18, 0.5),
+        0 0 0 4px rgba(200, 164, 77, 0.3);
+}
+
+.social-btn .icon i {
+    color: var(--wood-900);
+    text-shadow:
+        0 1px 0 rgba(255, 255, 255, 0.1),
+        0 -1px 0 rgba(0, 0, 0, 0.3);
+}
+
+.social-btn.facebook {
+    background: linear-gradient(135deg, var(--temple-gold), var(--brass-500));
+}
+
+.social-btn.instagram {
+    background: linear-gradient(135deg, var(--ritual-saffron), var(--temple-gold));
+}
+
+.social-btn.twitter {
+    background: linear-gradient(135deg, var(--prayer-flag-blue), var(--jade-600));
+}
+
+.social-btn::after {
+    content: attr(data-title);
+    position: absolute;
+    bottom: calc(var(--btn-size) + 12px);
+    left: 50%;
+    transform: translateX(-50%) translateY(8px);
+    background:
+        linear-gradient(135deg, rgba(43, 26, 18, 0.95), rgba(59, 36, 22, 0.9));
+    color: var(--temple-gold);
+    padding: 8px 12px;
+    font-size: 0.85rem;
+    border-radius: 10px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 200ms ease;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.6);
+    z-index: 30;
+    border: 1px solid rgba(200, 164, 77, 0.2);
+    font-weight: 700;
+}
+
+.social-btn:hover::after,
+.social-btn:focus::after,
+.social-btn:focus-visible::after {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+@media (max-width: 480px) {
+    .social-btn {
+        --btn-size: 48px;
+        border-radius: 14px;
+    }
+
+    .social-btn::after {
+        font-size: 0.8rem;
+        padding: 6px 10px;
+    }
+}
+
+/* Enhanced Scroll Top Button */
+#scroll-top {
+    position: fixed;
+    bottom: 1.2rem;
+    right: 1.15rem;
+    width: 60px;
+    height: 60px;
+    background:
+        linear-gradient(135deg, var(--temple-gold) 0%, var(--brass-500) 50%, var(--copper-patina) 100%);
+    color: var(--wood-900);
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    text-decoration: none;
+    font-size: 1.6rem;
+    box-shadow:
+        0 15px 40px rgba(139, 46, 46, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    z-index: 100;
+    transition: all var(--transition-cultural);
+    border: 3px solid var(--temple-gold);
+    font-weight: 900;
+}
+
+#scroll-top::before {
+    content: "";
+    position: absolute;
+    inset: -3px;
+    background:
+        conic-gradient(from 0deg,
+            var(--temple-gold) 0deg 90deg,
+            var(--copper-patina) 90deg 180deg,
+            var(--ceremonial-red) 180deg 270deg,
+            var(--brass-500) 270deg 360deg);
+    border-radius: 50%;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity var(--transition-cultural);
+    animation: culturalScrollBorder 5s linear infinite;
+}
+
+@keyframes culturalScrollBorder {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+#scroll-top:hover::before {
+    opacity: 1;
+}
+
+#scroll-top:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow:
+        0 25px 80px rgba(139, 46, 46, 0.4),
+        0 0 40px rgba(200, 164, 77, 0.5);
+    filter: brightness(1.1);
+}
+
+.credit {
+    color: var(--temple-gold);
+    text-align: center;
+    font-weight: 600;
+    margin-top: 2rem;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* Enhanced Responsive Design */
+@media (max-width: 991px) {
+    html {
+        font-size: 90%;
+    }
+
+    header {
+        padding: 1rem 2rem;
+        height: 70px;
+    }
+
+    main {
+        margin-top: 70px;
+    }
+
+    #menu-bar {
+        display: block;
+    }
+
+    .navbar {
+        position: fixed;
+        top: 70px;
+        left: -100%;
+        width: 100%;
+        height: calc(100vh - 70px);
+        background:
+            /* Traditional prayer flag mobile pattern */
+            repeating-linear-gradient(0deg,
+                rgba(204, 41, 54, 0.15) 0px 20px,
+                rgba(212, 175, 55, 0.12) 20px 40px,
+                rgba(46, 107, 87, 0.1) 40px 60px,
+                rgba(255, 140, 66, 0.13) 60px 80px),
+            linear-gradient(135deg, var(--brick-800), var(--terra-500));
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        padding: 3rem 0;
+        transition: left var(--transition-slow);
+        border-top: 3px solid var(--temple-gold);
+        z-index: 999;
+        backdrop-filter: blur(15px);
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .navbar.active {
+        left: 0;
+    }
+
+    .navbar a {
+        display: block;
+        width: 85%;
+        margin: 0.8rem auto;
+        padding: 1.5rem 2.5rem;
+        border-radius: 20px;
+        color: var(--cream-50);
+        background:
+            linear-gradient(135deg,
+                rgba(255, 255, 255, 0.15) 0%,
+                rgba(200, 164, 77, 0.1) 100%);
+        text-align: center;
+        font-size: 1.2rem;
+        font-weight: 700;
+        border: 2px solid rgba(200, 164, 77, 0.3);
+        backdrop-filter: blur(8px);
+        transition: all var(--transition-cultural);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .navbar a::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+            linear-gradient(135deg, var(--temple-gold), var(--copper-patina));
+        opacity: 0;
+        transition: opacity var(--transition-cultural);
+    }
+
+    .navbar a:hover::before {
+        opacity: 0.9;
+    }
+
+    .navbar a:hover {
+        color: var(--wood-900);
+        transform: translateY(-3px) scale(1.02);
+        box-shadow:
+            0 12px 35px rgba(0, 0, 0, 0.3),
+            0 0 30px rgba(200, 164, 77, 0.4);
+        border-color: var(--ceremonial-red);
+    }
+
+    .home {
+        grid-template-columns: 1fr;
+        text-align: center;
+        padding: 3rem 2rem;
+        gap: 2rem;
+    }
+
+    .order .row {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .inputBox {
+        grid-template-columns: 1fr;
+    }
+
+    .footer-map-wrapper {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .map-info-card {
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .review {
+        padding: 4rem 3%;
+    }
+
+    .review .box {
+        padding: 2rem;
+    }
+
+    .review .box h3 {
+        font-size: 1.2rem;
+    }
+
+    .review .box p {
+        font-size: 1rem;
+    }
+
+    .home .content h3 {
+        font-size: clamp(2.2rem, 5vw, 3.5rem);
+    }
+
+    .heading {
+        font-size: clamp(1.8rem, 4vw, 2.8rem);
+        margin-bottom: 3rem;
+    }
+
+    .heading::before,
+    .heading::after {
+        display: none;
+    }
+}
+
+@media (max-width: 450px) {
+    html {
+        font-size: 85%;
+    }
+
+    .steps {
+        grid-template-columns: 1fr;
+    }
+
+    .gallery .box-container {
+        grid-template-columns: 1fr;
+    }
+
+    .footer .share {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .social-row {
+        gap: 0.8rem;
+    }
+
+    .box-container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .home {
+        padding: 2rem 1rem;
+    }
+
+    .order,
+    .gallery,
+    .speciality,
+    .popular,
+    .step-container {
+        padding: 4rem 3%;
+    }
+}
+
+/* Enhanced Cultural Accent Elements */
+.cultural-accent {
+    position: relative;
+}
+
+.cultural-accent::before {
+    content: "";
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 6px;
+    background:
+        linear-gradient(90deg,
+            var(--temple-gold) 0%,
+            var(--copper-patina) 25%,
+            var(--ceremonial-red) 50%,
+            var(--brass-500) 75%,
+            var(--temple-gold) 100%);
+    border-radius: 3px;
+    animation: culturalAccentPulse 4s ease-in-out infinite;
+}
+
+@keyframes culturalAccentPulse {
+
+    0%,
+    100% {
+        opacity: 0.7;
+        transform: translateX(-50%) scaleX(1);
+    }
+
+    50% {
+        opacity: 1;
+        transform: translateX(-50%) scaleX(1.2);
+    }
+}
+
+.cultural-accent::after {
+    content: "";
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 20px;
+    background:
+        radial-gradient(circle, var(--temple-gold) 30%, transparent 31%),
+        radial-gradient(circle, var(--ceremonial-red) 60%, transparent 61%);
+    border-radius: 50%;
+    animation: culturalAccentOrb 3s ease-in-out infinite;
+}
+
+@keyframes culturalAccentOrb {
+
+    0%,
+    100% {
+        transform: translateX(-50%) rotate(0deg) scale(1);
+    }
+
+    50% {
+        transform: translateX(-50%) rotate(180deg) scale(1.1);
+    }
+}
+
+/* Enhanced Loading Animation with Cultural Elements */
+.loader-container {
+    position: fixed;
+    inset: 0;
+    background:
+        /* Traditional mandala loading pattern */
+        radial-gradient(circle at 30% 30%, rgba(200, 164, 77, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 70% 70%, rgba(139, 46, 46, 0.08) 0%, transparent 50%),
+        linear-gradient(135deg, var(--cream-50), var(--cream-100));
+    display: grid;
+    place-items: center;
+    z-index: 10000;
+}
+
+.loader-container::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 200px;
+    height: 200px;
+    background:
+        conic-gradient(from 0deg,
+            var(--temple-gold) 0deg 45deg,
+            transparent 45deg 90deg,
+            var(--copper-patina) 90deg 135deg,
+            transparent 135deg 180deg,
+            var(--ceremonial-red) 180deg 225deg,
+            transparent 225deg 270deg,
+            var(--brass-500) 270deg 315deg,
+            transparent 315deg 360deg);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    animation: culturalLoaderSpin 2s linear infinite;
+    opacity: 0.3;
+}
+
+@keyframes culturalLoaderSpin {
+    from {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+
+    to {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+.loader-container img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    box-shadow:
+        0 0 30px rgba(200, 164, 77, 0.5),
+        0 0 60px rgba(139, 46, 46, 0.3);
+    animation: culturalLoaderPulse 1.5s ease-in-out infinite;
+    position: relative;
+    z-index: 1;
+}
+
+@keyframes culturalLoaderPulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+        filter: brightness(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+        filter: brightness(1.2);
+    }
+}
+
+/* Enhanced Fade-in Animation */
+.fade-in {
+    opacity: 0;
+    animation: culturalFadeIn 1.2s ease-out forwards;
+}
+
+@keyframes culturalFadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(30px) scale(0.95);
+    }
+
+    60% {
+        opacity: 0.8;
+        transform: translateY(-5px) scale(1.01);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Additional Cultural Hover Effects */
+.cultural-hover {
+    transition: all var(--transition-cultural);
+    position: relative;
+    overflow: hidden;
+}
+
+.cultural-hover::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background:
+        radial-gradient(circle, rgba(200, 164, 77, 0.2) 0%, transparent 70%);
+    border-radius: 50%;
+    transition: all var(--transition-cultural);
+    transform: translate(-50%, -50%);
+    z-index: 0;
+}
+
+.cultural-hover:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+/* Traditional Window Frame Effects */
+.newari-window-frame {
+    position: relative;
+    border: 4px solid var(--wood-900);
+    border-image:
+        repeating-linear-gradient(45deg,
+            var(--brass-500) 0px 2px,
+            var(--copper-patina) 2px 4px,
+            var(--temple-gold) 4px 6px,
+            var(--brass-500) 6px 8px) 4;
+    background:
+        /* Carved lattice pattern */
+        repeating-conic-gradient(from 0deg at 20px 20px,
+            rgba(200, 164, 77, 0.1) 0deg 45deg,
+            transparent 45deg 90deg,
+            rgba(139, 46, 46, 0.08) 90deg 135deg,
+            transparent 135deg 180deg);
+    background-size: 40px 40px;
+}
+
+.newari-window-frame::before {
+    content: "";
+    position: absolute;
+    inset: 8px;
+    background:
+        /* Traditional carved details */
+        repeating-linear-gradient(90deg,
+            transparent 0px 18px,
+            var(--wood-900) 18px 20px,
+            transparent 20px 38px,
+            var(--wood-900) 38px 40px),
+        repeating-linear-gradient(0deg,
+            transparent 0px 18px,
+            var(--wood-900) 18px 20px,
+            transparent 20px 38px,
+            var(--wood-900) 38px 40px);
+    opacity: 0.6;
+    z-index: 1;
+}
+
+.newari-window-frame::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 60px;
+    height: 60px;
+    background:
+        radial-gradient(circle,
+            var(--temple-gold) 2px,
+            transparent 3px 8px,
+            var(--copper-patina) 9px 10px,
+            transparent 11px);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+}
+
+/* Enhanced Typography with Cultural Flair */
+.newari-text {
+    font-family: "Noto Serif", "Times New Roman", serif;
+    position: relative;
+}
+
+.newari-text.ceremonial {
+    background:
+        linear-gradient(135deg,
+            var(--ceremonial-red) 0%,
+            var(--temple-gold) 30%,
+            var(--ritual-saffron) 70%,
+            var(--brass-500) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 4px 8px rgba(204, 41, 54, 0.3);
+    font-weight: 900;
+    letter-spacing: 0.05em;
+}
+
+.newari-text.ceremonial::before {
+    content: "";
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background:
+        linear-gradient(90deg,
+            transparent 0%,
+            var(--temple-gold) 30%,
+            var(--ceremonial-red) 50%,
+            var(--temple-gold) 70%,
+            transparent 100%);
+    animation: culturalTextUnderline 3s ease-in-out infinite;
+}
+
+@keyframes culturalTextUnderline {
+
+    0%,
+    100% {
+        opacity: 0.5;
+        transform: scaleX(1);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scaleX(1.1);
+    }
+}
+
+/* Traditional Bell and Prayer Flag Animations */
+.prayer-flags {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 30px;
+    background:
+        repeating-linear-gradient(90deg,
+            rgba(204, 41, 54, 0.4) 0px 15px,
+            rgba(212, 175, 55, 0.4) 15px 30px,
+            rgba(46, 107, 87, 0.4) 30px 45px,
+            rgba(255, 140, 66, 0.4) 45px 60px,
+            rgba(0, 119, 190, 0.4) 60px 75px);
+    z-index: -1;
+    animation: culturalFlagsWave 8s ease-in-out infinite;
+}
+
+@keyframes culturalFlagsWave {
+
+    0%,
+    100% {
+        transform: translateX(0) scaleY(1);
+    }
+
+    25% {
+        transform: translateX(5px) scaleY(0.95);
+    }
+
+    50% {
+        transform: translateX(0) scaleY(0.9);
+    }
+
+    75% {
+        transform: translateX(-5px) scaleY(0.95);
+    }
+}
+
+/* Traditional Temple Bell Effect */
+.temple-bell {
+    position: relative;
+    display: inline-block;
+}
+
+.temple-bell::before {
+    content: "🔔";
+    position: absolute;
+    top: -20px;
+    right: -10px;
+    font-size: 1.5rem;
+    animation: culturalBellRing 4s ease-in-out infinite;
+    filter:
+        drop-shadow(0 2px 4px rgba(200, 164, 77, 0.5)) drop-shadow(0 0 10px rgba(212, 175, 55, 0.3));
+}
+
+@keyframes culturalBellRing {
+
+    0%,
+    90%,
+    100% {
+        transform: rotate(0deg);
+    }
+
+    2%,
+    8% {
+        transform: rotate(15deg);
+    }
+
+    4%,
+    6% {
+        transform: rotate(-15deg);
+    }
+}
+
+/* Enhanced Brick Pattern with Cultural Motifs */
+.enhanced-brick-pattern {
+    background:
+        /* Traditional Newari architectural elements */
+        repeating-conic-gradient(from 45deg at 60px 60px,
+            var(--brick-600) 0deg 45deg,
+            var(--terra-500) 45deg 90deg,
+            var(--brick-800) 90deg 135deg,
+            var(--wood-900) 135deg 180deg),
+        /* Carved stone details */
+        repeating-radial-gradient(circle at 30px 30px,
+            rgba(200, 164, 77, 0.3) 1px 2px,
+            transparent 2px 15px),
+        /* Base brick color */
+        var(--brick-600);
+    background-size: 120px 120px, 60px 60px, 100% 100%;
+    position: relative;
+}
+
+.enhanced-brick-pattern::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        /* Traditional carved mandala overlay */
+        radial-gradient(circle at 25% 25%, rgba(212, 175, 55, 0.2) 2px, transparent 3px),
+        radial-gradient(circle at 75% 75%, rgba(204, 41, 54, 0.15) 1px, transparent 2px);
+    background-size: 80px 80px, 100px 100px;
+    animation: culturalPatternShimmer 12s ease-in-out infinite;
+}
+
+@keyframes culturalPatternShimmer {
+
+    0%,
+    100% {
+        opacity: 0.6;
+    }
+
+    50% {
+        opacity: 0.9;
+    }
+}
+
+/* Final Cultural Flourishes */
+.cultural-flourish {
+    position: relative;
+}
+
+.cultural-flourish::before,
+.cultural-flourish::after {
+    content: "";
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background:
+        radial-gradient(circle,
+            var(--temple-gold) 0% 30%,
+            transparent 31% 50%,
+            var(--copper-patina) 51% 70%,
+            transparent 71%);
+    border-radius: 50%;
+    top: 50%;
+    z-index: -1;
+    animation: culturalFlourishSpin 10s linear infinite;
+}
+
+.cultural-flourish::before {
+    left: -60px;
+    transform: translateY(-50%);
+}
+
+.cultural-flourish::after {
+    right: -60px;
+    transform: translateY(-50%);
+    animation-direction: reverse;
+}
+
+@keyframes culturalFlourishSpin {
+    from {
+        transform: translateY(-50%) rotate(0deg);
+    }
+
+    to {
+        transform: translateY(-50%) rotate(360deg);
+    }
+}
+
+
+/* === Chat launcher (pop‑out) === */
+/* .kk-chat-launcher{
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 10050;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  border: 3px solid var(--temple-gold, #c8a44d);
+  background: linear-gradient(135deg, var(--temple-gold, #c8a44d), var(--brass-500, #c8a44d));
+  color: var(--wood-900, #2b1a12);
+  font-size: 1.4rem;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,.25);
+  text-decoration: none;
+  transition: transform .18s ease, filter .18s ease;
+}
+.kk-chat-launcher:hover{
+  transform: translateY(-2px);
+  filter: brightness(1.05);
+}
+.kk-chat-launcher:active{
+  transform: translateY(0);
+}
+@media (max-width: 600px){
+  .kk-chat-launcher{
+    right: 12px;
+    bottom: 12px;
+    width: 56px;
+    height: 56px;
+  }
+} */
