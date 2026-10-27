@@ -1,0 +1,16 @@
+Install Node.js first:
+
+https://nodejs.org/
+
+Hidden Gem Editable Website:
+
+cd "C:\Users\kanur\OneDrive - University of Iowa\KAUSHIK\Restaurant-Website\hidden-gem-frontend"
+node server.mjs
+
+http://localhost:5173/
+
+To stop:
+
+Ctrl + C
+
+Y

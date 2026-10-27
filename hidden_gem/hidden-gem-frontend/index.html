@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hidden Gem | Restaurant</title>
+    <meta name="description" content="Hidden Gem serves Nepali, Indian, boba tea, and comfort dishes in Trophy Club, TX." />
+    <script>
+      const siteBase = location.pathname.startsWith("/hidden_gem/") ? "/hidden_gem/" : "/";
+      document.write(`<link rel="icon" href="${siteBase}icon.png" />`);
+      document.write(`<link rel="apple-touch-icon" href="${siteBase}apple-icon.png" />`);
+      document.write(`<link rel="stylesheet" href="${siteBase}src/styles.css" />`);
+    </script>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module">
+      const siteBase = location.pathname.startsWith("/hidden_gem/") ? "/hidden_gem/" : "/";
+      import(`${siteBase}src/app.js`);
+    </script>
+  </body>
+</html>
