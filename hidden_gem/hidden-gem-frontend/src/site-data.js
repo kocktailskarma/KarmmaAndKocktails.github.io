@@ -1,8 +1,8 @@
 export const site = {
-  name: "Hidden Gem",
+  name: "Karmma and Kocktails",
   tagline: "Restaurant",
-  logo: "/assets/brand/logo.jpg",
-  logoMark: "/assets/brand/logo.jpg",
+  logo: "/assets/brand/karmma-kocktails.jpg",
+  logoMark: "/assets/brand/karmma-kocktails.jpg",
   addressLine1: "2550 Bobcat Blvd Suite 106",
   addressLine2: "Trophy Club, TX 76262",
   directionsUrl: "https://www.google.com/maps/search/?api=1&query=2550+Bobcat+Blvd+Suite+106+Trophy+Club+TX+76262",

@@ -427,7 +427,7 @@ export const menuData = {
       {
         "id": "chowk-ko-special",
         "name": "Chowk Ko Special",
-        "description": "Hidden Gem house specials made for guests who want something different.",
+        "description": "Karmma and Kocktails house specials made for guests who want something different.",
         "items": [
           {
             "id": "gem-s-delight",
@@ -533,8 +533,8 @@ export const menuData = {
           },
           {
             "id": "hidden-gem-delight",
-            "name": "Hidden Gem Delight",
-            "description": "A hearty Hidden Gem special plate with signature Himalayan flavors.",
+            "name": "Karmma and Kocktails Delight",
+            "description": "A hearty Karmma and Kocktails special plate with signature Himalayan flavors.",
             "price": 22.99,
             "tags": [
               "popular"

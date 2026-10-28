@@ -3,20 +3,20 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Hidden Gem | Restaurant</title>
-    <meta name="description" content="Hidden Gem serves Nepali, Indian, boba tea, and comfort dishes in Trophy Club, TX." />
+    <title>Karmma and Kocktails | Restaurant</title>
+    <meta name="description" content="Karmma and Kocktails serves Nepali, Indian, boba tea, and comfort dishes in Trophy Club, TX." />
     <script>
       const siteBase = location.pathname.startsWith("/hidden_gem/") ? "/hidden_gem/" : "/";
-      document.write(`<link rel="icon" href="${siteBase}icon.png" />`);
-      document.write(`<link rel="apple-touch-icon" href="${siteBase}apple-icon.png" />`);
-      document.write(`<link rel="stylesheet" href="${siteBase}src/styles.css" />`);
+      document.write(`<link rel="icon" href="${siteBase}assets/brand/karmma-kocktails.jpg?v=karmma-2" />`);
+      document.write(`<link rel="apple-touch-icon" href="${siteBase}assets/brand/karmma-kocktails.jpg?v=karmma-2" />`);
+      document.write(`<link rel="stylesheet" href="${siteBase}src/styles.css?v=karmma-2" />`);
     </script>
   </head>
   <body>
     <div id="app"></div>
     <script type="module">
       const siteBase = location.pathname.startsWith("/hidden_gem/") ? "/hidden_gem/" : "/";
-      import(`${siteBase}src/app.js`);
+      import(`${siteBase}src/app.js?v=karmma-2`);
     </script>
   </body>
 </html>

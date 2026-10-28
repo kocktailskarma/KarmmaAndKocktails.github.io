@@ -362,3 +362,183 @@ body{background:linear-gradient(180deg,#fffaf0 0%,#f8ecd2 48%,#efd9ad 100%);}
   .visit-pill{right:10px;bottom:10px;padding:9px 13px;gap:8px;font-size:13px;letter-spacing:.07em;box-shadow:0 10px 24px rgba(94,59,8,.22);}
   .visit-pill span{width:28px;height:28px;}
 }
+
+/* Crimson and gold theme: keep palette and component colors together. */
+:root {
+  --crimson: #9e1b40;
+  --crimson-deep: #470e20;
+  --crimson-dark: #280911;
+  --bg: #470e20;
+  --bg2: #350b19;
+  --navy: #73142f;
+  --card: #5b1029;
+  --gold: #e4be62;
+  --gold-light: #f6dfa0;
+  --gold-dark: #d6ad50;
+  --text: #fff5e5;
+  --muted: #ecd5d8;
+  --soft: #d8b7be;
+  --theme-border: rgba(228, 190, 98, .38);
+  --theme-shadow: 0 12px 30px rgba(25, 3, 10, .24);
+  color-scheme: dark;
+}
+
+body {
+  background: linear-gradient(180deg, var(--crimson-deep), var(--navy) 48%, var(--bg2));
+  color: var(--text);
+}
+body:before { opacity: .025; mix-blend-mode: soft-light; }
+.navbar {
+  background: linear-gradient(180deg, rgba(71,14,32,.98), rgba(71,14,32,.94));
+  box-shadow: 0 1px 0 var(--theme-border), var(--theme-shadow);
+}
+.brand strong, .footer-brand strong { color: var(--gold); }
+.brand small, .footer-brand small, .nav-links a { color: var(--muted); }
+.nav-links a.active, .nav-links a:hover { color: var(--gold-light); }
+.mobile-panel { background: var(--crimson-deep); border-color: var(--theme-border); }
+.mobile-panel a { color: var(--text); }
+.mobile-panel a:hover { color: var(--gold-light); }
+
+.hero-bg {
+  background: linear-gradient(rgba(40,9,17,.66), rgba(71,14,32,.82)),
+    url("../assets/restaurant/main-restaurant.jpeg") center/cover no-repeat;
+  filter: none;
+}
+.hero:before {
+  background: linear-gradient(90deg, rgba(71,14,32,.28), transparent 50%, rgba(40,9,17,.28));
+}
+.hero:after { background: linear-gradient(transparent, var(--bg)); }
+.hero-content { text-shadow: none; }
+.hero h1 {
+  color: var(--gold-light) !important;
+  -webkit-text-fill-color: var(--gold-light) !important;
+  text-shadow: 0 3px 16px rgba(25,3,10,.65) !important;
+}
+.hero p {
+  color: var(--gold-light);
+  background: rgba(40,9,17,.8);
+  border-color: var(--theme-border);
+  text-shadow: none;
+  box-shadow: var(--theme-shadow);
+}
+.scroll-cue { color: var(--gold-light); text-shadow: 0 2px 8px var(--crimson-dark); }
+.scroll-cue i { border-color: var(--gold); background: var(--crimson-deep); }
+.scroll-cue i:before { background: var(--gold); }
+
+.feature-band, .feature-band.alt, .services-title, .reserve-title, .contact-title {
+  background: linear-gradient(180deg, var(--bg), var(--navy));
+}
+.cta { background: radial-gradient(ellipse at center bottom, var(--navy), var(--bg) 75%); }
+.copy h2, .section h2, .cta h2, .page-title h1, .page-hero h1,
+.service-detail h2, .contact-list h2, .reservation-card h2 { color: var(--text); }
+.copy em, .section em, .cta em, .page-title em, .page-hero em {
+  background: none;
+  -webkit-background-clip: initial;
+  color: var(--gold-light);
+}
+.copy p, .lead, .page-title p, .page-hero p, .cta p,
+.service-detail p, .service-detail ul, .service-card p, .footer p,
+.contact-list p, .contact-hours p, .contact-feature-grid p,
+.menu-card p, .menu-category > p, .reservation-card p { color: var(--muted); }
+.eyebrow, .service-card span, .dish-head strong, .contact-list button,
+.service-icon, .line-icon, .contact-list article > span { color: var(--gold); }
+
+.btn, .hero .hero-actions .btn {
+  background: var(--crimson-deep);
+  border-color: var(--gold);
+  color: var(--gold-light);
+  box-shadow: var(--theme-shadow);
+}
+.btn:hover, .hero .hero-actions .btn:hover, .btn-gold,
+.menu-toolbar .btn-gold, .visit-pill {
+  background: linear-gradient(135deg, var(--gold-light), var(--gold));
+  border-color: var(--gold);
+  color: var(--crimson-dark);
+  box-shadow: var(--theme-shadow);
+}
+.btn-gold:hover, .menu-toolbar .btn-gold:hover, .visit-pill:hover {
+  background: var(--gold-light);
+  color: var(--crimson-dark);
+}
+.visit-pill span { background: rgba(71,14,32,.12); }
+a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible {
+  outline: 3px solid var(--gold-light);
+  outline-offset: 4px;
+}
+
+.service-card, .menu-card, .contact-grid article, .reserve-box,
+.contact-feature-grid article {
+  background: var(--card);
+  border-color: var(--theme-border);
+  box-shadow: var(--theme-shadow);
+}
+.service-card:hover, .menu-card:hover {
+  background: var(--navy);
+  border-color: var(--gold);
+}
+.service-icon, .value-card .service-icon, .contact-list article > span {
+  background: linear-gradient(135deg, var(--navy), var(--bg));
+  border-color: var(--theme-border);
+  color: var(--gold);
+  box-shadow: var(--theme-shadow);
+}
+.line-icon { color: var(--gold); border-color: var(--gold); }
+.line-icon svg { filter: none; }
+.service-detail li:before { border-color: var(--gold); }
+
+.menu-toolbar, .menu-controls {
+  background: var(--crimson-deep);
+  box-shadow: var(--theme-shadow);
+  border-color: var(--theme-border);
+}
+.menu-controls .menu-toolbar { background: transparent; box-shadow: none; }
+.tabs, .menu-toolbar input, .filters button, .category-pills a {
+  background: var(--bg2);
+  border-color: var(--theme-border);
+  color: var(--text);
+}
+.tabs button, .filters button { color: var(--muted); }
+.menu-toolbar input::placeholder { color: var(--muted); opacity: 1; }
+.tabs button.selected, .filters button.selected,
+.category-pills a.active, .category-pills a:hover {
+  background: linear-gradient(135deg, var(--gold-light), var(--gold));
+  color: var(--crimson-dark);
+}
+.dish-image { background: linear-gradient(135deg, var(--bg2), var(--navy)); color: var(--gold); }
+.tags span { color: var(--gold-light); background: var(--bg2); }
+.reserve-box input, .reserve-box textarea {
+  background: var(--bg2); border-color: var(--theme-border); color: var(--text);
+}
+.about-frame img, .service-photo img, .map-panel, .reservation-embed {
+  border-color: var(--theme-border);
+}
+.map-panel { background: var(--bg2); }
+.map-panel .map-label {
+  background: var(--crimson-deep); border: 1px solid var(--theme-border);
+  padding: 10px 14px; border-radius: 6px; opacity: 1;
+}
+.map-panel .map-label strong { color: var(--gold-light); }
+.map-panel .map-label span { color: var(--muted); }
+.reservation-embed { background: var(--card); box-shadow: var(--theme-shadow); }
+
+.footer { background: var(--crimson-dark); border-color: var(--theme-border); }
+.footer:before { background: linear-gradient(90deg, transparent, var(--gold), transparent); }
+.footer-bottom { color: var(--muted); border-color: var(--theme-border); }
+.footer-socials a { border-color: var(--gold); }
+
+/* The printable menu stays light for paper and Save as PDF. */
+.print-menu { color-scheme: light; background: #fff; color: #111; }
+.print-menu h2 { border-color: #8a651e; }
+@media print {
+  :root { color-scheme: light; }
+  body { background: #fff; color: #111; }
+  body:before { display: none; }
+}
+
+/* Show the complete Karmma and Kocktails logo without a circular crop. */
+.brand-logo, .brand-logo img, .footer-brand img, .hero-logo {
+  border-radius: 12px;
+}
+.brand-logo img, .footer-brand img, .hero-logo {
+  object-fit: contain;
+}
