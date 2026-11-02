@@ -14,7 +14,7 @@ export const menuData = {
             "tags": [
               "veg"
             ],
-            "image": null
+            "image": "/assets/HiddenGem Menu Pictures JPG/1 - Appetisers/Vegetable Pakora.jpg"
           },
           {
             "id": "mustang-potato",
@@ -25,7 +25,7 @@ export const menuData = {
               "veg",
               "spicy"
             ],
-            "image": null
+            "image": "/assets/HiddenGem Menu Pictures JPG/1 - Appetisers/Mustangey Potatoes.jpg"
           },
           {
             "id": "samosa",
@@ -35,7 +35,7 @@ export const menuData = {
             "tags": [
               "veg"
             ],
-            "image": null
+            "image": "/assets/HiddenGem Menu Pictures JPG/1 - Appetisers/Samosa.jpg"
           },
           {
             "id": "balsamic-sprouts",
@@ -67,7 +67,7 @@ export const menuData = {
               "veg",
               "spicy"
             ],
-            "image": null
+            "image": "/assets/HiddenGem Menu Pictures JPG/1 - Appetisers/Paneer Chilly.jpg"
           },
           {
             "id": "gobi-manchurian",
@@ -77,7 +77,7 @@ export const menuData = {
             "tags": [
               "veg"
             ],
-            "image": null
+            "image": "/assets/HiddenGem Menu Pictures JPG/1 - Appetisers/Gobi Manchurian.jpg"
           },
           {
             "id": "chips-chilly",
@@ -88,7 +88,7 @@ export const menuData = {
               "veg",
               "spicy"
             ],
-            "image": null
+            "image": "/assets/HiddenGem Menu Pictures JPG/1 - Appetisers/Chips Chilly.jpg"
           }
         ]
       },
@@ -105,7 +105,7 @@ export const menuData = {
             "tags": [
               "veg"
             ],
-            "image": null
+            "image": "/assets/HiddenGem Menu Pictures JPG/3 - Main Course/2 - Entrees/Paneer Tikka Masala.jpg"
           },
           {
             "id": "butter-paneer",
@@ -115,7 +115,7 @@ export const menuData = {
             "tags": [
               "veg"
             ],
-            "image": null
+            "image": "/assets/HiddenGem Menu Pictures JPG/3 - Main Course/2 - Entrees/Butter Paneer.jpg"
           },
           {
             "id": "malai-kofta",
@@ -125,7 +125,7 @@ export const menuData = {
             "tags": [
               "veg"
             ],
-            "image": null
+            "image": "/assets/HiddenGem Menu Pictures JPG/3 - Main Course/2 - Entrees/Malai Kofta.jpg"
           },
           {
             "id": "dal-makhani",
@@ -135,7 +135,7 @@ export const menuData = {
             "tags": [
               "veg"
             ],
-            "image": null
+            "image": "/assets/HiddenGem Menu Pictures JPG/3 - Main Course/2 - Entrees/Dal Makhani.jpg"
           },
           {
             "id": "dal-tadka",
@@ -155,7 +155,7 @@ export const menuData = {
             "tags": [
               "veg"
             ],
-            "image": null
+            "image": "/assets/HiddenGem Menu Pictures JPG/3 - Main Course/2 - Entrees/Aloo Gobi Masala.jpg"
           },
           {
             "id": "okra-masala",
@@ -165,7 +165,7 @@ export const menuData = {
             "tags": [
               "veg"
             ],
-            "image": null
+            "image": "/assets/HiddenGem Menu Pictures JPG/3 - Main Course/2 - Entrees/Okra Masala.jpg"
           },
           {
             "id": "navarattan-koorma",
@@ -185,7 +185,7 @@ export const menuData = {
             "tags": [
               "veg"
             ],
-            "image": null
+            "image": "/assets/HiddenGem Menu Pictures JPG/3 - Main Course/2 - Entrees/Palak Paneer.jpg"
           },
           {
             "id": "kadhai-paneer",
@@ -195,7 +195,7 @@ export const menuData = {
             "tags": [
               "veg"
             ],
-            "image": null
+            "image": "/assets/HiddenGem Menu Pictures JPG/3 - Main Course/2 - Entrees/Kadhai Paneer.jpg"
           },
           {
             "id": "matar-paneer",
@@ -205,7 +205,7 @@ export const menuData = {
             "tags": [
               "veg"
             ],
-            "image": null
+            "image": "/assets/HiddenGem Menu Pictures JPG/3 - Main Course/MATAR PANEER.png"
           },
           {
             "id": "channa-masala",
@@ -215,7 +215,7 @@ export const menuData = {
             "tags": [
               "veg"
             ],
-            "image": null
+            "image": "/assets/HiddenGem Menu Pictures JPG/3 - Main Course/2 - Entrees/Channa Masala.jpg"
           }
         ]
       },
@@ -230,7 +230,7 @@ export const menuData = {
             "description": "Five lamb chops marinated with spices and grilled tandoori-style.",
             "price": 29.99,
             "tags": [],
-            "image": null
+            "image": "/assets/HiddenGem Menu Pictures JPG/3 - Main Course/Lamb Chops Tandoori.jpg"
           },
           {
             "id": "chicken-tandoori",
@@ -238,7 +238,7 @@ export const menuData = {
             "description": "Bone-in chicken marinated in yogurt and spices, cooked until smoky.",
             "price": 19.99,
             "tags": [],
-            "image": null
+            "image": "/assets/HiddenGem Menu Pictures JPG/3 - Main Course/chicken tandori.png"
           },
           {
             "id": "tandoori-shrimp",
@@ -246,7 +246,7 @@ export const menuData = {
             "description": "Shrimp marinated with tandoori spices and grilled.",
             "price": 21.99,
             "tags": [],
-            "image": null
+            "image": "/assets/HiddenGem Menu Pictures JPG/3 - Main Course/Tandoori Shrimp.jpg"
           },
           {
             "id": "paneer-kabab",
@@ -256,7 +256,7 @@ export const menuData = {
             "tags": [
               "veg"
             ],
-            "image": null
+            "image": "/assets/HiddenGem Menu Pictures JPG/3 - Main Course/Paneer Kabab.jpg"
           }
         ]
       },
@@ -271,7 +271,7 @@ export const menuData = {
             "description": "Dry $13.99 / Gravy $14.99",
             "price": "From $13.99",
             "tags": [],
-            "image": null
+            "image": "/assets/HiddenGem Menu Pictures JPG/1 - Appetisers/Chicken Lolipop.jpg"
           },
           {
             "id": "chicken-gem",
@@ -289,7 +289,7 @@ export const menuData = {
             "tags": [
               "spicy"
             ],
-            "image": null
+            "image": "/assets/HiddenGem Menu Pictures JPG/1 - Appetisers/chicken chilly.png"
           },
           {
             "id": "chicken-65",
@@ -299,7 +299,7 @@ export const menuData = {
             "tags": [
               "spicy"
             ],
-            "image": null
+            "image": "/assets/HiddenGem Menu Pictures JPG/1 - Appetisers/Chicken 65.jpg"
           },
           {
             "id": "mystic-chicken",
@@ -317,7 +317,7 @@ export const menuData = {
             "tags": [
               "spicy"
             ],
-            "image": null
+            "image": "/assets/HiddenGem Menu Pictures JPG/1 - Appetisers/Mustangey Chicken.jpg"
           },
           {
             "id": "shrimp-chilly",
@@ -327,7 +327,7 @@ export const menuData = {
             "tags": [
               "spicy"
             ],
-            "image": null
+            "image": "/assets/HiddenGem Menu Pictures JPG/1 - Appetisers/Shrimp Chilly.jpg"
           },
           {
             "id": "golden-chicken",
@@ -352,7 +352,7 @@ export const menuData = {
             "tags": [
               "popular"
             ],
-            "image": null
+            "image": "/assets/HiddenGem Menu Pictures JPG/3 - Main Course/2 - Entrees/Butter Chicken.jpg"
           },
           {
             "id": "chicken-tikka-masala",
@@ -362,7 +362,7 @@ export const menuData = {
             "tags": [
               "popular"
             ],
-            "image": null
+            "image": "/assets/HiddenGem Menu Pictures JPG/3 - Main Course/2 - Entrees/Chicken Tikka Masala.jpg"
           },
           {
             "id": "rogan-josh",
@@ -370,7 +370,7 @@ export const menuData = {
             "description": "Tender meat curry simmered with aromatic Kashmiri-style spices.",
             "price": 17.99,
             "tags": [],
-            "image": null
+            "image": "/assets/HiddenGem Menu Pictures JPG/3 - Main Course/2 - Entrees/Rogan Gosh (Bone-In).jpg"
           },
           {
             "id": "koorma",
@@ -378,7 +378,7 @@ export const menuData = {
             "description": "Chicken $15.99 / Lamb $17.99 / Shrimp $17.99 / Veg $14.99",
             "price": "From $14.99",
             "tags": [],
-            "image": null
+            "image": "/assets/HiddenGem Menu Pictures JPG/3 - Main Course/2 - Entrees/Koorma.jpg"
           },
           {
             "id": "vindaloo",
@@ -388,7 +388,7 @@ export const menuData = {
             "tags": [
               "spicy"
             ],
-            "image": null
+            "image": "/assets/HiddenGem Menu Pictures JPG/3 - Main Course/2 - Entrees/Vindaloo.jpg"
           },
           {
             "id": "saag",
@@ -404,7 +404,7 @@ export const menuData = {
             "description": "Chicken $15.99 / Lamb $17.99 / Goat $17.99 / Shrimp $17.99",
             "price": "From $15.99",
             "tags": [],
-            "image": null
+            "image": "/assets/HiddenGem Menu Pictures JPG/3 - Main Course/2 - Entrees/Kadhai.jpg"
           },
           {
             "id": "gem-special-curry",
@@ -427,7 +427,7 @@ export const menuData = {
       {
         "id": "chowk-ko-special",
         "name": "Chowk Ko Special",
-        "description": "Karmma and Kocktails house specials made for guests who want something different.",
+        "description": "Hidden Gem house specials made for guests who want something different.",
         "items": [
           {
             "id": "gem-s-delight",
@@ -460,7 +460,7 @@ export const menuData = {
             "description": "Chicken $12.99 · Goat $14.99 · Lamb $14.99 · Veg $11.99",
             "price": "From $11.99",
             "tags": [],
-            "image": null
+            "image": "/assets/HiddenGem Menu Pictures JPG/4 - Fast Food/Fried Rice.jpg"
           }
         ]
       },
@@ -478,7 +478,7 @@ export const menuData = {
               "veg",
               "popular"
             ],
-            "image": null
+            "image": "/assets/HiddenGem Menu Pictures JPG/4 - Fast Food/Jhol Momo.jpg"
           },
           {
             "id": "fried-momo",
@@ -486,7 +486,7 @@ export const menuData = {
             "description": "Dumplings fried until crisp and served with dipping sauce.",
             "price": 13.99,
             "tags": [],
-            "image": null
+            "image": "/assets/HiddenGem Menu Pictures JPG/1 - Appetisers/fried momo.png"
           },
           {
             "id": "chilly-momo",
@@ -496,7 +496,7 @@ export const menuData = {
             "tags": [
               "spicy"
             ],
-            "image": null
+            "image": "/assets/HiddenGem Menu Pictures JPG/1 - Appetisers/chilly momo.png"
           },
           {
             "id": "momo-mystic",
@@ -504,7 +504,7 @@ export const menuData = {
             "description": "Momos finished with a bold house special sauce.",
             "price": 14.99,
             "tags": [],
-            "image": null
+            "image": "/assets/HiddenGem Menu Pictures JPG/1 - Appetisers/momo mystic.png"
           },
           {
             "id": "butter-tikka-momo",
@@ -512,7 +512,7 @@ export const menuData = {
             "description": "Momos tossed in rich butter or tikka-style sauce.",
             "price": 14.99,
             "tags": [],
-            "image": null
+            "image": "/assets/HiddenGem Menu Pictures JPG/1 - Appetisers/buttertikka momo.png"
           }
         ]
       },
@@ -529,12 +529,12 @@ export const menuData = {
             "tags": [
               "popular"
             ],
-            "image": null
+            "image": "/assets/HiddenGem Menu Pictures JPG/3 - Main Course/thali set.png"
           },
           {
             "id": "hidden-gem-delight",
-            "name": "Karmma and Kocktails Delight",
-            "description": "A hearty Karmma and Kocktails special plate with signature Himalayan flavors.",
+            "name": "Hidden Gem Delight",
+            "description": "A hearty Hidden Gem special plate with signature Himalayan flavors.",
             "price": 22.99,
             "tags": [
               "popular"
@@ -599,7 +599,7 @@ export const menuData = {
             "tags": [
               "popular"
             ],
-            "image": null
+            "image": "/assets/HiddenGem Menu Pictures JPG/3 - Main Course/chicken biryani.png"
           },
           {
             "id": "goat-biryani",
@@ -615,7 +615,7 @@ export const menuData = {
             "description": "Basmati rice layered with lamb and aromatic spices.",
             "price": 16.99,
             "tags": [],
-            "image": null
+            "image": "/assets/HiddenGem Menu Pictures JPG/3 - Main Course/lamb biryani.png"
           },
           {
             "id": "vegetable-biryani",
@@ -625,7 +625,7 @@ export const menuData = {
             "tags": [
               "veg"
             ],
-            "image": null
+            "image": "/assets/HiddenGem Menu Pictures JPG/3 - Main Course/veg biryani.png"
           }
         ]
       },
@@ -663,7 +663,7 @@ export const menuData = {
             "description": "Chicken $12.99 / Goat $14.99 / Lamb $14.99 / Veg $11.99",
             "price": "From $11.99",
             "tags": [],
-            "image": null
+            "image": "/assets/HiddenGem Menu Pictures JPG/4 - Fast Food/Noodles or Chowmein.jpg"
           },
           {
             "id": "shrimp-chowmein",
@@ -698,7 +698,7 @@ export const menuData = {
             "tags": [
               "veg"
             ],
-            "image": null
+            "image": "/assets/HiddenGem Menu Pictures JPG/3 - Main Course/butter naan.png"
           },
           {
             "id": "garlic-naan",
@@ -708,7 +708,7 @@ export const menuData = {
             "tags": [
               "veg"
             ],
-            "image": null
+            "image": "/assets/HiddenGem Menu Pictures JPG/3 - Main Course/garlic naan.png"
           },
           {
             "id": "bullet-naan",
@@ -739,7 +739,7 @@ export const menuData = {
             "tags": [
               "veg"
             ],
-            "image": null
+            "image": "/assets/HiddenGem Menu Pictures JPG/3 - Main Course/tandori roti.png"
           },
           {
             "id": "naan-basket-choice-of-3-naan-butter-garlic-bullet-plain",
@@ -771,7 +771,7 @@ export const menuData = {
             "tags": [
               "veg"
             ],
-            "image": null
+            "image": "/assets/HiddenGem Menu Pictures JPG/3 - Main Course/2 - Entrees/Samosa Chat.jpg"
           },
           {
             "id": "dahi-poori",
@@ -779,7 +779,7 @@ export const menuData = {
             "description": "Crisp puris filled with yogurt, chutney, and spices.",
             "price": 8.99,
             "tags": [],
-            "image": null
+            "image": "/assets/HiddenGem Menu Pictures JPG/1 - Appetisers/dahi puri.png"
           },
           {
             "id": "pani-poori",
@@ -787,7 +787,7 @@ export const menuData = {
             "description": "Crisp puris served with tangy spiced water.",
             "price": 8.99,
             "tags": [],
-            "image": null
+            "image": "/assets/HiddenGem Menu Pictures JPG/3 - Main Course/2 - Entrees/Pani Poori.jpg"
           },
           {
             "id": "chatpate",
@@ -795,7 +795,7 @@ export const menuData = {
             "description": "Crunchy Nepali street snack tossed with tangy spices.",
             "price": 7.99,
             "tags": [],
-            "image": null
+            "image": "/assets/HiddenGem Menu Pictures JPG/3 - Main Course/2 - Entrees/Chatpate.jpg"
           }
         ]
       },

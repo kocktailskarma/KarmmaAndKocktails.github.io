@@ -1,0 +1,119 @@
+{
+  "desktop": {
+    "title": "Karmma & Kocktails",
+    "sections": [
+      {
+        "id": "home",
+        "height": 900
+      },
+      {
+        "id": "about",
+        "height": 1212
+      },
+      {
+        "id": "speciality",
+        "height": 1557
+      },
+      {
+        "id": "gallery",
+        "height": 1086
+      },
+      {
+        "id": "popular",
+        "height": 1630
+      },
+      {
+        "id": "review",
+        "height": 2412
+      },
+      {
+        "id": "order",
+        "height": 755
+      },
+      {
+        "id": "",
+        "height": 174
+      }
+    ],
+    "brokenImages": [],
+    "iframes": [
+      {
+        "src": "https://drive.google.com/file/d/1YYYVKLWE0mYbozYjZWj45H82MbnGhvXj/preview",
+        "title": ""
+      },
+      {
+        "src": "https://drive.google.com/file/d/1QOAGxPGUepWtHiF3iMJbDAB8ohCosgCu/preview",
+        "title": ""
+      },
+      {
+        "src": "https://drive.google.com/file/d/1zQV22XGGOTzdQLTER-UNOl1TdgJKU9bp/preview",
+        "title": ""
+      },
+      {
+        "src": "https://drive.google.com/file/d/1LEWIrhUcFdMwM0XNqq-VOqZQkr54YlxY/preview",
+        "title": ""
+      },
+      {
+        "src": "https://drive.google.com/file/d/1L_SngPyzt-weeeuzpIdCy-qa1DpzGHF8/preview",
+        "title": ""
+      },
+      {
+        "src": "https://drive.google.com/file/d/1xcAZ1-gktFaPU5eFGJEbJTTd_JrWeKKI/preview",
+        "title": ""
+      },
+      {
+        "src": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3348.4192732215133!2d-97.07853159999999!3d32.9399382!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x864c2bbd403dea43%3A0x122183654f577741!2sKarmma%20%26%20kocktails%20by%20Teatro!5e0!3m2!1sen!2sin!4v1759775486939!5m2!1sen!2sin",
+        "title": ""
+      }
+    ],
+    "viewport": 1440,
+    "pageWidth": 1440
+  },
+  "galleryInitial": 8,
+  "galleryExpanded": 9,
+  "moreButtonAfterExpand": "none",
+  "galleryCollapsed": 8,
+  "filter-food": 6,
+  "filter-drinks": 3,
+  "filter-all": 8,
+  "galleryAfterPdfClick": 0,
+  "mobileNav": {
+    "open": true,
+    "links": [
+      {
+        "text": "home",
+        "bottom": 172.265625
+      },
+      {
+        "text": "about",
+        "bottom": 275.609375
+      },
+      {
+        "text": "speciality",
+        "bottom": 378.953125
+      },
+      {
+        "text": "menu",
+        "bottom": 482.296875
+      },
+      {
+        "text": "popular",
+        "bottom": 585.640625
+      },
+      {
+        "text": "review/Gallery",
+        "bottom": 688.984375
+      },
+      {
+        "text": "order",
+        "bottom": 792.328125
+      }
+    ],
+    "viewport": 844
+  },
+  "mobileMap": {
+    "viewport": 390,
+    "map": 800,
+    "container": 351
+  }
+}

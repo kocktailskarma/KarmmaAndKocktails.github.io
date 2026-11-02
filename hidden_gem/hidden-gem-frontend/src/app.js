@@ -1,5 +1,5 @@
-import { menuData } from "./menu-data.js?v=karmma-2";
-import { navItems, site } from "./site-data.js?v=karmma-2";
+import { menuData } from "./menu-data.js?v=menu-photos-1";
+import { navItems, site } from "./site-data.js";
 
 const app = document.querySelector("#app");
 const siteRoot = new URL("..", import.meta.url);
@@ -77,7 +77,7 @@ function footer() {
         <section><h3>Opening Hours</h3>${site.hours.map(([day, time]) => `<p class="hour"><span>${day}</span><span>${time}</span></p>`).join("")}</section>
         <section><h3>Contact Us</h3><p>${site.addressLine1}<br />${site.addressLine2}</p><p><a href="${site.phoneHref}">${site.phone}</a><br /><a href="${site.emailHref}">${site.email}</a></p></section>
       </div>
-      <div class="footer-bottom"><p>© 2026 Karmma and Kocktails. All rights reserved.</p><p class="footer-socials"><a href="${site.facebook}" aria-label="Facebook"></a><a href="${site.instagram}" aria-label="Instagram"></a></p></div>
+      <div class="footer-bottom"><p>© 2026 Hidden Gem. All rights reserved.</p><p class="footer-socials"><a href="${site.facebook}" aria-label="Facebook"></a><a href="${site.instagram}" aria-label="Instagram"></a></p></div>
     </footer>
   `;
 }
@@ -101,13 +101,13 @@ function homePage() {
     </section>
     <section class="feature-band">
       <div class="split">
-        <div class="copy reveal"><span class="eyebrow">Signature Dish</span><h2>Karmma and Kocktails<br /><em>Thali Special</em></h2><p>A generous plate built for comfort and variety, with curry, dal, rice, bread, and sides served together so you can enjoy several Karmma and Kocktails favorites in one meal.</p><a class="btn" href="${appUrl("/menu/")}" data-link>Explore Menu</a></div>
-        <div class="round-image reveal"><img src="${assetUrl("/assets/food/thali.png")}" alt="Karmma and Kocktails Thali Special" /></div>
+        <div class="copy reveal"><span class="eyebrow">Signature Dish</span><h2>Hidden Gem<br /><em>Thali Special</em></h2><p>A generous plate built for comfort and variety, with curry, dal, rice, bread, and sides served together so you can enjoy several Hidden Gem favorites in one meal.</p><a class="btn" href="${appUrl("/menu/")}" data-link>Explore Menu</a></div>
+        <div class="round-image reveal"><img src="${assetUrl("/assets/food/thali.png")}" alt="Hidden Gem Thali Special" /></div>
       </div>
     </section>
     <section class="feature-band alt">
       <div class="split">
-        <div class="round-image reveal"><img src="${assetUrl("/assets/food/momo-plate-with-momos.png")}" alt="Steaming Momos" /></div>
+        <div class="round-image momo-feature-image reveal"><img src="${assetUrl("/assets/food/momos-bamboo-steamer.png")}" alt="Steamed momos in a bamboo steamer with orange dipping sauce" /></div>
         <div class="copy reveal"><span class="eyebrow">Handcrafted Delicacy</span><h2>Heavenly<br /><em>Steamed Momos</em></h2><p>Soft dumplings filled with savory flavor and served with chutney for a warm, satisfying bite. Choose them steamed, fried, or tossed in one of our house sauces.</p><a class="btn" href="${appUrl("/menu/")}" data-link>Order Now</a></div>
       </div>
     </section>
@@ -119,22 +119,22 @@ function homePage() {
 function servicesPreview() {
   const services = [
     ["Dine-In", "Enjoy a relaxed dine-in meal with fresh food, friendly service, and a comfortable setting", "dining"],
-    ["Catering", "Bring Karmma and Kocktails flavors to parties, office meals, and family gatherings", "catering"],
+    ["Catering", "Bring Hidden Gem flavors to parties, office meals, and family gatherings", "catering"],
     ["Private Events", "Plan birthdays, team dinners, and celebrations with menu options that fit your group", "events"],
   ];
-  return `<section class="section"><span class="eyebrow">What We Offer</span><h2>Our <em>Services</em></h2><p class="lead">Whether you are stopping in for dinner, planning an event, or ordering for a group, Karmma and Kocktails keeps the food flavorful and the service easy.</p><div class="card-grid">${services.map(([title, desc, icon]) => `<article class="service-card reveal"><div class="service-icon" aria-hidden="true">${iconSvg(icon)}</div><h3>${title}</h3><p>${desc}</p></article>`).join("")}</div></section>`;
+  return `<section class="section"><span class="eyebrow">What We Offer</span><h2>Our <em>Services</em></h2><p class="lead">Whether you are stopping in for dinner, planning an event, or ordering for a group, Hidden Gem keeps the food flavorful and the service easy.</p><div class="card-grid">${services.map(([title, desc, icon]) => `<article class="service-card reveal"><div class="service-icon" aria-hidden="true">${iconSvg(icon)}</div><h3>${title}</h3><p>${desc}</p></article>`).join("")}</div></section>`;
 }
 
 function ctaBlock() {
-  return `<section class="cta"><h2>Discover<br /><em>Karmma and Kocktails</em></h2><p>Visit us in Trophy Club for comforting curries, momos, noodles, boba tea, and a menu made for sharing.</p><div class="hero-actions"><a class="btn" href="${appUrl("/reserve/")}" data-link>Reserve a Table</a><a class="btn" href="${appUrl("/menu/")}" data-link>View Menu</a><a class="btn" href="${appUrl("/contact/")}" data-link>Get Directions</a></div><div class="hours"><h3>Opening Hours</h3>${site.hours.map(([d, t]) => `<p><span>${d}</span><span>${t}</span></p>`).join("")}</div><div class="cta-socials"><a href="${site.facebook}" target="_blank" rel="noopener">Facebook</a><a href="${site.instagram}" target="_blank" rel="noopener">Instagram</a></div></section>`;
+  return `<section class="cta"><h2>Discover the<br /><em>Hidden Gem</em></h2><p>Visit us in Trophy Club for comforting curries, momos, noodles, boba tea, and a menu made for sharing.</p><div class="hero-actions"><a class="btn" href="${appUrl("/reserve/")}" data-link>Reserve a Table</a><a class="btn" href="${appUrl("/menu/")}" data-link>View Menu</a><a class="btn" href="${appUrl("/contact/")}" data-link>Get Directions</a></div><div class="hours"><h3>Opening Hours</h3>${site.hours.map(([d, t]) => `<p><span>${d}</span><span>${t}</span></p>`).join("")}</div><div class="cta-socials"><a href="${site.facebook}" target="_blank" rel="noopener">Facebook</a><a href="${site.instagram}" target="_blank" rel="noopener">Instagram</a></div></section>`;
 }
 
 function servicesCta() {
-  return `<section class="cta simple-cta"><h2>Ready to Visit<br /><em>Karmma and Kocktails?</em></h2><p>Tell us what you are planning and we will help with dine-in, catering, or private event details.</p><div class="hero-actions"><a class="btn" href="${appUrl("/contact/")}" data-link>Contact Us</a><a class="btn" href="${appUrl("/menu/")}" data-link>View Menu</a></div></section>`;
+  return `<section class="cta simple-cta"><h2>Ready to Visit<br /><em>Hidden Gem?</em></h2><p>Tell us what you are planning and we will help with dine-in, catering, or private event details.</p><div class="hero-actions"><a class="btn" href="${appUrl("/contact/")}" data-link>Contact Us</a><a class="btn" href="${appUrl("/menu/")}" data-link>View Menu</a></div></section>`;
 }
 
 function aboutCta() {
-  return `<section class="cta simple-cta"><h2>Come Experience the<br /><em>Karmma and Kocktails Difference</em></h2><p>Stop by for a flavorful meal, bring your family, or explore the menu before your next visit.</p><div class="hero-actions"><a class="btn" href="${appUrl("/menu/")}" data-link>View Menu</a><a class="btn" href="${appUrl("/contact/")}" data-link>Contact Us</a></div></section>`;
+  return `<section class="cta simple-cta"><h2>Come Experience the<br /><em>Hidden Gem Difference</em></h2><p>Stop by for a flavorful meal, bring your family, or explore the menu before your next visit.</p><div class="hero-actions"><a class="btn" href="${appUrl("/menu/")}" data-link>View Menu</a><a class="btn" href="${appUrl("/contact/")}" data-link>Contact Us</a></div></section>`;
 }
 
 function menuPage() {
@@ -172,7 +172,10 @@ function menuPage() {
 }
 
 function menuItem(item) {
-  return `<article class="menu-card"><div class="dish-image">${imageIcon}</div><div><div class="dish-head"><h3>${item.name}</h3><strong>${formatMenuPrice(item.price)}</strong></div>${item.description ? `<p>${item.description}</p>` : ""}<div class="tags">${item.tags.map((tag) => `<span>${tag}</span>`).join("")}</div></div></article>`;
+  const photo = item.image
+    ? `<img src="${escapeHtml(assetUrl(item.image))}" alt="${escapeHtml(item.name)}" loading="lazy" decoding="async" width="160" height="160" />`
+    : imageIcon;
+  return `<article class="menu-card"><div class="dish-image"${item.image ? "" : ' aria-hidden="true"'}>${photo}</div><div><div class="dish-head"><h3>${item.name}</h3><strong>${formatMenuPrice(item.price)}</strong></div>${item.description ? `<p>${item.description}</p>` : ""}<div class="tags">${item.tags.map((tag) => `<span>${tag}</span>`).join("")}</div></div></article>`;
 }
 
 function formatMenuPrice(price) {
@@ -182,7 +185,7 @@ function formatMenuPrice(price) {
 }
 
 function aboutPage() {
-  return `<section class="page-hero about-hero"><div><span class="eyebrow">Our Story</span><h1>About <em>Karmma and Kocktails</em></h1><p>Karmma and Kocktails brings Nepali, Indian, and boba favorites to Trophy Club with a menu built around bold flavors, comforting meals, and fresh-made favorites.</p><p>From momos and thali plates to curries, biryanis, noodles, and tea drinks, our kitchen focuses on generous portions, familiar comfort, and dishes guests will want to come back for.</p></div><div class="about-frame"><img src="${assetUrl("/assets/restaurant/main-restaurant.jpeg")}" alt="Karmma and Kocktails Entrance" /></div></section><section class="section values-section"><span class="eyebrow">What We Stand For</span><h2>Our <em>Values</em></h2><div class="card-grid values-grid">${["Excellence", "Authenticity", "Hospitality", "Sustainability"].map((v) => `<article class="service-card value-card"><div class="service-icon" aria-hidden="true">${iconSvg(valueIcon(v))}</div><h3>${v}</h3><p>${valueText(v)}</p></article>`).join("")}</div></section>${aboutCta()}`;
+  return `<section class="page-hero about-hero"><div><span class="eyebrow">Our Story</span><h1>About <em>Hidden Gem</em></h1><p>Hidden Gem brings Nepali, Indian, and boba favorites to Trophy Club with a menu built around bold flavors, comforting meals, and fresh-made favorites.</p><p>From momos and thali plates to curries, biryanis, noodles, and tea drinks, our kitchen focuses on generous portions, familiar comfort, and dishes guests will want to come back for.</p></div><div class="about-frame"><img src="${assetUrl("/assets/restaurant/main-restaurant.jpeg")}" alt="Hidden Gem Entrance" /></div></section><section class="section values-section"><span class="eyebrow">What We Stand For</span><h2>Our <em>Values</em></h2><div class="card-grid values-grid">${["Excellence", "Authenticity", "Hospitality", "Sustainability"].map((v) => `<article class="service-card value-card"><div class="service-icon" aria-hidden="true">${iconSvg(valueIcon(v))}</div><h3>${v}</h3><p>${valueText(v)}</p></article>`).join("")}</div></section>${aboutCta()}`;
 }
 
 function servicesPage() {
@@ -206,7 +209,7 @@ function servicesPage() {
       title: "Catering Services",
       icon: "catering",
       image: "/assets/restaurant/catering.jpg",
-      description: "Bring Karmma and Kocktails dishes to your next gathering with catering options for family parties, office lunches, celebrations, and community events.",
+      description: "Bring Hidden Gem dishes to your next gathering with catering options for family parties, office lunches, celebrations, and community events.",
       points: ["Menu planning for your group", "Pickup or service details by request"],
     },
     {
@@ -217,16 +220,16 @@ function servicesPage() {
       points: ["Group dining support", "Menu options for guests", "Flexible seating help", "Friendly service from start to finish"],
     },
   ];
-  return `<section class="page-title services-title"><span class="eyebrow">What We Offer</span><h1>Our <em>Services</em></h1><p>Karmma and Kocktails is here for everyday meals, takeout, catering, and small celebrations with food that is easy to enjoy and share.</p></section><section class="service-rows">${services.map((service, index) => `<article class="service-row ${index % 2 ? "reverse" : ""}"><div class="service-photo ${service.imageFit === "contain" ? "contain" : ""}"><img src="${assetUrl(service.image)}" alt="${service.title}" /></div><div class="service-detail"><div class="line-icon" aria-hidden="true">${iconSvg(service.icon)}</div><h2>${service.title}</h2><p>${service.description}</p><ul>${service.points.map((point) => `<li>${point}</li>`).join("")}</ul><a class="btn" href="${appUrl("/contact/")}" data-link>Inquire Now</a></div></article>`).join("")}</section>${servicesCta()}`;
+  return `<section class="page-title services-title"><span class="eyebrow">What We Offer</span><h1>Our <em>Services</em></h1><p>Hidden Gem is here for everyday meals, takeout, catering, and small celebrations with food that is easy to enjoy and share.</p></section><section class="service-rows">${services.map((service, index) => `<article class="service-row ${index % 2 ? "reverse" : ""}"><div class="service-photo ${service.imageFit === "contain" ? "contain" : ""}"><img src="${assetUrl(service.image)}" alt="${service.title}" /></div><div class="service-detail"><div class="line-icon" aria-hidden="true">${iconSvg(service.icon)}</div><h2>${service.title}</h2><p>${service.description}</p><ul>${service.points.map((point) => `<li>${point}</li>`).join("")}</ul><a class="btn" href="${appUrl("/contact/")}" data-link>Inquire Now</a></div></article>`).join("")}</section>${servicesCta()}`;
 }
 
 function contactPage() {
   const fullAddress = `${site.addressLine1}, ${site.addressLine2}`;
-  return `<section class="page-title contact-title"><span class="eyebrow">Get In Touch</span><h1>Contact <em>Us</em></h1><p>Find us in Trophy Club, call ahead, or reach out with questions about ordering, catering, and reservations.</p></section><section class="contact-layout"><div class="contact-list"><h2>Visit Karmma and Kocktails</h2><article><span>${iconPin}</span><div><h3>Address</h3><p>${fullAddress}</p><button type="button" data-copy="${escapeHtml(fullAddress)}">Copy Address</button></div></article><article><span>${phoneIcon()}</span><div><h3>Phone</h3><p><a href="${site.phoneHref}">${site.phone}</a></p><button type="button" data-copy="${escapeHtml(site.phone)}">Copy Number</button></div></article><article><span>${mailIcon()}</span><div><h3>Email</h3><p><a href="${site.emailHref}">${site.email}</a></p><button type="button" data-copy="${escapeHtml(site.email)}">Copy Email</button></div></article><div class="contact-hours"><h3>Opening Hours</h3>${site.hours.map(([d, t]) => `<p class="hour"><span>${d}</span><span>${t}</span></p>`).join("")}</div><a class="btn btn-gold" href="${site.directionsUrl}" target="_blank" rel="noopener">Get Directions</a></div><div class="map-panel"><iframe src="${site.mapEmbedUrl}" title="Karmma and Kocktails Location" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe><div class="map-label"><strong>Karmma and Kocktails</strong><span>${site.tagline}</span></div></div></section><section class="contact-feature-grid"><article><h3>Wheelchair Accessible</h3><p>Full accessibility throughout our venue</p></article><article><h3>Private Events</h3><p>Contact us for private event inquiries</p></article></section>`;
+  return `<section class="page-title contact-title"><span class="eyebrow">Get In Touch</span><h1>Contact <em>Us</em></h1><p>Find us in Trophy Club, call ahead, or reach out with questions about ordering, catering, and reservations.</p></section><section class="contact-layout"><div class="contact-list"><h2>Visit Hidden Gem</h2><article><span>${iconPin}</span><div><h3>Address</h3><p>${fullAddress}</p><button type="button" data-copy="${escapeHtml(fullAddress)}">Copy Address</button></div></article><article><span>${phoneIcon()}</span><div><h3>Phone</h3><p><a href="${site.phoneHref}">${site.phone}</a></p><button type="button" data-copy="${escapeHtml(site.phone)}">Copy Number</button></div></article><article><span>${mailIcon()}</span><div><h3>Email</h3><p><a href="${site.emailHref}">${site.email}</a></p><button type="button" data-copy="${escapeHtml(site.email)}">Copy Email</button></div></article><div class="contact-hours"><h3>Opening Hours</h3>${site.hours.map(([d, t]) => `<p class="hour"><span>${d}</span><span>${t}</span></p>`).join("")}</div><a class="btn btn-gold" href="${site.directionsUrl}" target="_blank" rel="noopener">Get Directions</a></div><div class="map-panel"><iframe src="${site.mapEmbedUrl}" title="Hidden Gem Location" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe><div class="map-label"><strong>Hidden Gem</strong><span>${site.tagline}</span></div></div></section><section class="contact-feature-grid"><article><h3>Wheelchair Accessible</h3><p>Full accessibility throughout our venue</p></article><article><h3>Private Events</h3><p>Contact us for private event inquiries</p></article></section>`;
 }
 
 function reservePage() {
-  return `<section class="page-title reserve-title"><span class="eyebrow">Book Your Table</span><h1>Reserve <em>a Table</em></h1><p>Plan your visit to Karmma and Kocktails and enjoy a relaxed meal with the people you care about.</p></section><section class="reservation-embed" aria-label="Reservation details"><div class="reservation-card"><span class="eyebrow">Reservations</span><h2>Call Us for Reservations</h2><p>To reserve a table, please call us at ${site.phone}.</p><div class="hero-actions"><a class="btn btn-gold" href="${site.phoneHref}">Call ${site.phone}</a></div></div></section>`;
+  return `<section class="page-title reserve-title"><span class="eyebrow">Book Your Table</span><h1>Reserve <em>a Table</em></h1><p>Plan your visit to Hidden Gem and enjoy a relaxed meal with the people you care about.</p></section><section class="reservation-embed" aria-label="Reservation details"><div class="reservation-card"><span class="eyebrow">Reservations</span><h2>Call Us for Reservations</h2><p>To reserve a table, please call us at ${site.phone}.</p><div class="hero-actions"><a class="btn btn-gold" href="${site.phoneHref}">Call ${site.phone}</a></div></div></section>`;
 }
 
 function iconSvg(name) {
@@ -361,7 +364,7 @@ function bind() {
     setActiveCategory(id);
     history.replaceState(null, "", `${window.location.pathname}#${id}`);
     const navbarHeight = document.querySelector(".navbar")?.offsetHeight || 0;
-    const controlsHeight = document.querySelector(".menu-controls")?.offsetHeight || 0;
+    const controlsHeight = stickyMenuControlsHeight();
     const offset = navbarHeight + controlsHeight + 28;
     const top = section.getBoundingClientRect().top + window.scrollY - offset;
     window.scrollTo({ top, behavior: "smooth" });
@@ -399,6 +402,11 @@ function setActiveCategory(id) {
   });
 }
 
+function stickyMenuControlsHeight() {
+  const controls = document.querySelector(".menu-controls");
+  return controls && getComputedStyle(controls).position === "sticky" ? controls.offsetHeight : 0;
+}
+
 function updateActiveCategory() {
   if (currentPath() !== "/menu/") return;
   if (pendingCategoryId) {
@@ -406,7 +414,7 @@ function updateActiveCategory() {
     return;
   }
   const navbarHeight = document.querySelector(".navbar")?.offsetHeight || 0;
-  const controlsHeight = document.querySelector(".menu-controls")?.offsetHeight || 0;
+  const controlsHeight = stickyMenuControlsHeight();
   const marker = window.scrollY + navbarHeight + controlsHeight + 48;
   let activeId = "";
   document.querySelectorAll(".menu-category").forEach((section) => {

@@ -1,10 +1,10 @@
 # Hidden Gem editable frontend
 
-Run this project:
+Run this project with Python (no extra packages needed):
 
 ```powershell
 cd hidden-gem-frontend
-node server.mjs
+python server.py
 ```
 
 Open:
@@ -12,6 +12,11 @@ Open:
 ```text
 http://localhost:5173/
 ```
+
+This server supports refreshing pages such as `/menu/` and disables caching
+during local preview. Stop any previous server with Ctrl+C before starting it.
+Use this instead of `python -m http.server`, which cannot serve the app's routes.
+If Node.js is installed, `node server.mjs` is also available.
 
 Common edits:
 
