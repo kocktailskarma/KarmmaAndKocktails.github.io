@@ -41,7 +41,7 @@ if __name__ == "__main__":
     parser.add_argument("--port", type=int, default=5173)
     args = parser.parse_args()
     with ThreadingHTTPServer(("127.0.0.1", args.port), PreviewHandler) as server:
-        print(f"Hidden Gem preview: http://localhost:{args.port}/", flush=True)
+        print(f"Karmma and Kocktails preview: http://localhost:{args.port}/", flush=True)
         print("Press Ctrl+C to stop.", flush=True)
         try:
             server.serve_forever()

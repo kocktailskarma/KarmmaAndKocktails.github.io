@@ -433,3 +433,110 @@ body{background:linear-gradient(180deg,#fffaf0 0%,#f8ecd2 48%,#efd9ad 100%);}
   .menu-card { grid-template-columns: minmax(0, 1fr); }
   .menu-card .dish-image { width: 160px; height: 160px; justify-self: center; }
 }
+
+/* Karmma and Kocktails branding; preserve the Hidden Gem layout. */
+:root{--bg:#470e20;--bg2:#350b19;--navy:#73142f;--card:#5b1029;--gold:#e4be62;--gold-light:#f6dfa0;--gold-dark:#d6ad50;--text:#fff5e5;--muted:#ecd5d8;--soft:#d8b7be;color-scheme:dark;}
+body{background:linear-gradient(180deg,var(--bg),var(--bg2));}
+.navbar,.mobile-panel{background:rgba(71,14,32,.98);border-color:var(--gold);}
+.brand strong,.footer-brand strong,.nav-links a.active,.nav-links a:hover{color:var(--gold);}
+.brand small,.footer-brand small,.nav-links a,.mobile-panel a{color:var(--text);}
+.hero-bg{background:linear-gradient(rgba(40,9,17,.45),rgba(71,14,32,.8)),url("../assets/restaurant/main-restaurant.jpeg") center/cover no-repeat;}
+.hero h1{color:var(--gold-light)!important;-webkit-text-fill-color:var(--gold-light)!important;white-space:normal;overflow-wrap:normal;font-size:clamp(34px,4.6vw,68px);}
+.hero p{color:var(--gold-light);background:var(--bg2);border-color:var(--gold-dark);text-shadow:none;}
+.scroll-cue{color:var(--gold-light);}
+.btn,.hero .hero-actions .btn{background:var(--bg);color:var(--gold-light);border-color:var(--gold);}
+.btn:hover,.hero .hero-actions .btn:hover,.btn-gold{background:var(--gold);color:var(--bg2);}
+.feature-band,.feature-band.alt{background:linear-gradient(180deg,var(--bg),var(--bg2),var(--bg));}
+.cta{background:radial-gradient(ellipse at center bottom,var(--navy),var(--bg) 72%);}
+.service-card,.menu-card,.contact-grid article,.reserve-box,.contact-feature-grid article,.reservation-embed,.reservation-card{background:var(--card);color:var(--text);border-color:rgba(228,190,98,.38);}
+.service-card:hover,.menu-card:hover{background:var(--navy);border-color:var(--gold);}
+.footer{background:var(--bg2);}.footer-bottom{color:var(--muted);}
+.menu-controls,.menu-toolbar,.tabs,.menu-toolbar input,.filters button,.category-pills a{background:var(--bg2);color:var(--text);border-color:rgba(228,190,98,.38);}
+.menu-toolbar input::placeholder{color:var(--muted);}
+.tabs button{color:var(--text);}
+.tabs button.selected,.filters button.selected,.category-pills a.active,.category-pills a:hover{background:var(--gold);color:var(--bg2);}
+.tags span{color:#d7efb6;background:#294223;}
+.brand-logo,.brand-logo img,.footer-brand img,.hero-logo{border-radius:12px;object-fit:contain;}
+.brand{min-width:0;}.brand strong{font-size:clamp(13px,1.4vw,20px);}
+@media(max-width:560px){.brand strong{font-size:13px;letter-spacing:.035em;}.hero h1{font-size:34px;line-height:1.2;letter-spacing:.04em;}.footer-brand strong{font-size:17px;}}
+@media print{body,.print-menu{background:white!important;color:#222!important;color-scheme:light;}}
+.hero:after{background:linear-gradient(transparent,var(--bg));}
+
+/* Readable home-page text on the crimson theme. */
+.feature-band .copy h2,.section h2,.cta h2{color:var(--gold-light);}
+.feature-band .copy em,.section em,.cta em{background:none;color:var(--gold);-webkit-text-fill-color:var(--gold);}
+.feature-band .copy p,.section .lead,.section .service-card p,.cta p{color:var(--text);}
+.footer-socials{display:flex;flex-wrap:wrap;gap:12px;}
+.footer-socials a{width:auto;height:auto;min-height:44px;padding:10px 14px;margin:0;border-radius:6px;border-color:var(--gold);color:var(--gold-light);font-size:14px;align-items:center;justify-content:center;overflow:visible;}
+.footer-socials a:hover,.footer-socials a:focus-visible{background:var(--gold);color:var(--bg2);}
+.footer-socials a:focus-visible{outline:2px solid var(--gold-light);outline-offset:3px;}
+
+/* Location selection for ordering and directions. */
+body:has(.location-dialog[open]){overflow:hidden;}
+button.btn,button.visit-pill{cursor:pointer;}
+button.visit-pill{border:1px solid var(--gold);}
+.location-dialog{width:min(560px,calc(100% - 32px));max-height:calc(100dvh - 32px);overflow:auto;padding:48px 28px 28px;border:1px solid var(--gold);border-radius:16px;background:var(--bg);color:var(--text);box-shadow:0 24px 80px #0008;}
+.location-dialog::backdrop{background:rgba(20,4,10,.8);}
+.location-dialog h2{margin:0 0 16px;font:400 clamp(24px,5vw,34px)/1.25 var(--font-head);color:var(--gold-light);}
+.location-dialog p{margin:0 0 24px;color:var(--text);line-height:1.6;}
+.location-close{position:absolute;right:8px;top:8px;width:44px;height:44px;border:0;background:transparent;color:var(--gold-light);font-size:30px;cursor:pointer;}
+.location-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;}
+.location-option{display:flex;flex-direction:column;gap:12px;padding:22px 16px;background:var(--bg2);border:1px solid var(--gold);border-radius:8px;}
+.location-option strong{font:400 22px var(--font-head);color:var(--gold-light);}
+.location-option span{font-size:14px;color:var(--text);}
+.location-option:hover{background:var(--navy);}
+.location-dialog :focus-visible,[data-location-action]:focus-visible{outline:2px solid var(--gold-light);outline-offset:4px;}
+@media(max-width:480px){.location-options{grid-template-columns:1fr;}.location-dialog{padding:52px 20px 24px;}}
+@media print{.location-dialog{display:none!important;}}
+
+/* Reservation page contrast for the crimson theme. */
+.reserve-title h1,.reservation-card h2{color:var(--gold-light);}
+.reserve-title em{background:none;color:var(--gold);}
+.reserve-title p,.reservation-card p{color:var(--text);}
+
+/* Location-specific contact information and restaurant hours. */
+.location-hours{margin:16px 0;color:var(--text);font-size:14px;line-height:1.6;}
+.location-hours>div{display:flex;justify-content:space-between;gap:12px;margin:0 0 8px;}
+.location-hours dt,.location-hours dd{margin:0;}.location-hours dd{text-align:right;}
+.location-hours-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;max-width:900px;margin:48px auto 24px;text-align:left;}
+.location-hours-grid article,.location-contact-card{padding:28px;background:var(--card);border:1px solid var(--gold-dark);border-radius:12px;min-width:0;}
+.location-hours-grid h3,.location-contact-card h2,.location-contact-card h3{font-family:var(--font-head);color:var(--gold-light);font-weight:400;}
+.location-hours-grid h3{font-size:26px;margin:0 0 12px;}
+.cta .hours-note,.hours-note{font-size:13px;line-height:1.6;color:var(--muted);}
+.footer-location address,.location-contact-card address{font-style:normal;color:var(--text);line-height:1.7;overflow-wrap:anywhere;}
+.footer-location h4{color:var(--gold-light);margin-bottom:10px;}
+.footer-location a,.location-social{display:block;margin-top:12px;color:var(--gold-light);}
+.footer-location .location-hours{font-size:13px;}
+.footer-bottom{flex-wrap:wrap;gap:12px;}.footer-bottom p{max-width:560px;}
+.locations-title h1{color:var(--gold-light);}.locations-title em{background:none;color:var(--gold);}.locations-title p{color:var(--text);}
+.locations-contact{max-width:1240px;margin:auto;padding:0 24px 96px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px;}
+.location-contact-card h2{font-size:32px;margin-top:0;}.location-contact-card p{color:var(--text);}
+.location-contact-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:24px;}.location-contact-actions .btn{padding:0 16px;}
+.location-contact-card iframe{display:block;width:100%;height:280px;border:0;border-radius:8px;margin-top:24px;}
+.copy-location{background:transparent;border:0;color:var(--gold);padding:10px 0;cursor:pointer;}
+@media(max-width:1100px){.footer-inner{grid-template-columns:repeat(2,minmax(0,1fr));}}
+@media(max-width:700px){.locations-contact,.location-hours-grid{grid-template-columns:minmax(0,1fr);}.location-contact-card{padding:20px;}.footer-inner{grid-template-columns:minmax(0,1fr);}.location-hours-grid article{padding:20px;}}
+
+body:has(.locations-contact) .visit-pill{display:none;}
+
+/* Services page: consistent crimson surfaces and readable text. */
+.services-title{background:linear-gradient(180deg,var(--bg2),var(--bg));}
+.services-title h1,.service-detail h2{color:var(--gold-light);}
+.services-title em{background:none;color:var(--gold);-webkit-text-fill-color:var(--gold);}
+.services-title p,.service-detail p,.service-detail ul{color:var(--text);}
+.service-detail .line-icon{color:var(--gold);}
+.service-detail .line-icon svg{filter:none;}
+.service-detail li:before{border-color:var(--gold);}
+
+/* About story contrast on crimson. */
+.about-hero h1{color:var(--gold-light);}
+.about-hero em{background:none;color:var(--gold);-webkit-text-fill-color:var(--gold);}
+.about-hero p{color:var(--text);}
+
+/* Direct menu URLs offer current location menus instead of template items. */
+.location-menu-title h1{color:var(--gold-light);}
+.location-menu-title em{background:none;color:var(--gold);}
+.location-menu-title p{color:var(--text);}
+.location-menu-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;max-width:850px;margin:0 auto;padding:0 24px 96px;}
+.location-menu-options a:focus-visible{outline:2px solid var(--gold-light);outline-offset:4px;}
+@media(max-width:560px){.location-menu-options{grid-template-columns:1fr;}}

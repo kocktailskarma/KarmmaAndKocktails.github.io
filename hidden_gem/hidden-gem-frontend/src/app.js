@@ -1,5 +1,4 @@
-import { menuData } from "./menu-data.js?v=menu-photos-1";
-import { navItems, site } from "./site-data.js";
+import { navItems, site, locations } from "./site-data.js?v=karmma-contact-1";
 
 const app = document.querySelector("#app");
 const siteRoot = new URL("..", import.meta.url);
@@ -20,14 +19,7 @@ function routePath(pathname = window.location.pathname) {
   if (!path.startsWith("/")) path = `/${path}`;
   return path.endsWith("/") ? path : `${path}/`;
 }
-let menuType = "food";
-let menuSearch = "";
-let menuTags = new Set();
-let pendingCategoryId = "";
-let pendingCategoryTimer;
-
 const iconPin = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s6-4.35 6-10a6 6 0 1 0-12 0c0 5.65 6 10 6 10z"></path><circle cx="12" cy="11" r="2"></circle></svg>`;
-const imageIcon = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 16l4.586-4.586a2 2 0 0 1 2.828 0L16 16m-2-2 1.586-1.586a2 2 0 0 1 2.828 0L20 14m-6-6h.01M6 20h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2z"></path></svg>`;
 
 function currentPath() {
   return routePath();
@@ -59,27 +51,32 @@ function shell(content) {
         ${navItems.map(([label, href]) => pageLink(href, label)).join("")}
       </div>
     </nav>
-    <a class="visit-pill" href="${appUrl("/contact/")}" data-link><span>${iconPin}</span>Visit Us</a>
+    <button type="button" class="visit-pill" data-location-action="directions" aria-haspopup="dialog"><span>${iconPin}</span>Visit Us</button>
     <main>${content}</main>
     ${footer()}
+    <dialog class="location-dialog" aria-labelledby="location-title" aria-describedby="location-description">
+      <button type="button" class="location-close" aria-label="Close location selection" autofocus>&times;</button>
+      <h2 id="location-title">Choose your location</h2>
+      <p id="location-description"></p>
+      <div class="location-options"></div>
+    </dialog>
   `;
 }
 
+function locationHours(location) {
+  return `<dl class="location-hours">${location.hours.map(([day, time]) => `<div><dt>${day}</dt><dd>${time}</dd></div>`).join("")}</dl>`;
+}
+
+function locationSocial(location) {
+  return location.instagram ? `<a class="location-social" href="${location.instagram}" target="_blank" rel="noopener noreferrer">${location.name} Instagram</a>` : "";
+}
+
 function footer() {
-  return `
-    <footer class="footer">
-      <div class="footer-inner">
-        <section>
-          <a href="${appUrl("/")}" class="footer-brand" data-link><img src="${assetUrl(site.logo)}" alt="${site.name}" /><span><strong>${site.name}</strong><small>${site.tagline}</small></span></a>
-          <p>Nepali, Indian, and boba favorites served with warm hospitality in Trophy Club.</p>
-        </section>
-        <section><h3>Quick Links</h3>${navItems.slice(0, 5).map(([label, href]) => pageLink(href, label)).join("")}</section>
-        <section><h3>Opening Hours</h3>${site.hours.map(([day, time]) => `<p class="hour"><span>${day}</span><span>${time}</span></p>`).join("")}</section>
-        <section><h3>Contact Us</h3><p>${site.addressLine1}<br />${site.addressLine2}</p><p><a href="${site.phoneHref}">${site.phone}</a><br /><a href="${site.emailHref}">${site.email}</a></p></section>
-      </div>
-      <div class="footer-bottom"><p>© 2026 Hidden Gem. All rights reserved.</p><p class="footer-socials"><a href="${site.facebook}" aria-label="Facebook"></a><a href="${site.instagram}" aria-label="Instagram"></a></p></div>
-    </footer>
-  `;
+  return `<footer class="footer"><div class="footer-inner">
+    <section><a href="${appUrl("/")}" class="footer-brand" data-link><img src="${assetUrl(site.logo)}" alt="${site.name}" /><span><strong>${site.name}</strong><small>${site.tagline}</small></span></a><p>Nepali and Indian favorites served with warm hospitality in Grapevine and Dallas.</p></section>
+    <section><h3>Quick Links</h3>${navItems.map(([label, href]) => pageLink(href, label)).join("")}</section>
+    ${locations.map(location => `<section class="footer-location"><h3>${location.name}</h3><address>${location.address}</address><a href="${location.phoneHref}">${location.phone}</a><h4>Opening Hours (CT)</h4>${locationHours(location)}<a href="${location.directionsUrl}" target="_blank" rel="noopener noreferrer">Get Directions</a>${locationSocial(location)}</section>`).join("")}
+    </div><div class="footer-bottom"><p>&copy; 2026 Karmma and Kocktails. All rights reserved.</p><p>All hours are Central Time. Closing times at or after midnight refer to the following day.</p></div></footer>`;
 }
 
 function homePage() {
@@ -92,7 +89,7 @@ function homePage() {
         <h1>${site.name}</h1>
         <p>${site.tagline}</p>
         <div class="hero-actions">
-          <a class="btn" ${linkAttrs(site.orderUrl)}>Order Online</a>
+          <button type="button" class="btn" data-location-action="order" aria-haspopup="dialog">Order Online</button>
           <a class="btn" href="${appUrl("/reserve/")}" data-link>Reserve a Table</a>
           <a class="btn" href="${appUrl("/menu/")}" data-link>View Menu</a>
         </div>
@@ -101,14 +98,14 @@ function homePage() {
     </section>
     <section class="feature-band">
       <div class="split">
-        <div class="copy reveal"><span class="eyebrow">Signature Dish</span><h2>Hidden Gem<br /><em>Thali Special</em></h2><p>A generous plate built for comfort and variety, with curry, dal, rice, bread, and sides served together so you can enjoy several Hidden Gem favorites in one meal.</p><a class="btn" href="${appUrl("/menu/")}" data-link>Explore Menu</a></div>
-        <div class="round-image reveal"><img src="${assetUrl("/assets/food/thali.png")}" alt="Hidden Gem Thali Special" /></div>
+        <div class="copy reveal"><span class="eyebrow">Signature Dish</span><h2>Karmma and Kocktails<br /><em>Thali Special</em></h2><p>A generous plate built for comfort and variety, with curry, dal, rice, bread, and sides served together so you can enjoy several Karmma and Kocktails favorites in one meal.</p><a class="btn" href="${appUrl("/menu/")}" data-link>Explore Menu</a></div>
+        <div class="round-image reveal"><img src="${assetUrl("/assets/food/thali.png")}" alt="Karmma and Kocktails Thali Special" /></div>
       </div>
     </section>
     <section class="feature-band alt">
       <div class="split">
         <div class="round-image momo-feature-image reveal"><img src="${assetUrl("/assets/food/momos-bamboo-steamer.png")}" alt="Steamed momos in a bamboo steamer with orange dipping sauce" /></div>
-        <div class="copy reveal"><span class="eyebrow">Handcrafted Delicacy</span><h2>Heavenly<br /><em>Steamed Momos</em></h2><p>Soft dumplings filled with savory flavor and served with chutney for a warm, satisfying bite. Choose them steamed, fried, or tossed in one of our house sauces.</p><a class="btn" href="${appUrl("/menu/")}" data-link>Order Now</a></div>
+        <div class="copy reveal"><span class="eyebrow">Handcrafted Delicacy</span><h2>Heavenly<br /><em>Steamed Momos</em></h2><p>Soft dumplings filled with savory flavor and served with chutney for a warm, satisfying bite. Choose them steamed, fried, or tossed in one of our house sauces.</p><button type="button" class="btn" data-location-action="order" aria-haspopup="dialog">Order Now</button></div>
       </div>
     </section>
     ${servicesPreview()}
@@ -119,73 +116,30 @@ function homePage() {
 function servicesPreview() {
   const services = [
     ["Dine-In", "Enjoy a relaxed dine-in meal with fresh food, friendly service, and a comfortable setting", "dining"],
-    ["Catering", "Bring Hidden Gem flavors to parties, office meals, and family gatherings", "catering"],
+    ["Catering", "Bring Karmma and Kocktails flavors to parties, office meals, and family gatherings", "catering"],
     ["Private Events", "Plan birthdays, team dinners, and celebrations with menu options that fit your group", "events"],
   ];
-  return `<section class="section"><span class="eyebrow">What We Offer</span><h2>Our <em>Services</em></h2><p class="lead">Whether you are stopping in for dinner, planning an event, or ordering for a group, Hidden Gem keeps the food flavorful and the service easy.</p><div class="card-grid">${services.map(([title, desc, icon]) => `<article class="service-card reveal"><div class="service-icon" aria-hidden="true">${iconSvg(icon)}</div><h3>${title}</h3><p>${desc}</p></article>`).join("")}</div></section>`;
+  return `<section class="section"><span class="eyebrow">What We Offer</span><h2>Our <em>Services</em></h2><p class="lead">Whether you are stopping in for dinner, planning an event, or ordering for a group, Karmma and Kocktails keeps the food flavorful and the service easy.</p><div class="card-grid">${services.map(([title, desc, icon]) => `<article class="service-card reveal"><div class="service-icon" aria-hidden="true">${iconSvg(icon)}</div><h3>${title}</h3><p>${desc}</p></article>`).join("")}</div></section>`;
 }
 
 function ctaBlock() {
-  return `<section class="cta"><h2>Discover the<br /><em>Hidden Gem</em></h2><p>Visit us in Trophy Club for comforting curries, momos, noodles, boba tea, and a menu made for sharing.</p><div class="hero-actions"><a class="btn" href="${appUrl("/reserve/")}" data-link>Reserve a Table</a><a class="btn" href="${appUrl("/menu/")}" data-link>View Menu</a><a class="btn" href="${appUrl("/contact/")}" data-link>Get Directions</a></div><div class="hours"><h3>Opening Hours</h3>${site.hours.map(([d, t]) => `<p><span>${d}</span><span>${t}</span></p>`).join("")}</div><div class="cta-socials"><a href="${site.facebook}" target="_blank" rel="noopener">Facebook</a><a href="${site.instagram}" target="_blank" rel="noopener">Instagram</a></div></section>`;
+  return `<section class="cta"><h2>Discover<br /><em>Karmma and Kocktails</em></h2><p>Visit us in Grapevine or Dallas for comforting curries, momos, noodles, and a menu made for sharing.</p><div class="hero-actions"><a class="btn" href="${appUrl("/reserve/")}" data-link>Reserve a Table</a><a class="btn" href="${appUrl("/menu/")}" data-link>View Menu</a><button type="button" class="btn" data-location-action="directions" aria-haspopup="dialog">Get Directions</button></div><div class="location-hours-grid">${locations.map(location => `<article><h3>${location.name}</h3><p>Opening Hours (CT)</p>${locationHours(location)}</article>`).join("")}</div><p class="hours-note">All hours are Central Time. Closing times at or after midnight refer to the following day.</p></section>`;
 }
 
 function servicesCta() {
-  return `<section class="cta simple-cta"><h2>Ready to Visit<br /><em>Hidden Gem?</em></h2><p>Tell us what you are planning and we will help with dine-in, catering, or private event details.</p><div class="hero-actions"><a class="btn" href="${appUrl("/contact/")}" data-link>Contact Us</a><a class="btn" href="${appUrl("/menu/")}" data-link>View Menu</a></div></section>`;
+  return `<section class="cta simple-cta"><h2>Ready to Visit<br /><em>Karmma and Kocktails?</em></h2><p>Tell us what you are planning and we will help with dine-in, catering, or private event details.</p><div class="hero-actions"><a class="btn" href="${appUrl("/contact/")}" data-link>Contact Us</a><a class="btn" href="${appUrl("/menu/")}" data-link>View Menu</a></div></section>`;
 }
 
 function aboutCta() {
-  return `<section class="cta simple-cta"><h2>Come Experience the<br /><em>Hidden Gem Difference</em></h2><p>Stop by for a flavorful meal, bring your family, or explore the menu before your next visit.</p><div class="hero-actions"><a class="btn" href="${appUrl("/menu/")}" data-link>View Menu</a><a class="btn" href="${appUrl("/contact/")}" data-link>Contact Us</a></div></section>`;
+  return `<section class="cta simple-cta"><h2>Come Experience the<br /><em>Karmma and Kocktails Difference</em></h2><p>Stop by for a flavorful meal, bring your family, or explore the menu before your next visit.</p><div class="hero-actions"><a class="btn" href="${appUrl("/menu/")}" data-link>View Menu</a><a class="btn" href="${appUrl("/contact/")}" data-link>Contact Us</a></div></section>`;
 }
 
 function menuPage() {
-  const data = menuData[menuType].categories;
-  const emptyMessage = menuType === "treats" ? "No snacks, sweets, or drinks found." : "No items found.";
-  const filtered = data.map((category) => ({
-    ...category,
-    items: category.items.filter((item) => {
-      const textMatch = !menuSearch || `${category.name} ${item.name} ${item.description}`.toLowerCase().includes(menuSearch.toLowerCase());
-      const tagMatch = menuTags.size === 0 || item.tags.some((tag) => menuTags.has(tag));
-      return textMatch && tagMatch;
-    }),
-  })).filter((category) => category.items.length);
-
-  return `
-    <section class="menu-page">
-      <div class="menu-controls">
-        <div class="menu-toolbar">
-          <div class="tabs">
-            <button class="${menuType === "food" ? "selected" : ""}" data-menu-type="food">Food</button>
-            <button class="${menuType === "treats" ? "selected" : ""}" data-menu-type="treats">Snacks & Treats</button>
-          </div>
-          <input data-menu-search placeholder="Search menu..." value="${escapeHtml(menuSearch)}" />
-          <a class="btn" ${linkAttrs(site.orderUrl)}>Order Online</a>
-          <a class="btn btn-gold" href="${appUrl("/menu/print/")}" target="_blank" rel="noopener">Download PDF</a>
-        </div>
-        <div class="filters"><span>Filter:</span>${["popular", "veg", "spicy"].map((tag) => `<button class="${menuTags.has(tag) ? "selected" : ""}" data-menu-tag="${tag}">${tag}</button>`).join("")}</div>
-        <div class="category-pills">${filtered.map((category) => `<a href="#${category.id}">${category.name}</a>`).join("")}</div>
-      </div>
-      <div class="menu-sections">
-        ${filtered.map((category) => `<section id="${category.id}" class="menu-category"><h2>${category.name}</h2><i></i><p>${category.description || ""}</p><div class="menu-grid">${category.items.map(menuItem).join("")}</div></section>`).join("") || `<p class="empty">${emptyMessage}</p>`}
-      </div>
-    </section>
-  `;
-}
-
-function menuItem(item) {
-  const photo = item.image
-    ? `<img src="${escapeHtml(assetUrl(item.image))}" alt="${escapeHtml(item.name)}" loading="lazy" decoding="async" width="160" height="160" />`
-    : imageIcon;
-  return `<article class="menu-card"><div class="dish-image"${item.image ? "" : ' aria-hidden="true"'}>${photo}</div><div><div class="dish-head"><h3>${item.name}</h3><strong>${formatMenuPrice(item.price)}</strong></div>${item.description ? `<p>${item.description}</p>` : ""}<div class="tags">${item.tags.map((tag) => `<span>${tag}</span>`).join("")}</div></div></article>`;
-}
-
-function formatMenuPrice(price) {
-  if (typeof price === "number") return `$${price.toFixed(2)}`;
-  if (!price) return "";
-  return price.includes("$") ? price : `$${price}`;
+  return `<section class="page-title location-menu-title"><span class="eyebrow">Explore Our Menus</span><h1>Choose <em>Your Location</em></h1><p>Browse the menu for Grapevine or Dallas. Each menu opens in a new tab.</p></section><section class="location-menu-options" aria-label="Menus by location">${locations.map(location => `<a class="location-option" href="${escapeHtml(location.menuUrl)}" target="_blank" rel="noopener noreferrer"><strong>${escapeHtml(location.name)}</strong><span>View menu &#8599;</span></a>`).join("")}</section>`;
 }
 
 function aboutPage() {
-  return `<section class="page-hero about-hero"><div><span class="eyebrow">Our Story</span><h1>About <em>Hidden Gem</em></h1><p>Hidden Gem brings Nepali, Indian, and boba favorites to Trophy Club with a menu built around bold flavors, comforting meals, and fresh-made favorites.</p><p>From momos and thali plates to curries, biryanis, noodles, and tea drinks, our kitchen focuses on generous portions, familiar comfort, and dishes guests will want to come back for.</p></div><div class="about-frame"><img src="${assetUrl("/assets/restaurant/main-restaurant.jpeg")}" alt="Hidden Gem Entrance" /></div></section><section class="section values-section"><span class="eyebrow">What We Stand For</span><h2>Our <em>Values</em></h2><div class="card-grid values-grid">${["Excellence", "Authenticity", "Hospitality", "Sustainability"].map((v) => `<article class="service-card value-card"><div class="service-icon" aria-hidden="true">${iconSvg(valueIcon(v))}</div><h3>${v}</h3><p>${valueText(v)}</p></article>`).join("")}</div></section>${aboutCta()}`;
+  return `<section class="page-hero about-hero"><div><span class="eyebrow">Our Story</span><h1>About <em>Karmma and Kocktails</em></h1><p>Karmma and Kocktails brings Nepali and Indian favorites to Grapevine and Dallas with a menu built around bold flavors, comforting meals, and fresh-made favorites.</p><p>From momos and thali plates to curries, biryanis, noodles, and tea drinks, our kitchen focuses on generous portions, familiar comfort, and dishes guests will want to come back for.</p></div><div class="about-frame"><img src="${assetUrl("/assets/restaurant/main-restaurant.jpeg")}" alt="Karmma and Kocktails Entrance" /></div></section><section class="section values-section"><span class="eyebrow">What We Stand For</span><h2>Our <em>Values</em></h2><div class="card-grid values-grid">${["Excellence", "Authenticity", "Hospitality", "Sustainability"].map((v) => `<article class="service-card value-card"><div class="service-icon" aria-hidden="true">${iconSvg(valueIcon(v))}</div><h3>${v}</h3><p>${valueText(v)}</p></article>`).join("")}</div></section>${aboutCta()}`;
 }
 
 function servicesPage() {
@@ -209,7 +163,7 @@ function servicesPage() {
       title: "Catering Services",
       icon: "catering",
       image: "/assets/restaurant/catering.jpg",
-      description: "Bring Hidden Gem dishes to your next gathering with catering options for family parties, office lunches, celebrations, and community events.",
+      description: "Bring Karmma and Kocktails dishes to your next gathering with catering options for family parties, office lunches, celebrations, and community events.",
       points: ["Menu planning for your group", "Pickup or service details by request"],
     },
     {
@@ -220,16 +174,15 @@ function servicesPage() {
       points: ["Group dining support", "Menu options for guests", "Flexible seating help", "Friendly service from start to finish"],
     },
   ];
-  return `<section class="page-title services-title"><span class="eyebrow">What We Offer</span><h1>Our <em>Services</em></h1><p>Hidden Gem is here for everyday meals, takeout, catering, and small celebrations with food that is easy to enjoy and share.</p></section><section class="service-rows">${services.map((service, index) => `<article class="service-row ${index % 2 ? "reverse" : ""}"><div class="service-photo ${service.imageFit === "contain" ? "contain" : ""}"><img src="${assetUrl(service.image)}" alt="${service.title}" /></div><div class="service-detail"><div class="line-icon" aria-hidden="true">${iconSvg(service.icon)}</div><h2>${service.title}</h2><p>${service.description}</p><ul>${service.points.map((point) => `<li>${point}</li>`).join("")}</ul><a class="btn" href="${appUrl("/contact/")}" data-link>Inquire Now</a></div></article>`).join("")}</section>${servicesCta()}`;
+  return `<section class="page-title services-title"><span class="eyebrow">What We Offer</span><h1>Our <em>Services</em></h1><p>Karmma and Kocktails is here for everyday meals, takeout, catering, and small celebrations with food that is easy to enjoy and share.</p></section><section class="service-rows">${services.map((service, index) => `<article class="service-row ${index % 2 ? "reverse" : ""}"><div class="service-photo ${service.imageFit === "contain" ? "contain" : ""}"><img src="${assetUrl(service.image)}" alt="${service.title}" /></div><div class="service-detail"><div class="line-icon" aria-hidden="true">${iconSvg(service.icon)}</div><h2>${service.title}</h2><p>${service.description}</p><ul>${service.points.map((point) => `<li>${point}</li>`).join("")}</ul><a class="btn" href="${appUrl("/contact/")}" data-link>Inquire Now</a></div></article>`).join("")}</section>${servicesCta()}`;
 }
 
 function contactPage() {
-  const fullAddress = `${site.addressLine1}, ${site.addressLine2}`;
-  return `<section class="page-title contact-title"><span class="eyebrow">Get In Touch</span><h1>Contact <em>Us</em></h1><p>Find us in Trophy Club, call ahead, or reach out with questions about ordering, catering, and reservations.</p></section><section class="contact-layout"><div class="contact-list"><h2>Visit Hidden Gem</h2><article><span>${iconPin}</span><div><h3>Address</h3><p>${fullAddress}</p><button type="button" data-copy="${escapeHtml(fullAddress)}">Copy Address</button></div></article><article><span>${phoneIcon()}</span><div><h3>Phone</h3><p><a href="${site.phoneHref}">${site.phone}</a></p><button type="button" data-copy="${escapeHtml(site.phone)}">Copy Number</button></div></article><article><span>${mailIcon()}</span><div><h3>Email</h3><p><a href="${site.emailHref}">${site.email}</a></p><button type="button" data-copy="${escapeHtml(site.email)}">Copy Email</button></div></article><div class="contact-hours"><h3>Opening Hours</h3>${site.hours.map(([d, t]) => `<p class="hour"><span>${d}</span><span>${t}</span></p>`).join("")}</div><a class="btn btn-gold" href="${site.directionsUrl}" target="_blank" rel="noopener">Get Directions</a></div><div class="map-panel"><iframe src="${site.mapEmbedUrl}" title="Hidden Gem Location" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe><div class="map-label"><strong>Hidden Gem</strong><span>${site.tagline}</span></div></div></section><section class="contact-feature-grid"><article><h3>Wheelchair Accessible</h3><p>Full accessibility throughout our venue</p></article><article><h3>Private Events</h3><p>Contact us for private event inquiries</p></article></section>`;
+  return `<section class="page-title locations-title"><span class="eyebrow">Get In Touch</span><h1>Visit <em>Our Locations</em></h1><p>Find us in Grapevine and Dallas. Call your location for questions about dining, catering, or reservations.</p></section><section class="locations-contact" aria-label="Restaurant locations">${locations.map(location => `<article class="location-contact-card"><h2>${location.name}</h2><address>${location.address}</address><button class="copy-location" type="button" data-copy="${escapeHtml(location.address)}">Copy Address</button><p><a href="${location.phoneHref}">${location.phone}</a></p><h3>Opening Hours (CT)</h3>${locationHours(location)}<p class="hours-note">Closing times at or after midnight refer to the following day.</p><div class="location-contact-actions"><a class="btn" href="${location.directionsUrl}" target="_blank" rel="noopener noreferrer">Get Directions</a><a class="btn" href="${location.reserveUrl}" target="_blank" rel="noopener noreferrer">Reserve a Table</a></div>${locationSocial(location)}</article>`).join("")}</section>`;
 }
 
 function reservePage() {
-  return `<section class="page-title reserve-title"><span class="eyebrow">Book Your Table</span><h1>Reserve <em>a Table</em></h1><p>Plan your visit to Hidden Gem and enjoy a relaxed meal with the people you care about.</p></section><section class="reservation-embed" aria-label="Reservation details"><div class="reservation-card"><span class="eyebrow">Reservations</span><h2>Call Us for Reservations</h2><p>To reserve a table, please call us at ${site.phone}.</p><div class="hero-actions"><a class="btn btn-gold" href="${site.phoneHref}">Call ${site.phone}</a></div></div></section>`;
+  return `<section class="page-title reserve-title"><span class="eyebrow">Book Your Table</span><h1>Reserve <em>a Table</em></h1><p>Plan your visit to Karmma and Kocktails and enjoy a relaxed meal with the people you care about.</p></section><section class="reservation-embed" aria-label="Reservation details"><div class="reservation-card"><span class="eyebrow">Reservations</span><h2>Choose Your Location</h2><p>Select Grapevine or Dallas to check availability and reserve through Google.</p><div class="hero-actions"><button type="button" class="btn btn-gold" data-location-action="reserve" aria-haspopup="dialog">Reserve a Table</button></div></div></section>`;
 }
 
 function iconSvg(name) {
@@ -272,11 +225,6 @@ function mailIcon() {
   return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z"></path><path d="m22 6-10 7L2 6"></path></svg>`;
 }
 
-function printMenuPage() {
-  const categories = [...menuData.food.categories, ...menuData.treats.categories].filter((category) => category.items.length);
-  return `<section class="print-menu"><div class="print-head"><img src="${assetUrl(site.logo)}" alt="${site.name}" /><h1>${site.name}</h1><p>${site.tagline}</p></div>${categories.map((category) => `<section><h2>${category.name}</h2>${category.items.map((item) => `<div class="print-item"><span>${item.name}</span><strong>${formatMenuPrice(item.price)}</strong></div>`).join("")}</section>`).join("")}</section>`;
-}
-
 function notFoundPage() {
   return `<section class="page-title"><h1>Page not found</h1><p>This page is not available.</p><a class="btn" href="/" data-link>Go Home</a></section>`;
 }
@@ -286,7 +234,7 @@ function render() {
   const routes = {
     "/": homePage,
     "/menu/": menuPage,
-    "/menu/print/": printMenuPage,
+    "/menu/print/": menuPage,
     "/services/": servicesPage,
     "/about/": aboutPage,
     "/contact/": contactPage,
@@ -298,6 +246,43 @@ function render() {
 }
 
 function bind() {
+  // Menu and reservation entry points share the location picker, including navigation.
+  document.querySelectorAll("a[data-link]").forEach((link) => {
+    const action = link.getAttribute("href") === appUrl("/menu/") ? "menu" : link.getAttribute("href") === appUrl("/reserve/") ? "reserve" : null;
+    if (action) {
+      link.removeAttribute("data-link");
+      link.dataset.locationAction = action;
+      link.setAttribute("aria-haspopup", "dialog");
+    }
+  });
+  const dialog = document.querySelector(".location-dialog");
+  if (dialog) {
+    document.querySelectorAll("[data-location-action]").forEach((button) => {
+      button.addEventListener("click", (event) => {
+        event.preventDefault();
+        const action = button.dataset.locationAction;
+        const actions = {
+          order: { field: "orderUrl", prompt: "Where would you like to order from?", label: "Order online" },
+          menu: { field: "menuUrl", prompt: "Which location's menu would you like to view?", label: "View menu" },
+          reserve: { field: "reserveUrl", prompt: "Where would you like to reserve a table?", label: "Reserve a table" },
+          directions: { field: "directionsUrl", prompt: "Which location would you like to visit?", label: "Get directions" },
+        };
+        const selection = actions[action];
+        if (!selection) return;
+        dialog.querySelector("#location-description").textContent = selection.prompt;
+        dialog.querySelector(".location-options").innerHTML = locations.map((location) =>
+          `<a class="location-option" href="${escapeHtml(location[selection.field])}" target="_blank" rel="noopener noreferrer"><strong>${escapeHtml(location.name)}</strong><span>${selection.label} &#8599;</span></a>`
+        ).join("");
+        dialog.showModal();
+      });
+    });
+    dialog.querySelector(".location-close").addEventListener("click", () => dialog.close());
+    dialog.addEventListener("click", (event) => {
+      const box = dialog.getBoundingClientRect();
+      if (event.target === dialog && (event.clientX < box.left || event.clientX > box.right || event.clientY < box.top || event.clientY > box.bottom)) dialog.close();
+    });
+  }
+
   document.querySelectorAll("[data-link]").forEach((link) => link.addEventListener("click", (event) => {
     const href = link.getAttribute("href");
     if (!href || href.startsWith("http") || href.startsWith("tel:") || href.startsWith("mailto:")) return;
@@ -330,97 +315,6 @@ function bind() {
     }, 1600);
   }));
 
-  document.querySelectorAll("[data-menu-type]").forEach((button) => button.addEventListener("click", () => {
-    menuType = button.dataset.menuType;
-    menuSearch = "";
-    menuTags.clear();
-    clearMenuHash();
-    render();
-  }));
-
-  document.querySelector("[data-menu-search]")?.addEventListener("input", (event) => {
-    menuSearch = event.target.value;
-    const cursorPosition = event.target.selectionStart ?? menuSearch.length;
-    clearMenuHash();
-    render();
-    const searchInput = document.querySelector("[data-menu-search]");
-    searchInput?.focus();
-    searchInput?.setSelectionRange(cursorPosition, cursorPosition);
-  });
-
-  document.querySelectorAll("[data-menu-tag]").forEach((button) => button.addEventListener("click", () => {
-    const tag = button.dataset.menuTag;
-    menuTags.has(tag) ? menuTags.delete(tag) : menuTags.add(tag);
-    clearMenuHash();
-    render();
-  }));
-
-  document.querySelectorAll(".category-pills a").forEach((link) => link.addEventListener("click", (event) => {
-    const id = link.getAttribute("href")?.slice(1);
-    const section = id ? document.getElementById(id) : null;
-    if (!section) return;
-    event.preventDefault();
-    lockActiveCategory(id);
-    setActiveCategory(id);
-    history.replaceState(null, "", `${window.location.pathname}#${id}`);
-    const navbarHeight = document.querySelector(".navbar")?.offsetHeight || 0;
-    const controlsHeight = stickyMenuControlsHeight();
-    const offset = navbarHeight + controlsHeight + 28;
-    const top = section.getBoundingClientRect().top + window.scrollY - offset;
-    window.scrollTo({ top, behavior: "smooth" });
-  }));
-
-  setActiveCategory(getInitialCategoryId());
-  window.removeEventListener("scroll", updateActiveCategory);
-  if (currentPath() === "/menu/") window.addEventListener("scroll", updateActiveCategory, { passive: true });
-}
-
-function lockActiveCategory(id) {
-  pendingCategoryId = id;
-  clearTimeout(pendingCategoryTimer);
-  pendingCategoryTimer = setTimeout(() => {
-    pendingCategoryId = "";
-    updateActiveCategory();
-  }, 1500);
-}
-
-function clearMenuHash() {
-  pendingCategoryId = "";
-  clearTimeout(pendingCategoryTimer);
-  if (currentPath() === "/menu/" && window.location.hash) history.replaceState(null, "", window.location.pathname);
-}
-
-function getInitialCategoryId() {
-  const hashId = (window.location.hash || "#").slice(1);
-  return document.getElementById(hashId)?.classList.contains("menu-category") ? hashId : document.querySelector(".menu-category")?.id;
-}
-
-function setActiveCategory(id) {
-  if (!id) return;
-  document.querySelectorAll(".category-pills a").forEach((link) => {
-    link.classList.toggle("active", link.getAttribute("href") === `#${id}`);
-  });
-}
-
-function stickyMenuControlsHeight() {
-  const controls = document.querySelector(".menu-controls");
-  return controls && getComputedStyle(controls).position === "sticky" ? controls.offsetHeight : 0;
-}
-
-function updateActiveCategory() {
-  if (currentPath() !== "/menu/") return;
-  if (pendingCategoryId) {
-    setActiveCategory(pendingCategoryId);
-    return;
-  }
-  const navbarHeight = document.querySelector(".navbar")?.offsetHeight || 0;
-  const controlsHeight = stickyMenuControlsHeight();
-  const marker = window.scrollY + navbarHeight + controlsHeight + 48;
-  let activeId = "";
-  document.querySelectorAll(".menu-category").forEach((section) => {
-    if (section.offsetTop <= marker) activeId = section.id;
-  });
-  setActiveCategory(activeId || document.querySelector(".menu-category")?.id);
 }
 
 function reveal() {
