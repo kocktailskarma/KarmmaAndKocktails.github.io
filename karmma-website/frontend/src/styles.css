@@ -509,13 +509,20 @@ button.visit-pill{border:1px solid var(--gold);}
 .footer-location .location-hours{font-size:13px;}
 .footer-bottom{flex-wrap:wrap;gap:12px;}.footer-bottom p{max-width:560px;}
 .locations-title h1{color:var(--gold-light);}.locations-title em{background:none;color:var(--gold);}.locations-title p{color:var(--text);}
-.locations-contact{max-width:1240px;margin:auto;padding:0 24px 96px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px;}
+.locations-contact{max-width:1240px;margin:auto;padding:0 24px 96px;display:grid;grid-template-columns:minmax(0,1fr);gap:28px;}
 .location-contact-card h2{font-size:32px;margin-top:0;}.location-contact-card p{color:var(--text);}
+.location-contact-card{display:grid;grid-template-columns:minmax(0,.78fr) minmax(460px,1.22fr);gap:32px;align-items:start;}
+.location-contact-details{min-width:0;}
+.location-contact-card .location-map{display:block;width:100%;height:480px;margin:0;border:1px solid rgba(228,190,98,.38);border-radius:12px;background:var(--bg2);}
+.location-map-wrap{position:relative;min-width:0;}
+.location-map-link{position:absolute;inset:0;z-index:2;display:flex;align-items:flex-start;justify-content:flex-start;padding:12px;color:#1a73e8;text-decoration:none;}
+.location-map-link span{padding:8px 12px;background:#fff;border-radius:4px;box-shadow:0 1px 4px #0003;font:600 13px Arial,sans-serif;}
 .location-contact-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:24px;}.location-contact-actions .btn{padding:0 16px;}
 .location-contact-card iframe{display:block;width:100%;height:280px;border:0;border-radius:8px;margin-top:24px;}
 .copy-location{background:transparent;border:0;color:var(--gold);padding:10px 0;cursor:pointer;}
 @media(max-width:1100px){.footer-inner{grid-template-columns:repeat(2,minmax(0,1fr));}}
-@media(max-width:700px){.locations-contact,.location-hours-grid{grid-template-columns:minmax(0,1fr);}.location-contact-card{padding:20px;}.footer-inner{grid-template-columns:minmax(0,1fr);}.location-hours-grid article{padding:20px;}}
+@media(max-width:1000px){.location-contact-card{grid-template-columns:minmax(0,1fr);}.location-contact-card .location-map{height:360px;}}
+@media(max-width:700px){.locations-contact,.location-hours-grid{grid-template-columns:minmax(0,1fr);}.location-contact-card{padding:20px;}.footer-inner{grid-template-columns:minmax(0,1fr);}.location-hours-grid article{padding:20px;}.location-contact-card .location-map{height:280px;}}
 
 body:has(.locations-contact) .visit-pill{display:none;}
 
@@ -540,3 +547,88 @@ body:has(.locations-contact) .visit-pill{display:none;}
 .location-menu-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;max-width:850px;margin:0 auto;padding:0 24px 96px;}
 .location-menu-options a:focus-visible{outline:2px solid var(--gold-light);outline-offset:4px;}
 @media(max-width:560px){.location-menu-options{grid-template-columns:1fr;}}
+
+/* Location menus: Hidden Gem's card layout in Karmma's crimson and gold palette. */
+.service-photo.natural img{height:auto;object-fit:contain;border-radius:16px;}
+.reserve-title{background:linear-gradient(180deg,var(--bg2),var(--bg));}
+.reserve-title h1{color:var(--gold-light);}
+.reserve-title p{color:var(--text);}
+.visit-pill{text-decoration:none;}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0;}
+.location-dining-menu{padding:140px 24px 80px;background:var(--bg);}
+.dining-heading{max-width:1260px;margin:0 auto 32px;}
+.dining-heading h1{font:400 clamp(38px,5vw,64px)/1.15 var(--font-head);color:var(--gold-light);margin:16px 0;}
+.dining-heading h1 em{color:var(--gold);font-style:normal;}
+.dining-heading p{color:var(--text);line-height:1.6;}
+.location-dining-menu .menu-controls{position:sticky;top:88px;z-index:35;max-width:1260px;margin:0 auto 24px;padding:18px;background:var(--bg2);border:0;border-radius:0;box-shadow:0 12px 32px #16040a22;}
+.location-dining-menu .menu-toolbar{position:static;display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin:0 0 16px;padding:0;max-width:none;background:none;box-shadow:none;backdrop-filter:none;}
+.location-dining-menu .tabs{background:var(--bg);border:1px solid var(--gold-dark);flex-shrink:0;}
+.location-dining-menu .tabs button{min-height:44px;padding:10px 18px;color:var(--text);font-size:14px;letter-spacing:.03em;text-transform:none;}
+.location-dining-menu .tabs button.selected,.location-dining-menu .filters button.selected{background:var(--gold);color:var(--bg2);}
+.location-dining-menu .menu-toolbar .btn{width:auto;min-height:44px;padding:10px 16px;font-size:12px;letter-spacing:.04em;}
+.menu-print-link{color:var(--gold-light);font-size:14px;text-decoration:underline;text-underline-offset:4px;padding:12px 4px;}
+.location-dining-menu .menu-search{margin-left:auto;flex:1 1 200px;max-width:290px;}
+.location-dining-menu .menu-toolbar .btn-gold{background:var(--gold);color:var(--bg2);}
+.menu-bottom-actions{max-width:1260px;margin:24px auto;}
+.menu-search{display:block;width:min(360px,100%);}
+.menu-search input{display:block;width:100%;min-height:46px;padding:12px 14px;border:1px solid var(--gold-dark);border-radius:6px;background:var(--bg);color:var(--text);font:inherit;font-size:16px;}
+.menu-search input::placeholder{color:var(--muted);opacity:1;}
+.location-dining-menu .filters{gap:8px;margin:0 0 14px;}
+.location-dining-menu .filters button{min-height:40px;color:var(--text);background:transparent;border:0;border-radius:0;}
+.location-dining-menu .category-pills{display:flex;flex-wrap:wrap;gap:6px 8px;overflow:visible;margin:0;padding:4px 0 0;}
+.location-dining-menu .category-pills a{flex:0 1 auto;max-width:100%;background:transparent;color:var(--text);border:0;font-size:13px;white-space:normal;padding:9px 14px;}
+.location-dining-menu .category-pills a[aria-current],.location-dining-menu .category-pills a:hover{background:var(--gold);color:var(--bg2);}
+.location-dining-menu :focus-visible{outline:2px solid var(--gold-light);outline-offset:4px;}
+.location-dining-menu .menu-result-count{max-width:1260px;margin:0 auto 26px;color:var(--muted);font-size:14px;}
+.location-dining-menu .menu-sections{margin:0 auto;}
+.location-dining-menu .menu-category h2{color:var(--gold-light);font-size:32px;line-height:1.25;}
+.location-dining-menu .menu-category>p{color:var(--text);}
+.location-dining-menu .menu-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;}
+.location-dining-menu .menu-card{display:grid;grid-template-columns:140px minmax(0,1fr);align-items:start;gap:18px;padding:18px;min-width:0;background:var(--card);border:1px solid var(--gold-dark);border-radius:10px;box-shadow:none;}
+.location-dining-menu .menu-card:hover{background:var(--bg2);border-color:var(--gold);}
+.location-dining-menu .dish-image{width:140px;height:140px;background:var(--bg2);color:var(--gold-dark);border-radius:8px;overflow:hidden;}
+.location-dining-menu .dish-image img{display:block;width:100%;height:100%;object-fit:contain;}
+.location-dining-menu .dish-image svg{width:48px;height:48px;}
+.location-dining-menu .dish-copy{min-width:0;}
+.location-dining-menu .dish-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 12px;margin-bottom:10px;}
+.location-dining-menu .dish-head h3{font:400 21px/1.3 var(--font-head);color:var(--gold-light);margin:0;flex:1 1 140px;overflow-wrap:anywhere;}
+.location-dining-menu .dish-price{color:var(--gold-light);font-size:17px;white-space:nowrap;}
+.location-dining-menu .menu-card p{color:var(--text);font-size:15px;line-height:1.6;}
+.dish-options{margin:10px 0 0;font-size:14px;line-height:1.5;}
+.dish-options>div{display:flex;justify-content:space-between;gap:14px;border-bottom:1px solid #bb8d5530;padding:4px 0;}
+.dish-options dt{color:var(--text);}.dish-options dd{margin:0;white-space:nowrap;color:var(--gold-light);font-weight:600;}
+.price-pending{font-size:13px;color:var(--muted);}
+.location-dining-menu .tags{margin-top:12px;}.location-dining-menu .tags span{color:#d8e8bd;background:#34412c;}
+.location-dining-menu .empty{padding:40px 16px;color:var(--text);}
+.print-actions{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:30px;}.print-actions .btn{color:#501424;border-color:#501424;}
+.print-menu .print-item{break-inside:avoid;align-items:start;}.print-item>div:first-child{flex:1;}.print-item>div:last-child{min-width:160px;}
+.print-item h3{font-size:16px;margin:0 0 6px;}.print-item p{font-size:13px;line-height:1.4;margin:0 0 6px;}
+.print-menu .dish-options{margin:0;}.print-menu .dish-options dt,.print-menu .dish-options dd,.print-menu .price-pending,.print-menu .dish-price{color:#111;}
+@media(max-width:1100px){.location-dining-menu .menu-grid{grid-template-columns:minmax(0,1fr);}}
+@media(max-width:900px){
+  .location-dining-menu{padding-top:112px;}
+  .location-dining-menu .menu-controls{position:static;}
+  .location-dining-menu .menu-search{width:100%;max-width:none;margin-left:0;}
+}
+@media(max-width:560px){
+  .location-dining-menu{padding:110px 14px 64px;}
+  .location-dining-menu .menu-controls{padding:12px;}
+  .location-dining-menu .menu-toolbar{gap:10px;}
+  .location-dining-menu .menu-toolbar .btn{flex:1 1 115px;}
+  .location-dining-menu .menu-search{flex-basis:100%;}
+  .location-dining-menu .category-pills a{padding:8px 10px;font-size:12px;}
+  .location-dining-menu .type-tabs{display:flex;width:100%;}.location-dining-menu .type-tabs button{flex:1;padding:10px 8px;font-size:13px;}
+  .location-dining-menu .filters{gap:6px;}.location-dining-menu .filters button{padding:8px 10px;font-size:13px;}
+  .location-dining-menu .menu-card{grid-template-columns:100px minmax(0,1fr);padding:12px;gap:12px;}
+  .location-dining-menu .dish-image{width:100px;height:100px;}
+  .location-dining-menu .dish-head h3{font-size:19px;}
+  .print-menu{padding:110px 16px 40px;}.print-item{flex-wrap:wrap;}.print-item>div:last-child{width:100%;}
+}
+@media(max-width:360px){.location-dining-menu .menu-card{grid-template-columns:minmax(0,1fr);}.location-dining-menu .dish-image{width:140px;height:140px;justify-self:center;}}
+@media print{
+  .print-actions{display:none!important;}.print-menu{padding:0;max-width:none;}.print-menu h2{break-after:avoid;}.print-item{flex-wrap:nowrap;}.print-item>div:last-child{width:auto;}
+  body:has(.print-menu){background:#fff!important;color:#111!important;}
+}
+
+.location-dining-menu .filters span{color:var(--muted);}
+.location-dining-menu .filters button.selected{background:transparent;color:var(--gold-light);box-shadow:inset 0 -2px var(--gold);}

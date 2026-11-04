@@ -1,4 +1,5 @@
-import { navItems, site, locations } from "./site-data.js?v=karmma-contact-1";
+import { navItems, site, locations } from "./site-data.js?v=karmma-contact-map-2";
+import { menuPage as diningMenuPage, printMenuPage, bindMenu } from "./menu.js?v=locations-3";
 
 const app = document.querySelector("#app");
 const siteRoot = new URL("..", import.meta.url);
@@ -51,7 +52,7 @@ function shell(content) {
         ${navItems.map(([label, href]) => pageLink(href, label)).join("")}
       </div>
     </nav>
-    <button type="button" class="visit-pill" data-location-action="directions" aria-haspopup="dialog"><span>${iconPin}</span>Visit Us</button>
+    <a class="visit-pill" href="${appUrl("/contact/")}" data-link><span>${iconPin}</span>Visit Us</a>
     <main>${content}</main>
     ${footer()}
     <dialog class="location-dialog" aria-labelledby="location-title" aria-describedby="location-description">
@@ -75,8 +76,8 @@ function footer() {
   return `<footer class="footer"><div class="footer-inner">
     <section><a href="${appUrl("/")}" class="footer-brand" data-link><img src="${assetUrl(site.logo)}" alt="${site.name}" /><span><strong>${site.name}</strong><small>${site.tagline}</small></span></a><p>Nepali and Indian favorites served with warm hospitality in Grapevine and Dallas.</p></section>
     <section><h3>Quick Links</h3>${navItems.map(([label, href]) => pageLink(href, label)).join("")}</section>
-    ${locations.map(location => `<section class="footer-location"><h3>${location.name}</h3><address>${location.address}</address><a href="${location.phoneHref}">${location.phone}</a><h4>Opening Hours (CT)</h4>${locationHours(location)}<a href="${location.directionsUrl}" target="_blank" rel="noopener noreferrer">Get Directions</a>${locationSocial(location)}</section>`).join("")}
-    </div><div class="footer-bottom"><p>&copy; 2026 Karmma and Kocktails. All rights reserved.</p><p>All hours are Central Time. Closing times at or after midnight refer to the following day.</p></div></footer>`;
+    ${locations.map(location => `<section class="footer-location"><h3>${location.name}</h3><address>${location.address}</address><a href="${location.phoneHref}">${location.phone}</a><h4>Opening Hours</h4>${locationHours(location)}<a href="${location.directionsUrl}" target="_blank" rel="noopener noreferrer">Get Directions</a>${locationSocial(location)}</section>`).join("")}
+    </div><div class="footer-bottom"><p>&copy; 2026 Karmma and Kocktails. All rights reserved.</p><p>Closing times at or after midnight refer to the following day.</p></div></footer>`;
 }
 
 function homePage() {
@@ -123,7 +124,7 @@ function servicesPreview() {
 }
 
 function ctaBlock() {
-  return `<section class="cta"><h2>Discover<br /><em>Karmma and Kocktails</em></h2><p>Visit us in Grapevine or Dallas for comforting curries, momos, noodles, and a menu made for sharing.</p><div class="hero-actions"><a class="btn" href="${appUrl("/reserve/")}" data-link>Reserve a Table</a><a class="btn" href="${appUrl("/menu/")}" data-link>View Menu</a><button type="button" class="btn" data-location-action="directions" aria-haspopup="dialog">Get Directions</button></div><div class="location-hours-grid">${locations.map(location => `<article><h3>${location.name}</h3><p>Opening Hours (CT)</p>${locationHours(location)}</article>`).join("")}</div><p class="hours-note">All hours are Central Time. Closing times at or after midnight refer to the following day.</p></section>`;
+  return `<section class="cta"><h2>Discover<br /><em>Karmma and Kocktails</em></h2><p>Visit us in Grapevine or Dallas for comforting curries, momos, noodles, and a menu made for sharing.</p><div class="hero-actions"><a class="btn" href="${appUrl("/reserve/")}" data-link>Reserve a Table</a><a class="btn" href="${appUrl("/menu/")}" data-link>View Menu</a><button type="button" class="btn" data-location-action="directions" aria-haspopup="dialog">Get Directions</button></div><div class="location-hours-grid">${locations.map(location => `<article><h3>${location.name}</h3><p>Opening Hours</p>${locationHours(location)}</article>`).join("")}</div><p class="hours-note">Closing times at or after midnight refer to the following day.</p></section>`;
 }
 
 function servicesCta() {
@@ -135,7 +136,7 @@ function aboutCta() {
 }
 
 function menuPage() {
-  return `<section class="page-title location-menu-title"><span class="eyebrow">Explore Our Menus</span><h1>Choose <em>Your Location</em></h1><p>Browse the menu for Grapevine or Dallas. Each menu opens in a new tab.</p></section><section class="location-menu-options" aria-label="Menus by location">${locations.map(location => `<a class="location-option" href="${escapeHtml(location.menuUrl)}" target="_blank" rel="noopener noreferrer"><strong>${escapeHtml(location.name)}</strong><span>View menu &#8599;</span></a>`).join("")}</section>`;
+  return diningMenuPage({ appUrl, assetUrl, locations });
 }
 
 function aboutPage() {
@@ -154,8 +155,8 @@ function servicesPage() {
     {
       title: "Snacks & Treats",
       icon: "treats",
-      image: "/assets/food/momo-plate-with-momos.png",
-      imageFit: "contain",
+      image: "/assets/food/momos-bamboo-steamer.png",
+      imageFit: "natural",
       description: "Explore light bites, street-style snacks, desserts, boba tea, lassi, soft drinks, and masala tea when you want something smaller or sweeter alongside your meal.",
       points: ["Chats, snacks, and munchies", "Desserts", "Boba tea options", "Lassi, tea, and soft drinks"],
     },
@@ -174,11 +175,11 @@ function servicesPage() {
       points: ["Group dining support", "Menu options for guests", "Flexible seating help", "Friendly service from start to finish"],
     },
   ];
-  return `<section class="page-title services-title"><span class="eyebrow">What We Offer</span><h1>Our <em>Services</em></h1><p>Karmma and Kocktails is here for everyday meals, takeout, catering, and small celebrations with food that is easy to enjoy and share.</p></section><section class="service-rows">${services.map((service, index) => `<article class="service-row ${index % 2 ? "reverse" : ""}"><div class="service-photo ${service.imageFit === "contain" ? "contain" : ""}"><img src="${assetUrl(service.image)}" alt="${service.title}" /></div><div class="service-detail"><div class="line-icon" aria-hidden="true">${iconSvg(service.icon)}</div><h2>${service.title}</h2><p>${service.description}</p><ul>${service.points.map((point) => `<li>${point}</li>`).join("")}</ul><a class="btn" href="${appUrl("/contact/")}" data-link>Inquire Now</a></div></article>`).join("")}</section>${servicesCta()}`;
+  return `<section class="page-title services-title"><span class="eyebrow">What We Offer</span><h1>Our <em>Services</em></h1><p>Karmma and Kocktails is here for everyday meals, takeout, catering, and small celebrations with food that is easy to enjoy and share.</p></section><section class="service-rows">${services.map((service, index) => `<article class="service-row ${index % 2 ? "reverse" : ""}"><div class="service-photo ${service.imageFit || ""}"><img src="${assetUrl(service.image)}" alt="${service.title}" /></div><div class="service-detail"><div class="line-icon" aria-hidden="true">${iconSvg(service.icon)}</div><h2>${service.title}</h2><p>${service.description}</p><ul>${service.points.map((point) => `<li>${point}</li>`).join("")}</ul><a class="btn" href="${appUrl("/contact/")}" data-link>Inquire Now</a></div></article>`).join("")}</section>${servicesCta()}`;
 }
 
 function contactPage() {
-  return `<section class="page-title locations-title"><span class="eyebrow">Get In Touch</span><h1>Visit <em>Our Locations</em></h1><p>Find us in Grapevine and Dallas. Call your location for questions about dining, catering, or reservations.</p></section><section class="locations-contact" aria-label="Restaurant locations">${locations.map(location => `<article class="location-contact-card"><h2>${location.name}</h2><address>${location.address}</address><button class="copy-location" type="button" data-copy="${escapeHtml(location.address)}">Copy Address</button><p><a href="${location.phoneHref}">${location.phone}</a></p><h3>Opening Hours (CT)</h3>${locationHours(location)}<p class="hours-note">Closing times at or after midnight refer to the following day.</p><div class="location-contact-actions"><a class="btn" href="${location.directionsUrl}" target="_blank" rel="noopener noreferrer">Get Directions</a><a class="btn" href="${location.reserveUrl}" target="_blank" rel="noopener noreferrer">Reserve a Table</a></div>${locationSocial(location)}</article>`).join("")}</section>`;
+  return `<section class="page-title locations-title"><span class="eyebrow">Get In Touch</span><h1>Visit <em>Our Locations</em></h1><p>Find us in Grapevine and Dallas. Call your location for questions about dining, catering, or reservations.</p></section><section class="locations-contact" aria-label="Restaurant locations">${locations.map(location => `<article class="location-contact-card"><div class="location-contact-details"><h2>${location.name}</h2><address>${location.address}</address><button class="copy-location" type="button" data-copy="${escapeHtml(location.address)}">Copy Address</button><p><a href="${location.phoneHref}">${location.phone}</a></p><h3>Opening Hours</h3>${locationHours(location)}<p class="hours-note">Closing times at or after midnight refer to the following day.</p><div class="location-contact-actions"><a class="btn" href="${location.directionsUrl}" target="_blank" rel="noopener noreferrer">Get Directions</a><a class="btn" href="${location.reserveUrl}" target="_blank" rel="noopener noreferrer">Reserve a Table</a></div>${locationSocial(location)}</div><div class="location-map-wrap"><iframe class="location-map" src="${escapeHtml(location.mapEmbedUrl)}" title="Map for ${escapeHtml(location.name)} location" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe><a class="location-map-link" href="${escapeHtml(location.mapUrl)}" target="_blank" rel="noopener noreferrer" aria-label="Open ${escapeHtml(location.name)} in Google Maps"><span>Open in Google Maps ↗</span></a></div></article>`).join("")}</section>`;
 }
 
 function reservePage() {
@@ -234,7 +235,7 @@ function render() {
   const routes = {
     "/": homePage,
     "/menu/": menuPage,
-    "/menu/print/": menuPage,
+    "/menu/print/": () => printMenuPage({ appUrl }),
     "/services/": servicesPage,
     "/about/": aboutPage,
     "/contact/": contactPage,
@@ -242,13 +243,14 @@ function render() {
   };
   app.innerHTML = shell((routes[path] || notFoundPage)());
   bind();
+  bindMenu({ assetUrl, render });
   reveal();
 }
 
 function bind() {
-  // Menu and reservation entry points share the location picker, including navigation.
+  // Menu choices open in separate tabs; reservations begin on the dedicated page.
   document.querySelectorAll("a[data-link]").forEach((link) => {
-    const action = link.getAttribute("href") === appUrl("/menu/") ? "menu" : link.getAttribute("href") === appUrl("/reserve/") ? "reserve" : null;
+    const action = link.getAttribute("href") === appUrl("/menu/") ? "menu" : null;
     if (action) {
       link.removeAttribute("data-link");
       link.dataset.locationAction = action;
@@ -270,9 +272,10 @@ function bind() {
         const selection = actions[action];
         if (!selection) return;
         dialog.querySelector("#location-description").textContent = selection.prompt;
-        dialog.querySelector(".location-options").innerHTML = locations.map((location) =>
-          `<a class="location-option" href="${escapeHtml(location[selection.field])}" target="_blank" rel="noopener noreferrer"><strong>${escapeHtml(location.name)}</strong><span>${selection.label} &#8599;</span></a>`
-        ).join("");
+        dialog.querySelector(".location-options").innerHTML = locations.map((location) => {
+          const href = action === "menu" ? appUrl(`/menu/?location=${location.name.toLowerCase()}`) : location[selection.field];
+          return `<a class="location-option" href="${escapeHtml(href)}" target="_blank" rel="noopener noreferrer"><strong>${escapeHtml(location.name)}</strong><span>${selection.label} &#8599;${action === "menu" ? '<span class="sr-only"> (opens in a new tab)</span>' : ''}</span></a>`;
+        }).join("");
         dialog.showModal();
       });
     });
@@ -284,6 +287,7 @@ function bind() {
   }
 
   document.querySelectorAll("[data-link]").forEach((link) => link.addEventListener("click", (event) => {
+    if (event.button !== 0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey || link.target === "_blank") return;
     const href = link.getAttribute("href");
     if (!href || href.startsWith("http") || href.startsWith("tel:") || href.startsWith("mailto:")) return;
     event.preventDefault();

@@ -21,9 +21,17 @@ If Node.js is installed, `node server.mjs` is also available.
 Common edits:
 
 - Site info: `src/site-data.js`
-- Location menus, ordering and reservations: `locations` in `src/site-data.js`
+- Location menu dishes, prices and photo assignments: `src/menu-data.js`
+- Menu search, filtering and print layout: `src/menu.js`
+- Location addresses, ordering and reservations: `locations` in `src/site-data.js`
 - Layout and page behavior: `src/app.js`
 - Colors, spacing, and responsive design: `src/styles.css`
 - Images: `assets/`
 
 See [startup instructions](../RUN-WEBSITE.md) for Windows and Node.js alternatives.
+
+Preview `/menu/?location=dallas` or `/menu/?location=grapevine`. Each location
+has its own PDF download and `/menu/print/?location=...` print view.
+Menu links open a location picker; each location opens in a new tab, leaving the
+picker available in the original tab. `/menu/` also offers both location choices.
+See [menu review notes](../MENU-REVIEW.md) for source details and unresolved entries.
