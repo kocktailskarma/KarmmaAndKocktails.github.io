@@ -1,5 +1,5 @@
 import { navItems, site, locations } from "./site-data.js?v=karmma-contact-map-2";
-import { menuPage as diningMenuPage, printMenuPage, bindMenu } from "./menu.js?v=locations-3";
+import { menuPage as diningMenuPage, printMenuPage, bindMenu } from "./menu.js?v=locations-4";
 
 const app = document.querySelector("#app");
 const siteRoot = new URL("..", import.meta.url);
@@ -235,7 +235,7 @@ function render() {
   const routes = {
     "/": homePage,
     "/menu/": menuPage,
-    "/menu/print/": () => printMenuPage({ appUrl }),
+    "/menu/print/": () => printMenuPage({ appUrl, assetUrl }),
     "/services/": servicesPage,
     "/about/": aboutPage,
     "/contact/": contactPage,

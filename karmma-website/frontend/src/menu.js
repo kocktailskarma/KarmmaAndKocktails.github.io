@@ -60,7 +60,7 @@ export function menuPage({ appUrl, assetUrl, locations }) {
         <div class="tabs type-tabs" role="group" aria-label="Menu section">${current.types.map(type => `<button type="button" data-menu-type="${type}" aria-pressed="${current.type === type}" class="${current.type === type ? 'selected' : ''}">${typeNames[type]}</button>`).join('')}</div>
         <label class="menu-search"><span class="sr-only">Search ${current.menu.name} menu</span><input type="search" data-menu-search placeholder="Search menu…" value="${escape(current.search)}"></label>
         <a class="btn" href="${escape(locationInfo.orderUrl)}" target="_blank" rel="noopener noreferrer" aria-label="Order online from ${current.menu.name} (opens in a new tab)">Order Online</a>
-        <a class="btn btn-gold" href="${assetUrl(current.menu.pdf)}" target="_blank" rel="noopener" download="${current.locationId}-menu.pdf">Download PDF</a>
+        <a class="btn btn-gold" href="${appUrl(`/menu/print/?location=${current.locationId}`)}" target="_blank" rel="noopener">Download PDF</a>
       </div>
       <div class="filters" role="group" aria-label="Dish filters"><span>Filter:</span>${[['', 'All dishes'], ['vegetarian', 'Vegetarian'], ['photos', 'With photos']].map(([id, name]) => `<button type="button" data-menu-filter="${id}" aria-pressed="${current.filter === id}" class="${current.filter === id ? 'selected' : ''}">${name}</button>`).join('')}</div>
       <nav class="category-pills" aria-label="Menu categories">${view.pills}</nav>
@@ -71,9 +71,9 @@ export function menuPage({ appUrl, assetUrl, locations }) {
   </section>`;
 }
 
-export function printMenuPage({ appUrl }) {
+export function printMenuPage({ appUrl, assetUrl }) {
   const { menu, locationId } = state();
-  return `<section class="print-menu"><div class="print-actions"><a class="btn" href="${appUrl(`/menu/?location=${locationId}`)}" data-link>Back to ${menu.name} menu</a><button type="button" class="btn" data-print-menu>Print / Save PDF</button></div><header class="print-head"><h1>Karmma and Kocktails</h1><p>${menu.name} Menu</p></header>${menu.categories.map(category => `<section><h2>${escape(category.name)}</h2>${category.description ? `<p>${escape(category.description)}</p>` : ''}${category.items.map(item => `<article class="print-item"><div><h3>${escape(item.name)}</h3>${item.description ? `<p>${escape(item.description)}</p>` : ''}</div><div>${prices(item)}</div></article>`).join('')}</section>`).join('')}</section>`;
+  return `<section class="print-menu"><div class="print-actions"><a class="btn" href="${appUrl(`/menu/?location=${locationId}`)}" data-link>Back to ${menu.name} menu</a><button type="button" class="btn" data-print-menu>Print / Save PDF</button></div><header class="print-head"><img src="${assetUrl('/assets/brand/karmma-kocktails.jpg')}" alt="Karmma and Kocktails logo" /><h1>Karmma and Kocktails</h1><p>${menu.name} Menu</p></header>${menu.categories.map(category => `<section><h2>${escape(category.name)}</h2>${category.description ? `<p>${escape(category.description)}</p>` : ''}${category.items.map(item => `<article class="print-item"><div><h3>${escape(item.name)}</h3>${item.description ? `<p>${escape(item.description)}</p>` : ''}</div><div>${prices(item)}</div></article>`).join('')}</section>`).join('')}</section>`;
 }
 
 let disposeMenuTracking = () => {};

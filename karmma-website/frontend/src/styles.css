@@ -601,6 +601,8 @@ body:has(.locations-contact) .visit-pill{display:none;}
 .location-dining-menu .tags{margin-top:12px;}.location-dining-menu .tags span{color:#d8e8bd;background:#34412c;}
 .location-dining-menu .empty{padding:40px 16px;color:var(--text);}
 .print-actions{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:30px;}.print-actions .btn{color:#501424;border-color:#501424;}
+.print-actions .btn{background:var(--bg2);color:var(--gold-light);border-color:var(--gold);}
+.print-actions .btn:hover,.print-actions .btn:focus-visible{background:var(--gold);color:var(--bg2);}
 .print-menu .print-item{break-inside:avoid;align-items:start;}.print-item>div:first-child{flex:1;}.print-item>div:last-child{min-width:160px;}
 .print-item h3{font-size:16px;margin:0 0 6px;}.print-item p{font-size:13px;line-height:1.4;margin:0 0 6px;}
 .print-menu .dish-options{margin:0;}.print-menu .dish-options dt,.print-menu .dish-options dd,.print-menu .price-pending,.print-menu .dish-price{color:#111;}
