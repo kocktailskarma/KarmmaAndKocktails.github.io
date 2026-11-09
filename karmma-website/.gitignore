@@ -1,5 +1,8 @@
-﻿royal-mansion-clone/
 .DS_Store
 node_modules/
 .env
 .env.*
+__pycache__/
+frontend/tests/output/
+# originals used to regenerate images; kept locally only (not published)
+_archive/

@@ -1,0 +1,10 @@
+# Keep line endings identical on every machine (Windows checkouts and GitHub Actions).
+* text=auto eol=lf
+*.pdf binary
+*.webp binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.ico binary
+*.woff2 binary
+*.xlsx binary

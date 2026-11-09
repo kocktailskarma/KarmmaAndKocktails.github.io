@@ -7,7 +7,9 @@ from pathlib import Path
 from playwright.sync_api import sync_playwright
 
 BASE = 'http://localhost:5174'
-OUT = Path(__file__).resolve().parents[3] / 'review-artifacts' / 'karmma-menu'
+# All menu types are rendered into the page (crawlable); only the active type is visible.
+CARDS = '.menu-type:not([hidden]) .menu-card'
+OUT = Path(__file__).resolve().parent / 'output'  # git-ignored; screenshots and checks.json land here
 OUT.mkdir(parents=True, exist_ok=True)
 
 with sync_playwright() as playwright:
@@ -49,11 +51,11 @@ with sync_playwright() as playwright:
         page.locator('[data-menu-search]').fill('no-such-dish-123')
         assert page.locator('.empty').is_visible()
         page.locator('[data-clear-menu]').click()
-        assert page.locator('.menu-card').count() > 50
+        assert page.locator(CARDS).count() > 50
         page.locator('[data-menu-filter="vegetarian"]').click()
-        assert page.locator('.menu-card').count() == page.locator('.menu-card .tags').count()
+        assert page.locator(CARDS).count() == page.locator(CARDS + ' .tags').count()
         page.locator('[data-menu-filter="photos"]').click()
-        assert page.locator('.menu-card.no-photo').count() == 0
+        assert page.locator(CARDS + '.no-photo').count() == 0
         page.locator('[data-menu-filter=""]').click()
     page.locator('[data-menu-type="happy-hour"]').click()
     assert '4 PM' in page.locator('.menu-sections').inner_text()
@@ -75,14 +77,14 @@ with sync_playwright() as playwright:
             for type_name in (['food', 'drinks', 'happy-hour'] if city == 'dallas' else ['food', 'drinks']):
                 page.locator(f'[data-menu-type="{type_name}"]').click()
                 assert page.evaluate('document.documentElement.scrollWidth <= innerWidth'), (width, city, type_name)
-                assert page.locator('.category-pills').evaluate('el => el.scrollWidth <= el.clientWidth')
+                # On phones the category bar is a sticky single row that scrolls sideways by design.
                 # Wrapped categories must still scroll headings below sticky controls.
                 link = page.locator('[data-category]').last
                 target = link.get_attribute('href')
                 link.click()
                 rect = page.locator(target + ' h2').bounding_box()
                 nav_bottom = page.locator('.navbar').bounding_box()['height']
-                sticky_bottom = page.locator('.menu-controls').evaluate("el => getComputedStyle(el).position === 'sticky' ? el.getBoundingClientRect().bottom : 0")
+                sticky_bottom = page.evaluate("() => Math.max(0, ...['.menu-controls', '.category-pills'].map(s => { const el = document.querySelector(s); return getComputedStyle(el).position === 'sticky' ? el.getBoundingClientRect().bottom : 0; }))")
                 assert rect['y'] >= max(nav_bottom, sticky_bottom) - 2, (width, city, type_name, rect)
                 assert page.evaluate('document.documentElement.scrollWidth <= innerWidth')
             page.locator('[data-menu-type="food"]').click()
@@ -108,34 +110,37 @@ with sync_playwright() as playwright:
     page.set_viewport_size({'width': 390, 'height': 844})
     page.goto(BASE + '/')
     page.locator('[data-menu-toggle]').wait_for()
+    # Menu links now navigate in the same tab; Order Online (dialog) opens ordering in new tabs.
     page.locator('[data-menu-toggle]').click()
     page.locator('[data-mobile-panel] a', has_text='Menu').click()
+    page.wait_for_url('**/menu/')
+    assert page.locator('h1').inner_text() == 'Menus: Grapevine and Dallas'
+    assert page.locator('.location-menu-options a[data-link]').count() == 2
+    page.locator('.location-menu-options a[data-link]', has_text='Dallas').click()
+    page.wait_for_url('**/menu/dallas/')
+    assert page.locator('h1').inner_text() == 'Dallas Menu'
+    page.goto(BASE + '/')
+    page.locator('[data-menu-toggle]').click()
+    page.locator('[data-mobile-panel] a[data-location-action="order"]').click()
     assert page.locator('.location-dialog').is_visible()
-    original_url = page.url
-    for city in ['Grapevine', 'Dallas']:
-        with page.expect_popup() as opened:
-            page.locator('.location-dialog .location-option', has_text=city).click()
-        menu_tab = opened.value
-        menu_tab.locator('.menu-card').first.wait_for()
-        assert menu_tab.locator('h1').inner_text() == city + ' Menu'
-        assert menu_tab.locator('[data-menu-location]').count() == 0
-        assert page.url == original_url
-        assert page.locator('.location-dialog').is_visible()
-        assert menu_tab.evaluate('window.opener === null')
-        menu_tab.close()
+    options = page.locator('.location-dialog .location-option')
+    assert options.count() == 2
+    for index in range(2):
+        assert options.nth(index).get_attribute('target') == '_blank' and 'noopener' in options.nth(index).get_attribute('rel')
     page.keyboard.press('Escape')
     assert not page.locator('.location-dialog').is_visible()
     page.set_viewport_size({'width': 1440, 'height': 1000})
     page.goto(BASE + '/')
     page.locator('.nav-links a', has_text='Menu').click()
-    assert page.locator('.location-dialog').is_visible()
+    page.wait_for_url('**/menu/')
     page.screenshot(path=str(OUT / 'menu-location-picker.png'))
-    page.locator('.location-close').click()
-    page.get_by_role('link', name='View Menu', exact=True).first.click()
+    page.goto(BASE + '/')
+    page.locator('.nav-order').click()
     assert page.locator('.location-dialog').is_visible()
-    page.goto(BASE + '/menu/')
-    page.locator('.location-menu-options').wait_for()
-    assert page.locator('.location-menu-options a[target="_blank"]').count() == 2
+    page.locator('.location-close').click()
+    page.get_by_role('link', name='View Menus', exact=True).first.click()
+    page.wait_for_url('**/menu/')
+    assert page.locator('.location-menu-options a[target="_blank"]').count() == 2  # the two Order Online buttons
     assert not errors, errors
     assert not failed, failed
     report = {'items': totals, 'decoded_images': len(images), 'responsive_checks': responsive, 'browser_errors': errors, 'failed_local_responses': failed}

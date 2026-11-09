@@ -4,26 +4,28 @@ The on-site menus are in `frontend/src/menu-data.js`. The renderer is in
 `frontend/src/menu.js`, following the existing Hidden Gem menu's photo cards,
 search, filters, category navigation and print layout with Karmma's colors.
 
-Menu navigation opens the location picker. Its choices open the corresponding
-on-site menu in a new tab and leave the original picker open. A direct `/menu/`
-visit also offers both locations; individual menu pages have no location switch.
-The toolbar places section tabs, search, ordering and PDF download together;
-filters sit below, followed by category links that wrap without horizontal scrolling.
-Print remains available below the menu.
+Menus have their own pages: `/menu/grapevine/` and `/menu/dallas/` (the `/menu/` page
+links to both in the same tab, and each menu page has a location switch). The toolbar
+places section tabs, search, ordering and PDF download together; filters sit below,
+followed by category links (a single scrolling bar on phones). All sections (food,
+drinks, happy hour) are in the page HTML; the tabs show one at a time. "Download PDF"
+downloads the PDF; "Print ... menu" opens the print view (`/menu/print/?location=...`).
 
 ## Sources and counting
 
-- Grapevine: `files/pdf/grapevine-menu.pdf`, pages 1–6.
-- Dallas: `files/pdf/dallas-menu.pdf`, photographed pages 1–7. Page 8 is blank.
+- Grapevine: `assets/menus/grapevine-menu.pdf`, pages 1–6.
+- Dallas: `assets/menus/dallas-menu.pdf`, photographed pages 1–7. Page 8 is blank.
 - Each category records its source page. Prices and protein/size options are
   recorded separately for each location. Happy-hour entries are separate from
-  the regular menu. No days of availability were inferred for happy hour.
+  the regular menu. No days of availability were inferred for happy hour (set
+  `happyHourDays` for Dallas in `frontend/src/site-data.js` once confirmed).
 - Displayed counts refer to cards, not distinct dish families: combined listings
   remain combined where practical, while separately priced Grapevine biryanis,
   naan varieties and egg dishes retain separate cards.
 - Descriptions are concise paraphrases of the supplied menus. The PDF downloads
-  are unchanged copies of the supplied files, served inside the frontend so they
-  work when the frontend is hosted by itself.
+  are the supplied files, served inside the frontend so they work when the frontend
+  is hosted by itself. The Grapevine PDF had its embedded photos down-sampled
+  (5.1 MB to 1.0 MB, same pages and text); the original is in `_archive/original-assets/menus/`.
 
 ## Unresolved source details
 
@@ -46,8 +48,8 @@ Print remains available below the menu.
 
 ## Images
 
-Selected files are copied from `images/HiddenGem Menu Pictures JPG` into
-`frontend/assets/menu`. The `photos` table records the original relative paths.
+Selected files were copied from `images/HiddenGem Menu Pictures JPG` and ship as
+320 px WebP files in `frontend/assets/menu` (originals: `_archive/original-assets/menu`). The `photos` table records the original relative paths.
 Images are assigned to clear name matches, not speculative aliases. A dish
 without a matched image uses a neutral serving-dish icon. The black
 `chicken tenders.png` is not used. A shared photo does not establish that both

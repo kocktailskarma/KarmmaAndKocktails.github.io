@@ -1,0 +1,11 @@
+{
+  "name": "karmma-kocktails-frontend",
+  "private": true,
+  "type": "module",
+  "description": "Static site for Karmma (Karma) & Kocktails. No dependencies; Node 20+ only for the prerender script.",
+  "scripts": {
+    "start": "python -I server.py --port 5174",
+    "prerender": "node tools/prerender.mjs",
+    "check": "node tools/prerender.mjs --check"
+  }
+}

@@ -1,0 +1,10 @@
+# robots.txt for https://www.karmmankocktails.com/
+# Do NOT Disallow /src/ or /assets/: Google must fetch the CSS, JS and images to render pages.
+# Do NOT Disallow /menu/print/: it carries a noindex meta tag, and Google can only see a
+# noindex tag on a page it is allowed to crawl.
+# Query-string menu URLs (?location=...) are handled by canonical tags, not by robots rules.
+
+User-agent: *
+Allow: /
+
+Sitemap: https://www.karmmankocktails.com/sitemap.xml

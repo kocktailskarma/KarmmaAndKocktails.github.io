@@ -1,22 +1,79 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Karmma and Kocktails | Restaurant</title>
-    <meta name="description" content="Visit Karmma and Kocktails in Grapevine and Dallas, Texas for Nepali and Indian cuisine." />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Page not found | Karmma &amp; Kocktails</title>
+    <meta name="description" content="This page is not available. Visit the Karmma &amp; Kocktails home page, menus or contact page.">
+    <meta name="robots" content="noindex">
+    <meta name="theme-color" content="#470e20">
+    <meta property="og:site_name" content="Karmma &amp; Kocktails">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:title" content="Page not found | Karmma &amp; Kocktails">
+    <meta property="og:description" content="This page is not available. Visit the Karmma &amp; Kocktails home page, menus or contact page.">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Page not found | Karmma &amp; Kocktails">
+    <meta name="twitter:description" content="This page is not available. Visit the Karmma &amp; Kocktails home page, menus or contact page.">
+    <link rel="icon" href="/favicon.ico" sizes="48x48">
+    <link rel="icon" type="image/png" href="/assets/brand/favicon-192.png" sizes="192x192">
+    <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon-180.png">
+    <link rel="preload" href="/assets/fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/fonts/cinzel.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="/src/styles.css?v=aa6541cd">
+    <script type="importmap">{"imports":{"/src/app.js":"/src/app.js?v=aa6541cd","/src/jsonld.js":"/src/jsonld.js?v=aa6541cd","/src/menu-data.js":"/src/menu-data.js?v=aa6541cd","/src/menu.js":"/src/menu.js?v=aa6541cd","/src/pages.js":"/src/pages.js?v=aa6541cd","/src/seo-routes.js":"/src/seo-routes.js?v=aa6541cd","/src/site-data.js":"/src/site-data.js?v=aa6541cd","/src/util.js":"/src/util.js?v=aa6541cd"}}</script>
+    <link rel="modulepreload" href="/src/app.js?v=aa6541cd">
+    <link rel="modulepreload" href="/src/pages.js?v=aa6541cd">
+    <link rel="modulepreload" href="/src/menu.js?v=aa6541cd">
+    <link rel="modulepreload" href="/src/menu-data.js?v=aa6541cd">
+    <link rel="modulepreload" href="/src/site-data.js?v=aa6541cd">
+    <noscript><style>.reveal{opacity:1!important;transform:none!important}.menu-type[hidden]{display:block}</style></noscript>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-HZ8LLF7ZZ8"></script>
     <script>
-      const siteBase = location.pathname.includes("/karmma-website/frontend/") ? location.pathname.split("/karmma-website/frontend/")[0] + "/karmma-website/frontend/" : location.pathname.startsWith("/karmma-website/") ? "/karmma-website/" : "/";
-      document.write(`<link rel="icon" href="${siteBase}assets/brand/karmma-kocktails.jpg" />`);
-      document.write(`<link rel="apple-touch-icon" href="${siteBase}assets/brand/karmma-kocktails.jpg" />`);
-      document.write(`<link rel="stylesheet" href="${siteBase}src/styles.css?v=karmma-print-actions-1" />`);
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      // No analytics hits from local previews or LAN test copies.
+      window['ga-disable-G-HZ8LLF7ZZ8'] = /^(localhost|127\.|10\.|192\.168\.)/.test(location.hostname);
+      gtag('js', new Date());
+      gtag('config', 'G-HZ8LLF7ZZ8');
+      // Click events (SEO-PLAN 6.1): any link with data-track="order_click|reserve_click|directions_click|call_click|menu_pdf_download|menu_print|social_click".
+      document.addEventListener('click', function (e) {
+        var a = e.target.closest('a[data-track],button[data-track]');
+        if (!a) return;
+        gtag('event', a.dataset.track, { location: a.dataset.location || '', placement: a.dataset.placement || '', intent: a.dataset.intent || '', platform: a.dataset.platform || '', link_url: a.href || '', transport_type: 'beacon' });
+      }, true);
     </script>
   </head>
   <body>
-    <div id="app"></div>
-    <script type="module">
-      const siteBase = location.pathname.includes("/karmma-website/frontend/") ? location.pathname.split("/karmma-website/frontend/")[0] + "/karmma-website/frontend/" : location.pathname.startsWith("/karmma-website/") ? "/karmma-website/" : "/";
-      import(`${siteBase}src/app.js?v=karmma-services-image-1`);
-    </script>
+    <div id="app" data-prerendered="/404.html" data-hash="1srqx0l"><a class="skip-link" href="#main">Skip to main content</a>
+    <nav class="navbar" data-navbar aria-label="Main">
+      <div class="nav-inner">
+        <a href="/" class="brand" aria-label="Karmma &amp; Kocktails Nepali &amp; Indian Restaurant &amp; Bar, home" data-link>
+          <span class="brand-logo"><img src="/assets/brand/karmma-kocktails-256.webp" alt="" width="256" height="256" /></span>
+          <span class="brand-copy"><strong>Karmma &amp; Kocktails</strong> <small>Nepali &amp; Indian Restaurant &amp; Bar</small></span>
+        </a>
+        <div class="nav-links"><a href="/menu/" class="" data-link>Menu</a><div class="nav-group"><a href="/#locations" class="nav-parent" data-link>Locations</a><div class="nav-sub"><a href="/grapevine/" class="" data-link>Grapevine</a><a href="/dallas/" class="" data-link>Dallas</a></div></div><a href="/happy-hour/" class="" data-link>Happy Hour</a><a href="/catering/" class="" data-link>Catering</a><a href="/about/" class="" data-link>About</a><a href="/contact/" class="" data-link>Contact</a></div>
+        <a class="btn btn-gold nav-order" href="/menu/" data-location-action="order" aria-haspopup="dialog">Order Online</a>
+        <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-panel" data-menu-toggle><span></span><span></span><span></span></button>
+      </div>
+      <div class="mobile-panel" id="mobile-panel" data-mobile-panel>
+        <a href="/" data-link>Home</a><a href="/menu/" data-link>Menu</a><a href="/grapevine/" data-link>Grapevine</a><a href="/dallas/" data-link>Dallas</a><a href="/happy-hour/" data-link>Happy Hour</a><a href="/catering/" data-link>Catering</a><a href="/about/" data-link>About</a><a href="/contact/" data-link>Contact</a>
+        <a href="/menu/" data-location-action="order" aria-haspopup="dialog">Order Online</a>
+      </div>
+    </nav>
+    
+    <main id="main" tabindex="-1"><section class="page-title not-found"><h1>Page not found</h1><p>This page is not available. Try one of these instead.</p><div class="hero-actions"><a href="/" class="btn btn-gold" data-link>Go Home</a><a href="/menu/" class="btn" data-link>View Menus</a><a href="/contact/" class="btn" data-link>Contact</a></div></section></main>
+    <footer class="footer"><div class="footer-inner">
+    <section><a href="/" class="footer-brand" data-link><img src="/assets/brand/karmma-kocktails-256.webp" alt="" width="58" height="58" /><span><strong>Karmma &amp; Kocktails</strong><small>Nepali &amp; Indian Restaurant &amp; Bar</small></span></a><p>Nepali and Indian favorites served with warm hospitality in Grapevine and Dallas.</p></section>
+    <section><h2>Quick Links</h2><a href="/" data-link>Home</a><a href="/menu/" data-link>Menu</a><a href="/grapevine/" data-link>Grapevine</a><a href="/dallas/" data-link>Dallas</a><a href="/happy-hour/" data-link>Happy Hour</a><a href="/catering/" data-link>Catering</a><a href="/private-events/" data-link>Private Events</a><a href="/services/" data-link>Dine-In &amp; Takeout</a><a href="/about/" data-link>About</a><a href="/contact/" data-link>Contact</a><a href="/reserve/" data-link>Reserve</a></section>
+    <section class="footer-location"><h2><a href="/grapevine/" data-link>Grapevine</a></h2><address>120 S Main St, Suite 50, Grapevine, TX 76051, USA</address><a href="tel:+16822231123" data-track="call_click" data-location="grapevine" data-placement="footer" data-intent="general">(682) 223-1123</a><h3>Opening Hours</h3><dl class="location-hours"><div><dt>Monday</dt><dd>11:00 AM - 12:00 AM</dd></div><div><dt>Tuesday</dt><dd>11:00 AM - 12:00 AM</dd></div><div><dt>Wednesday</dt><dd>11:00 AM - 12:00 AM</dd></div><div><dt>Thursday</dt><dd>11:00 AM - 12:00 AM</dd></div><div><dt>Friday</dt><dd>11:00 AM - 2:00 AM</dd></div><div><dt>Saturday</dt><dd>11:00 AM - 2:00 AM</dd></div><div><dt>Sunday</dt><dd>12:00 PM - 12:00 AM</dd></div></dl><a href="https://maps.app.goo.gl/uTUKaAPoKi7F6Hhk7" target="_blank" rel="noopener noreferrer" data-track="directions_click" data-location="grapevine" data-placement="footer" aria-label="Get Directions, Grapevine (opens in a new tab)">Get Directions</a><a class="location-social" href="https://www.instagram.com/karmma_and_kocktails/" target="_blank" rel="noopener noreferrer" data-track="social_click" data-location="grapevine" data-placement="location">Grapevine Instagram</a></section><section class="footer-location"><h2><a href="/dallas/" data-link>Dallas</a></h2><address>3011 Gulden Ln, Unit 102, Dallas, TX 75212, USA</address><a href="tel:+14697221100" data-track="call_click" data-location="dallas" data-placement="footer" data-intent="general">(469) 722-1100</a><h3>Opening Hours</h3><dl class="location-hours"><div><dt>Monday</dt><dd>11:00 AM - 12:00 AM</dd></div><div><dt>Tuesday</dt><dd>11:00 AM - 12:00 AM</dd></div><div><dt>Wednesday</dt><dd>11:00 AM - 12:00 AM</dd></div><div><dt>Thursday</dt><dd>11:00 AM - 12:00 AM</dd></div><div><dt>Friday</dt><dd>11:00 AM - 2:00 AM</dd></div><div><dt>Saturday</dt><dd>11:00 AM - 2:00 AM</dd></div><div><dt>Sunday</dt><dd>12:00 PM - 12:00 AM</dd></div></dl><a href="https://maps.app.goo.gl/ALyZLgiMujUwfLEb9" target="_blank" rel="noopener noreferrer" data-track="directions_click" data-location="dallas" data-placement="footer" aria-label="Get Directions, Dallas (opens in a new tab)">Get Directions</a></section>
+    </div><div class="footer-bottom"><p>&copy; 2026 Karmma &amp; Kocktails. All rights reserved.</p><p>Closing times at or after midnight refer to the following day.</p></div></footer>
+    <dialog class="location-dialog" aria-labelledby="location-title" aria-describedby="location-description">
+      <button type="button" class="location-close" aria-label="Close location selection" autofocus>&times;</button>
+      <h2 id="location-title">Choose your location</h2>
+      <p id="location-description"></p>
+      <div class="location-options"></div>
+    </dialog></div>
+    <script type="module" src="/src/app.js?v=aa6541cd"></script>
   </body>
 </html>

@@ -1,4 +1,6 @@
-// Transcribed from files/pdf/{location}-menu.pdf. Page numbers refer to those PDFs.
+// Transcribed from the supplied menu PDFs (served as assets/menus/{location}-menu.pdf). Page numbers refer to those PDFs.
+// To add a drinks menu (e.g. Grapevine cocktails): add categories with type 'drinks' and alcohol = true; the Drinks tab,
+// the bar section on the location page and the structured data appear automatically.
 // Keep location prices independent. Do not infer equivalence from similar dish names.
 const photos = {
   pakora: '1 - Appetisers/Vegetable Pakora.jpg', samosa: '1 - Appetisers/Samosa.jpg',
@@ -32,13 +34,16 @@ const photos = {
   choilaMomo: '4 - Fast Food/Choila Momo.jpg', butterMomo: '4 - Fast Food/Butter or Tikka Momo.jpg',
   butterNaan: '3 - Main Course/butter naan.png', garlicNaan: '3 - Main Course/garlic naan.png',
   roti: '3 - Main Course/tandori roti.png',
+  steamMomo: '1 - Appetisers/Steam Momo.jpg', kidsDelight: '3 - Main Course/Kids Feast.jpg',
+  fishCurry: '3 - Main Course/2 - Entrees/Himalayan Fish Curry or Shrimp.jpg',
 };
 // A price is either a number, or explicit [option, price] pairs. Null means unresolved.
 function item(name, price, description = '', photo = '', vegetarian = false) {
-  return { name, price, description, image: photo ? `/assets/menu/${photos[photo]}` : '', vegetarian };
+  // Menu photos are shipped as 320 px WebP copies (tools/optimize-images.py); originals are in _archive/original-assets.
+  return { name, price, description, image: photo ? `/assets/menu/${photos[photo].replace(/\.(jpe?g|png)$/i, '.webp')}` : '', vegetarian };
 }
-function category(id, name, page, items, description = '', type = 'food') {
-  return { id, name, page, items, description, type };
+function category(id, name, page, items, description = '', type = 'food', alcohol = false) {
+  return { id, name, page, items, description, type, alcohol };
 }
 const m = item;
 const c = category;
@@ -97,7 +102,7 @@ export const menus = {
         m('Kadhai', [['Chicken', 21.99], ['Lamb', 23.99], ['Goat', 23.99], ['Shrimp', 23.99]], 'Semi-dry curry with freshly ground spices.', 'kadhai'),
         m("Karma’s Special Curry", [['Chicken', 21.99], ['Lamb', 23.99], ['Goat', 23.99], ['Shrimp', 23.99]], 'Signature curry with a special spice blend.'),
         m('Vindaloo', [['Chicken', 21.99], ['Lamb', 23.99], ['Shrimp', 23.99]], 'Bold, hot and aromatic curry.', 'vindaloo'),
-        m('Malabari Fish Curry / Shrimp', [['Fish', 22.99], ['Shrimp', 23.99]], 'Coconut-infused curry.'),
+        m('Malabari Fish Curry / Shrimp', [['Fish', 22.99], ['Shrimp', 23.99]], 'Coconut-infused curry.', 'fishCurry'),
       ], riceNote),
       c('biryani', 'Biryani', 4, [
         m('Chicken Biryani', 19.99, '', 'chickenBiryani'), m('Goat Biryani', 22.99),
@@ -115,7 +120,7 @@ export const menus = {
       ]),
       c('wings', 'Wings', 4, [m('Spicy Garlic Wings', 15.99), m('Honey Garlic Wings', 15.99), m('Masala Wings', 15.99), m('Tandoori Wings', 15.99)], '5 pieces per order.'),
       c('momos', 'Momo / Dumplings', 5, [
-        m('Steam Momo', 14.99), m('Jhol Momo', 15.99, '', 'jhol'), m('Fried Momo', 14.99, '', 'friedMomo'),
+        m('Steam Momo', 14.99, '', 'steamMomo'), m('Jhol Momo', 15.99, '', 'jhol'), m('Fried Momo', 14.99, '', 'friedMomo'),
         m('Chilly Momo', 16.99, '', 'chiliMomo'), m('Momo 555', 16.99),
         m('Choila Momo', 16.99, '', 'choilaMomo'), m('Butter / Tikka Momo', 16.99, '', 'butterMomo'),
       ], 'Choose chicken or vegetable filling.'),
@@ -143,7 +148,7 @@ export const menus = {
         m('Chowmein', [['Chicken', 14.99], ['Goat', 16.99], ['Lamb', 16.99], ['Vegetable', 13.99]], 'Stir-fried noodles and vegetables.', 'noodles'),
         m('Shrimp Chowmein', 16.99), m('Thukpa', 16.99, 'Himalayan noodle soup with vegetables, spices and your choice of meat.', 'thukpa'),
       ], 'Add egg to chowmein for $1.49.'),
-      c('kids', 'Kids Menu', 6, [m('Kids Delight', 12.99, 'Fries, butter chicken and rice.'), m('Chicken Tenders', 12.99, 'Served with fries and rice.')]),
+      c('kids', 'Kids Menu', 6, [m('Kids Delight', 12.99, 'Fries, butter chicken and rice.', 'kidsDelight'), m('Chicken Tenders', 12.99, 'Served with fries and rice.')]),
       c('desserts', 'Desserts', 6, [m('Gulab Jamun', 6.99), m('Kheer (Rice Pudding)', 8.99), m('Mithai Chat', 9.99, 'Warm gajar halwa with mithai, yogurt, chutneys and crunchy bits.')]),
       c('drinks', 'Drinks', 6, [m('Ice Tea', 2.99), m('Plain Lassi', 7.99), m('Mango Lassi', 8.99), m('Masala Chai Tea', 4.99), m('Thai Tea', 7.99, 'Add boba for $1.49.')], '', 'drinks'),
     ],
@@ -202,7 +207,7 @@ export const menus = {
         m('Saag', [['Chicken', 16.99], ['Lamb', 18.99]], 'Chicken or lamb in spinach curry.'),
         m('Kadhai', [['Chicken', 16.99], ['Goat', 18.99], ['Lamb', 18.99], ['Shrimp', 18.99]], 'Semi-dry curry with bell peppers and ground spices.', 'kadhai'),
         m('Vindaloo', [['Chicken', 16.99], ['Lamb', 18.99], ['Shrimp', 18.99]], 'Bold, aromatic, fiery curry.', 'vindaloo'),
-        m('Malabari Curry', [['Fish', 18.99], ['Shrimp', 19.99]], 'Fish or shrimp in rich coconut curry.'),
+        m('Malabari Curry', [['Fish', 18.99], ['Shrimp', 19.99]], 'Fish or shrimp in rich coconut curry.', 'fishCurry'),
         m('Egg Masala', 15.99, 'Hard-boiled eggs in tomato-based masala gravy.'),
       ], riceNote),
       c('rice-noodles', 'Biryani, Rice & Noodles', 2, [
@@ -230,7 +235,7 @@ export const menus = {
         m("Chef’s Special Fried Rice", 16.99, 'Chicken, mutton, shrimp and fresh vegetables.'),
       ]),
       c('momos', 'Momo / Dumplings', 3, [
-        m('Steam Momo', 11.99), m('Fried Momo', 11.99, '', 'friedMomo'), m('Jhol Momo', 12.99, '', 'jhol'),
+        m('Steam Momo', 11.99, '', 'steamMomo'), m('Fried Momo', 11.99, '', 'friedMomo'), m('Jhol Momo', 12.99, '', 'jhol'),
         m('Chili Momo', 13.99, '', 'chiliMomo'), m('Momo Reloaded', 13.99, '', 'reloaded'),
         m('Choila Momo', 13.99, '', 'choilaMomo'), m('Butter / Tikka Momo', 13.99, '', 'butterMomo'),
       ], 'Choose chicken or vegetable filling.'),
@@ -240,7 +245,7 @@ export const menus = {
         m('Naan Basket', 9.99, 'Choose 3: plain, butter, bullet or garlic.', '', true),
       ]),
       c('kids', 'Kids Menu', 3, [
-        m('Kids Delight', 12.99, 'Fries, butter chicken and rice.'),
+        m('Kids Delight', 12.99, 'Fries, butter chicken and rice.', 'kidsDelight'),
         m('Kids Tikka Masala', 12.99, 'Fries, tikka chicken masala and rice.'), m('Chicken Tenders', 12.99, 'Served with fries and rice.'),
       ]),
       c('desserts', 'Desserts', 3, [m('Fried Ice Cream', 8.99), m('Pistachio Cheesecake', 8.99), m('Kheer (Rice Pudding)', 8.99), m('Gulab Jamun', 6.99)]),
@@ -249,27 +254,27 @@ export const menus = {
         m('Kendall Jackson Cabernet, CA', [['Glass', 11], ['Bottle', 35]]), m('Iron and Sand Cabernet, Paso Robles', [['Glass', 13], ['Bottle', 45]]),
         m('Austin Hope Cabernet, CA (1000 ml)', 125), m('Kendall Jackson Merlot, CA', [['Glass', 11], ['Bottle', 35]]),
         m('Carmel Road Pinot Noir, CA', [['Glass', 10], ['Bottle', 30]]), m('Piattelli Malbec, Argentina', [['Glass', 11], ['Bottle', 35]]), m('San Polo Rubio, Italy', [['Glass', 11], ['Bottle', 35]]),
-      ], '', 'drinks'),
+      ], '', 'drinks', true),
       c('white-wine', 'White Wines', 4, [
         m('Kendall Jackson Chardonnay, CA', [['Glass', 11], ['Bottle', 35]]), m('Decoy Chardonnay, CA', [['Glass', 12], ['Bottle', 40]]),
         m('Kim Crawford Sauvignon Blanc, NZ', [['Glass', 11], ['Bottle', 35]]), m('Ceretto Moscato, Italy', [['Glass', 12], ['Bottle', 40]]),
         m('Seaglass Pinot Grigio, CA', [['Glass', 10], ['Bottle', 35]]), m('Benvolio Prosecco Split', 10),
         m('House Wine', 6, 'Chardonnay, Cabernet Sauvignon or Merlot.'),
-      ], '', 'drinks'),
+      ], '', 'drinks', true),
       c('beer-shots', 'Beer & Shots', 4, [
         m('Local Beer', 5, 'Miller Lite, Shiner Bock, Coors Light, Michelob Ultra.'),
         m('Imported Beer', 6, 'Barasinghe Pilsner, Barasinghe IPA, Taj Mahal, Corona.'),
         m('Draft Beer', 7, 'Miller Lite, Shiner Bock, Blue Moon, Dos Equis, Half-Life IPA.'),
         m('Karmaholic', 11), m('Green Tea Shot', 8), m('Karma Fuego', 9), m('Cupcake Shot', 8), m('Karma Sour', 8), m('Karma Fusion', 35, 'All 5 shots.'),
-      ], '', 'drinks'),
+      ], '', 'drinks', true),
       c('martinis', 'Martinis', 5, [
         m('Classic Tini', 11), m('Cosmopolitan', 11), m('Electric Tini', 12), m('Karma’s Tini', 12),
         m('Lemon Drop Tini', 12), m('Strawberry Lemon Drop Tini', 12), m('Choco-Mocha Tini', 12), m('Espresso Martini', 12),
-      ], '', 'drinks'),
+      ], '', 'drinks', true),
       c('cocktails', 'Cocktails & Mocktails', 5, [
         ...['Karma Sutra', 'Himalayan Mule', 'Mumbai Buzz', 'Margarita / Tamarind-Rita', 'Karma’s Punch', 'Sunny Mimosa', 'Gurkha’s Old Fashioned', 'Mango Bliss', 'Karma Colada', 'Himalayan Hot Rum Punch', 'Karma Velvet', 'Karmahattan', 'Negroni'].map(name => m(name, 12)),
         m('Mocktails', 8, 'Ask us for available flavors.'),
-      ], '', 'drinks'),
+      ], '', 'drinks', true),
       c('happy-food', 'Happy Hour Bites', 6, [
         m('Tandoori Chicken Tacos', 9, 'Tandoori chicken and creamy sauce.'), m('Butter Chicken Loaded Fries', 9, 'Fries, butter chicken and melted cheese.'),
         m('Nitro Chicken', 9, 'Crispy chicken with Nitro sauce.', 'nitro'), m('Chilli / Honey Garlic Wings (4 pcs)', 9, 'Choose chilli garlic or honey garlic.'),
@@ -281,7 +286,7 @@ export const menus = {
         m('House Wine', 7, 'Cabernet Sauvignon, Merlot or Chardonnay.'),
         ...['Green Tea', 'Masala Candy', 'Mango Chilli', 'Lychee Drop', 'Tamarind Tequila'].map(name => m(`${name} Shot`, 6)),
         m('Domestic Beer', 4), m('Imported Beer', 5),
-      ], '4 PM – 7 PM', 'happy-hour'),
+      ], '4 PM – 7 PM', 'happy-hour', true),
     ],
   },
 };

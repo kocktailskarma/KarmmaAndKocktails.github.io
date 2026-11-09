@@ -1,22 +1,29 @@
-# Run the Karmma and Kocktails website
+# Run the Karmma (Karma) & Kocktails website
 
 Install Python 3. Open a terminal in the KarmmaAndKocktails.github.io repository root.
 
 ```powershell
 cd karmma-website/frontend
-python server.py --port 5174
+python -I server.py --port 5174
 ```
 
-On Windows, use `py server.py --port 5174` if `python` is unavailable.
+On Windows, use `py -I server.py --port 5174` if `python` is unavailable.
 
 Open http://localhost:5174/ in your browser. Keep the terminal open.
 Press Ctrl+C to stop the server.
 
-If you already opened a terminal in `karmma-website`, use `cd frontend` instead.
-If it is already in `frontend`, run the server command directly.
+The server behaves like GitHub Pages (a real file per page, `404.html` for unknown
+URLs), so a page that was not generated shows up as an error here too.
 
-Alternatively, with Node.js installed, run `node server.mjs` from `frontend`.
-That server uses port 5173 by default; follow the URL it prints.
+After you change anything in `frontend/src/`, regenerate the static pages (Node 20+):
 
-The copied website is in `karmma-website/frontend`. The original website remains
-in the repository root. No dependency installation is required for this preview.
+```powershell
+cd karmma-website/frontend
+node tools/prerender.mjs
+```
+
+Alternatively, with Node.js installed, run `node server.mjs` from `frontend`
+(port 5173, or `PORT=5174 node server.mjs`).
+
+The site is in `karmma-website/frontend`. The original (old) website remains in the
+repository root and is not touched. No dependency installation is required.

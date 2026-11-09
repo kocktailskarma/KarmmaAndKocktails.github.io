@@ -1,0 +1,96 @@
+# Deploys the new Karmma & Kocktails website to GitHub Pages (custom domain www.karmmankocktails.com).
+#
+# Needs ONE setting in GitHub: Settings > Pages > Build and deployment > Source = "GitHub Actions".
+# (Rollback: set Source back to "Deploy from a branch", branch main, folder / (root). The old root files are
+#  still in main, and the old site is also saved on the branch old-site-backup-2026-11-09.)
+#
+# What it does: builds a clean folder (_site) containing ONLY the new site (karmma-website/frontend, without
+# tools/tests/server files), the custom-domain file CNAME, the Google Search Console verification file, and the
+# old public folders other things still link to (images, newimage, files, restaurant-management). Nothing else
+# from the repository root is published: api.php, htaccess, bundles/, review-artifacts/, package-lock.json and
+# the old index.html/style.css/script.js stay out of the live site.
+name: Deploy Karmma website
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "karmma-website/frontend/**"
+      - "CNAME"
+      - "google6993532c5338de6d.html"
+      - "restaurant-management/**"
+      - "files/**"
+      - ".github/workflows/pages.yml"
+  workflow_dispatch:      # also lets the manager press "Run workflow" in the Actions tab
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node (only for the freshness check)
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Check the prerendered pages are up to date
+        # Fails the deploy if someone edited src/ or the menu data and forgot to run
+        #   node karmma-website/frontend/tools/prerender.mjs   and commit the result.
+        run: node karmma-website/frontend/tools/prerender.mjs --check
+
+      - name: Assemble the site folder
+        run: |
+          set -euo pipefail
+          mkdir _site
+          # the new site, without developer tooling
+          rsync -a \
+            --exclude 'tools/' --exclude 'tests/' --exclude '__pycache__/' --exclude 'node_modules/' \
+            --exclude 'server.py' --exclude 'server.mjs' --exclude 'package.json' --exclude 'README.md' \
+            karmma-website/frontend/ _site/
+          # custom domain + Google Search Console verification (SEO-PLAN S-02)
+          cp CNAME _site/CNAME
+          cp google6993532c5338de6d.html _site/google6993532c5338de6d.html
+          # Old public files that other websites or tools still use: old images, old menu PDF (files/pdf/menu.pdf),
+          # and the restaurant-management info/privacy/terms pages. Do not remove restaurant-management.
+          for dir in images newimage files restaurant-management; do [ -d "$dir" ] && cp -R "$dir" "_site/$dir" || true; done
+          touch _site/.nojekyll
+
+      - name: Safety checks on the folder that will be published
+        run: |
+          set -euo pipefail
+          test -f _site/index.html && test -f _site/404.html && test -f _site/sitemap.xml && test -f _site/robots.txt
+          test "$(cat _site/CNAME)" = "www.karmmankocktails.com"
+          for f in restaurant-management/index.html restaurant-management/privacy.html restaurant-management/terms.html files/pdf/menu.pdf; do test -f "_site/$f"; done
+          grep -q "google-site-verification: google6993532c5338de6d.html" _site/google6993532c5338de6d.html
+          for route in grapevine dallas menu menu/grapevine menu/dallas happy-hour catering private-events services about contact reserve; do test -f "_site/$route/index.html"; done
+          # nothing server-side or private may be published
+          if find _site \( -name '*.php' -o -name 'htaccess' -o -name '.htaccess' -o -name '*.env' -o -name 'package-lock.json' \) | grep -q .; then echo "forbidden file in _site"; exit 1; fi
+          test ! -d _site/tools && test ! -d _site/tests && test ! -d _site/karmma-website
+          echo "Publishing $(find _site -type f | wc -l) files, $(du -sh _site | cut -f1)"
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload site
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
